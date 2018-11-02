@@ -1,9 +1,13 @@
 # TODO
 
+## Intro page
+- [ ] Intro page
+- [ ] Intro page with play button
+
 ## News
 - [x] News layout  
 - [x] Read news  
-- [ ] Scrollbar
+- [ ] Get news list  
 - [ ] <s>Pitch control</s>  
 - [ ] <s>Voice control</s>  
 - [ ] <s>Rate control</s>  
@@ -17,19 +21,22 @@
 - [x] Store track  
 - [x] Encode stored track  
 - [x] Play stored track  
+- [ ] Store link on BE  
+- [ ] Send request on record
+- [ ] Share buttons  
 
 ## Design
 - [x] Loops layout  
 - [x] Indicator redesign  
 - [x] Loops progress bar  
 - [x] News progress bar  
-- [ ] Playback progress bar    
+- [ ] Playback progress bar  
+- [ ] Implement new design 
 
 ## Sounds
-- [ ] Improve sounds  
+- [x] Replace sounds  
 - [x] Add bass  
 - [x] Add keys  
-- [ ] Add FX  
 
 ## Tech debt
 - [x] Create repo  
@@ -38,5 +45,8 @@
 - [x] Remove comments
 - [ ] Sound sprites    
 - [x] Add Flow
-- [ ] <s>Add Emotion</s>
+- [ ] <s>Add Emotion.js</s>
 - [ ] Production build
+
+## Bugs
+- [ ] Sounds on mobile

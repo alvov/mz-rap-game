@@ -1,23 +1,6 @@
 import { LoopState } from "./consts";
 import type { Category, Loop, News } from "./types";
 
-import beat01 from "../assets/beat_01.mp3";
-import beat02 from "../assets/beat_02.mp3";
-import beat03 from "../assets/beat_03.mp3";
-import beat04 from "../assets/beat_04.mp3";
-import hihats01 from "../assets/hihats_01.mp3";
-import hihats02 from "../assets/hihats_02.mp3";
-import hihats03 from "../assets/hihats_03.mp3";
-import hihats04 from "../assets/hihats_04.mp3";
-import bass01 from "../assets/bass_01.mp3";
-import bass02 from "../assets/bass_02.mp3";
-import bass03 from "../assets/bass_03.mp3";
-import bass04 from "../assets/bass_04.mp3";
-import tune01 from "../assets/tune_01.mp3";
-import tune02 from "../assets/tune_02.mp3";
-import tune03 from "../assets/tune_03.mp3";
-import tune04 from "../assets/tune_04.mp3";
-
 export const categories: Category[] = [
     {
         id: "beats",
@@ -46,132 +29,117 @@ export const loops: Loop[] = [
         id: "bt1",
         categoryId: "beats",
         groupId: "beats",
-        src: beat01,
+        src: "beat1",
         state: LoopState.Loading,
     },
     {
         id: "bt2",
         categoryId: "beats",
         groupId: "beats",
-        src: beat02,
+        src: "beat2",
         state: LoopState.Loading,
     },
     {
         id: "bt3",
         categoryId: "beats",
         groupId: "beats",
-        src: beat03,
+        src: "beat3",
         state: LoopState.Loading,
     },
     {
         id: "bt4",
         categoryId: "beats",
         groupId: "beats",
-        src: beat04,
+        src: "beat4",
         state: LoopState.Loading,
     },
     {
         id: "h1",
         categoryId: "hihats",
         groupId: "hihats",
-        src: hihats01,
+        src: "hats1",
         state: LoopState.Loading,
     },
     {
         id: "h2",
         categoryId: "hihats",
         groupId: "hihats",
-        src: hihats02,
+        src: "hats2",
         state: LoopState.Loading,
     },
     {
         id: "h3",
         categoryId: "hihats",
         groupId: "hihats",
-        src: hihats03,
+        src: "hats3",
         state: LoopState.Loading,
     },
     {
         id: "h4",
         categoryId: "hihats",
         groupId: "hihats",
-        src: hihats04,
+        src: "hats4",
         state: LoopState.Loading,
     },
     {
         id: "b1",
         categoryId: "bass",
         groupId: "bass",
-        src: bass01,
+        src: "bass1",
         state: LoopState.Loading,
     },
     {
         id: "b2",
         categoryId: "bass",
         groupId: "bass",
-        src: bass02,
+        src: "bass2",
         state: LoopState.Loading,
     },
     {
         id: "b3",
         categoryId: "bass",
         groupId: "bass",
-        src: bass03,
+        src: "bass3",
         state: LoopState.Loading,
     },
     {
         id: "b4",
         categoryId: "bass",
         groupId: "bass",
-        src: bass04,
+        src: "bass4",
         state: LoopState.Loading,
     },
     {
         id: "t1",
         categoryId: "tune",
         groupId: "tune",
-        src: tune01,
+        src: "tema1",
         state: LoopState.Loading,
     },
     {
         id: "t2",
         categoryId: "tune",
         groupId: "tune",
-        src: tune02,
+        src: "tema2",
         state: LoopState.Loading,
     },
     {
         id: "t3",
         categoryId: "tune",
         groupId: "tune",
-        src: tune03,
+        src: "tema3",
         state: LoopState.Loading,
     },
     {
         id: "t4",
         categoryId: "tune",
         groupId: "tune",
-        src: tune04,
+        src: "tema4",
         state: LoopState.Loading,
     },
 ];
 
 export const news: News[] = [
-    // {
-    //     id: "0",
-    //     link: "https://zona.media/news/2018/09/17/urlashov",
-    //     text: "Путин отказался помиловать экс-мэра Ярославля Урлашова",
-    // },
-    // {
-    //     id: "1",
-    //     link: "https://zona.media/news/2018/09/17/nenasheva",
-    //     text: "Художницу Катрин Ненашеву задержали в центре Москвы во время акции против пыток",
-    // },
-    // {
-    //     id: "2",
-    //     link: "https://zona.media/news/2018/09/17/sagynbaev",
-    //     text: "Тяжелобольного фигуранта «пензенского дела» поместили в карцер после отказа от признательных показаний и рассказа о пытках",
-    // }
     {
         id: "0",
         link: "https://zona.media/news/2018/10/14/free",

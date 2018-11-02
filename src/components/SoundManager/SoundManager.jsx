@@ -9,6 +9,7 @@ import {
 } from "../../ducks/record";
 import { selectState as selectPlayback, setCursor } from "../../ducks/playback";
 import { LOOP_DURATION_SEC, LoopState } from "../../consts";
+import { mp3, ogg } from "../../../assets";
 import type { RootState } from "../../ducks";
 
 const checkLoopEndTimeMs = 40;
@@ -44,7 +45,7 @@ export class SoundManagerComponent extends React.Component<SoundManagerComponent
         this.howls = {};
         for (const loop of this.props.loops) {
             this.howls[loop.id] = new Howl({
-                src: [loop.src],
+                src: [ogg[loop.src], mp3[loop.src]],
                 preload: true,
                 onload: () => {
                     this.props.setLoopState([{ id: loop.id, state: LoopState.Off }]);

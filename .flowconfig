@@ -13,7 +13,8 @@ all=error
 [options]
 all=true
 emoji=true
-module.name_mapper.extension='mp3' -> '<PROJECT_ROOT>/flow/mp3-resolver.js'
+module.name_mapper.extension='ogg' -> '<PROJECT_ROOT>/flow/sound-file-resolver.js'
+module.name_mapper.extension='mp3' -> '<PROJECT_ROOT>/flow/sound-file-resolver.js'
 module.file_ext=.js
 module.file_ext=.jsx
 module.use_strict=true
