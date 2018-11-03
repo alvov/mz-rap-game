@@ -1,4 +1,5 @@
 import type { RootState } from "./index";
+import * as analytic from '../analytics';
 
 export const SET_IS_RECORDING = "record/SET_IS_RECORDING";
 export const SET_IS_PLAYING_RECORD = "record/SET_IS_PLAYING_RECORD";
@@ -84,11 +85,13 @@ export function recordReducer(state: RecordState = initialState, action: RecordA
     switch (action.type) {
         case SET_IS_RECORDING: {
             if (action.payload) {
+                analytic.GAStartRecord()
                 return {
                     ...initialState,
                     isRecording: true,
                 };
             } else {
+                analytic.GAStopRecord()
                 return {
                     ...state,
                     isRecording: false,

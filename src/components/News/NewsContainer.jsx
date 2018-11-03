@@ -10,6 +10,7 @@ import {
     selectRecordNews,
     selectStartTimestamp,
 } from "../../ducks/record";
+import * as analytic from '../../analytics';
 import type { RootState } from "../../ducks";
 
 import * as styles from "./NewsContainer.css";
@@ -99,6 +100,7 @@ class NewsContainerComponent extends React.Component<NewsContainerComponentProps
         const selectedNews = news.find(news => news.id === id);
         if (selectedNews) {
             this.newsReader.read(selectedNews.text, selectedNews.id);
+            analytic.GAInteractZag(selectedNews.text);
             if (this.props.isRecording) {
                 const startTimestamp = this.props.startTimestamp !== null ?
                     this.props.startTimestamp :

@@ -113,7 +113,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "65c18a27065e93704eb4";
+/******/ 	var hotCurrentHash = "e817d8b7bca6314d8b25";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1063,6 +1063,101 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
 /***/ }),
 
+/***/ "./src/analytics.js":
+/*!**************************!*\
+  !*** ./src/analytics.js ***!
+  \**************************/
+/*! exports provided: GAGameStart, GAStartRecord, GAStopRecord, GAInteractTrack, GAInteractZag */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GAGameStart", function() { return GAGameStart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GAStartRecord", function() { return GAStartRecord; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GAStopRecord", function() { return GAStopRecord; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GAInteractTrack", function() { return GAInteractTrack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GAInteractZag", function() { return GAInteractZag; });
+const GAME_NAME = 'rap_game';
+
+const GAGameStart = () => {
+  if (window.ga) {
+    const isRepeatStartGame = localStorage.getItem('isRepeatStartGame');
+
+    if (isRepeatStartGame !== null) {
+      window.ga('send', 'event', GAME_NAME, 'unique_start_game');
+    }
+
+    window.ga('send', 'event', GAME_NAME, 'start_game');
+    localStorage.setItem('isRepeatStartGame', '1');
+  } else {
+    console.error('No GA in WINDOW');
+  }
+};
+
+const GAStartRecord = () => {
+  let isFirstStart = true;
+
+  if (window.ga) {
+    window.ga('send', 'event', GAME_NAME, 'start_record');
+
+    if (isFirstStart) {
+      window.ga('send', 'event', GAME_NAME, 'first_start_record');
+      isFirstStart = false;
+    }
+  } else {
+    console.error('No GA in WINDOW');
+  }
+};
+
+const GAStopRecord = () => {
+  let isFirstStop = true;
+
+  if (window.ga) {
+    window.ga('send', 'event', GAME_NAME, 'stop_record');
+
+    if (isFirstStop) {
+      window.ga('send', 'event', GAME_NAME, 'first_stop_record');
+      isFirstStop = false;
+    }
+  } else {
+    console.error('No GA in WINDOW');
+  }
+};
+
+const GAInteractTrack = track => {
+  let isFirstInteractTrack = true;
+
+  if (window.ga) {
+    window.ga('send', 'event', GAME_NAME, 'interact_track', track);
+
+    if (isFirstInteractTrack) {
+      window.ga('send', 'event', GAME_NAME, 'first_interact_track', track);
+      isFirstInteractTrack = false;
+    }
+  } else {
+    console.error('No GA in WINDOW');
+  }
+};
+
+const GAInteractZag = zag => {
+  let isFirstInteractZag = true;
+
+  if (window.ga) {
+    window.ga('send', 'event', GAME_NAME, 'interact_zag', zag);
+
+    if (isFirstInteractZag) {
+      window.ga('send', 'event', GAME_NAME, 'first_interact_zag', zag);
+      isFirstInteractZag = false;
+    }
+  } else {
+    console.error('No GA in WINDOW');
+  }
+};
+
+
+
+/***/ }),
+
 /***/ "./src/components/Dashboard.css":
 /*!**************************************!*\
   !*** ./src/components/Dashboard.css ***!
@@ -1227,9 +1322,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Progress_ProgressCircle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Progress/ProgressCircle */ "./src/components/Progress/ProgressCircle.jsx");
 /* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../consts */ "./src/consts.js");
-/* harmony import */ var _Loop_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Loop.css */ "./src/components/Loop/Loop.css");
-/* harmony import */ var _Loop_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_Loop_css__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _analytics__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../analytics */ "./src/analytics.js");
+/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../data */ "./src/data.js");
+/* harmony import */ var _Loop_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Loop.css */ "./src/components/Loop/Loop.css");
+/* harmony import */ var _Loop_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_Loop_css__WEBPACK_IMPORTED_MODULE_6__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -1241,6 +1340,7 @@ class Loop extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     super(...args);
 
     _defineProperty(this, "onClick", () => {
+      _analytics__WEBPACK_IMPORTED_MODULE_4__["GAInteractTrack"](this.props.id);
       this.props.onClick(this.props.id);
     });
   }
@@ -1252,23 +1352,23 @@ class Loop extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       playbackPercent
     } = this.props;
     return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("button", {
-      className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(_Loop_css__WEBPACK_IMPORTED_MODULE_4__["loop"], {
-        [_Loop_css__WEBPACK_IMPORTED_MODULE_4__["loading"]]: state === _consts__WEBPACK_IMPORTED_MODULE_3__["LoopState"].Loading,
-        [_Loop_css__WEBPACK_IMPORTED_MODULE_4__["nextOn"]]: state === _consts__WEBPACK_IMPORTED_MODULE_3__["LoopState"].NextOn,
-        [_Loop_css__WEBPACK_IMPORTED_MODULE_4__["active"]]: state === _consts__WEBPACK_IMPORTED_MODULE_3__["LoopState"].Active,
-        [_Loop_css__WEBPACK_IMPORTED_MODULE_4__["nextOff"]]: state === _consts__WEBPACK_IMPORTED_MODULE_3__["LoopState"].NextOff
+      className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(_Loop_css__WEBPACK_IMPORTED_MODULE_6__["loop"], {
+        [_Loop_css__WEBPACK_IMPORTED_MODULE_6__["loading"]]: state === _consts__WEBPACK_IMPORTED_MODULE_3__["LoopState"].Loading,
+        [_Loop_css__WEBPACK_IMPORTED_MODULE_6__["nextOn"]]: state === _consts__WEBPACK_IMPORTED_MODULE_3__["LoopState"].NextOn,
+        [_Loop_css__WEBPACK_IMPORTED_MODULE_6__["active"]]: state === _consts__WEBPACK_IMPORTED_MODULE_3__["LoopState"].Active,
+        [_Loop_css__WEBPACK_IMPORTED_MODULE_6__["nextOff"]]: state === _consts__WEBPACK_IMPORTED_MODULE_3__["LoopState"].NextOff
       }),
       onClick: this.onClick
     }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
-      className: _Loop_css__WEBPACK_IMPORTED_MODULE_4__["background"]
+      className: _Loop_css__WEBPACK_IMPORTED_MODULE_6__["background"]
     }), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
-      className: _Loop_css__WEBPACK_IMPORTED_MODULE_4__["indicator"]
+      className: _Loop_css__WEBPACK_IMPORTED_MODULE_6__["indicator"]
     }), react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Progress_ProgressCircle__WEBPACK_IMPORTED_MODULE_2__["Progress"], {
       radius: 15,
       stroke: 3,
       percent: state !== _consts__WEBPACK_IMPORTED_MODULE_3__["LoopState"].Off ? playbackPercent : 0
     }), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
-      className: _Loop_css__WEBPACK_IMPORTED_MODULE_4__["name"]
+      className: _Loop_css__WEBPACK_IMPORTED_MODULE_6__["name"]
     }, name));
   }
 
@@ -1504,9 +1604,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reader_Reader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reader/Reader */ "./src/reader/Reader.js");
 /* harmony import */ var _News__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./News */ "./src/components/News/News.jsx");
 /* harmony import */ var _ducks_record__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../ducks/record */ "./src/ducks/record.js");
-/* harmony import */ var _NewsContainer_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./NewsContainer.css */ "./src/components/News/NewsContainer.css");
-/* harmony import */ var _NewsContainer_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_NewsContainer_css__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _analytics__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../analytics */ "./src/analytics.js");
+/* harmony import */ var _NewsContainer_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./NewsContainer.css */ "./src/components/News/NewsContainer.css");
+/* harmony import */ var _NewsContainer_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_NewsContainer_css__WEBPACK_IMPORTED_MODULE_7__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1532,6 +1634,7 @@ class NewsContainerComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Compone
 
       if (selectedNews) {
         this.newsReader.read(selectedNews.text, selectedNews.id);
+        _analytics__WEBPACK_IMPORTED_MODULE_6__["GAInteractZag"](selectedNews.text);
 
         if (this.props.isRecording) {
           const startTimestamp = this.props.startTimestamp !== null ? this.props.startTimestamp : 0;
@@ -1577,7 +1680,7 @@ class NewsContainerComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Compone
       currentNews
     } = this.state;
     return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
-      className: _NewsContainer_css__WEBPACK_IMPORTED_MODULE_6__["newsContainer"]
+      className: _NewsContainer_css__WEBPACK_IMPORTED_MODULE_7__["newsContainer"]
     }, news.map(({
       id,
       link,
@@ -1698,6 +1801,33 @@ class PlayerComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         this.props.setIsRecording(false);
         this.setState({
           shareLink: this.generateLink()
+        });
+        var url = 'http://localhost:8080/api/rap_rec';
+        var dataJSON = {
+          data: this.generateLink(),
+          r: 'ls'
+        };
+        fetch(url, {
+          method: 'POST',
+          // or 'PUT'
+          body: JSON.stringify(dataJSON),
+          // data can be `string` or {object}!
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(async res => {
+          const data = await res.json();
+          console.log(data);
+        });
+        fetch(url + `?rec=1540988048541-4x/kavr`, {
+          method: 'GET',
+          // or 'PUT'
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(async res => {
+          const data = await res.json();
+          console.log(data);
         });
       } else {
         this.props.setIsRecording(true);
@@ -2894,9 +3024,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectStartTimestamp", function() { return selectStartTimestamp; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectRecordLoops", function() { return selectRecordLoops; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectRecordNews", function() { return selectRecordNews; });
+/* harmony import */ var _analytics__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../analytics */ "./src/analytics.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 const SET_IS_RECORDING = "record/SET_IS_RECORDING";
 const SET_IS_PLAYING_RECORD = "record/SET_IS_PLAYING_RECORD";
@@ -2944,10 +3076,12 @@ function recordReducer(state = initialState, action) {
     case SET_IS_RECORDING:
       {
         if (action.payload) {
+          _analytics__WEBPACK_IMPORTED_MODULE_0__["GAStartRecord"]();
           return _objectSpread({}, initialState, {
             isRecording: true
           });
         } else {
+          _analytics__WEBPACK_IMPORTED_MODULE_0__["GAStopRecord"]();
           return _objectSpread({}, state, {
             isRecording: false
           });

@@ -3,6 +3,8 @@ import cn from "classnames";
 import { Progress } from "../Progress/ProgressCircle";
 import { LoopState } from "../../consts";
 import type { LoopStateEnum } from "../../types";
+import * as analytic from '../../analytics';
+import {loops} from '../../data';
 
 import * as styles from "./Loop.css";
 
@@ -42,6 +44,7 @@ export class Loop extends React.Component<LoopProps> {
     }
 
     onClick = () => {
+        analytic.GAInteractTrack(this.props.id)
         this.props.onClick(this.props.id);
     }
 }

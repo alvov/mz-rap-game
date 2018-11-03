@@ -147,6 +147,29 @@ export class PlayerComponent extends React.Component<PlayerComponentProps, Playe
             this.setState({
                 shareLink: this.generateLink(),
             });
+              var url = 'http://localhost:8080/api/rap_rec';
+
+            var dataJSON = {data: this.generateLink(), r: 'ls'};
+
+            fetch(url, {
+                method: 'POST', // or 'PUT'
+                body: JSON.stringify(dataJSON), // data can be `string` or {object}!
+                headers:{
+                    'Content-Type': 'application/json'
+                }
+            }).then(async res => {
+              const data = await res.json()
+              console.log(data)
+            })
+          fetch(url + `?rec=1540988048541-4x/kavr`, {
+            method: 'GET', // or 'PUT'
+            headers:{
+              'Content-Type': 'application/json'
+            }
+          }).then(async res => {
+            const data = await res.json()
+            console.log(data)
+          })
         } else {
             this.props.setIsRecording(true);
         }
