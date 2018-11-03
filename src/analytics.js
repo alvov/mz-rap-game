@@ -13,8 +13,9 @@ const GAGameStart = () => {
   }
 }
 
+let isFirstStart: boolean = true;
+
 const GAStartRecord = () => {
-  let isFirstStart: boolean = true;
   if (window.ga) {
     window.ga('send', 'event', GAME_NAME, 'start_record')
     if(isFirstStart) {
@@ -26,8 +27,9 @@ const GAStartRecord = () => {
   }
 }
 
+let isFirstStop: boolean = true;
+
 const GAStopRecord = () => {
-  let isFirstStop: boolean = true;
   if (window.ga) {
     window.ga('send', 'event', GAME_NAME, 'stop_record')
     if(isFirstStop) {
@@ -39,8 +41,9 @@ const GAStopRecord = () => {
   }
 }
 
+let isFirstInteractTrack: boolean = true;
+
 const GAInteractTrack = (track: string) => {
-  let isFirstInteractTrack: boolean = true;
   if (window.ga) {
     window.ga('send', 'event', GAME_NAME, 'interact_track', track)
     if(isFirstInteractTrack) {
@@ -52,8 +55,9 @@ const GAInteractTrack = (track: string) => {
   }
 }
 
+let isFirstInteractZag: boolean = true;
+
 const GAInteractZag = (zag: string) => {
-  let isFirstInteractZag: boolean = true;
   if (window.ga) {
     window.ga('send', 'event', GAME_NAME, 'interact_zag', zag)
     if(isFirstInteractZag) {

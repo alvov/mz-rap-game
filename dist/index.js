@@ -113,7 +113,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "e817d8b7bca6314d8b25";
+/******/ 	var hotCurrentHash = "7e80648b1ca68c47452e";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -840,7 +840,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/rap_game/";
 /******/
 /******/ 	// __webpack_hash__
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
@@ -861,179 +861,534 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./assets/bass_01.mp3":
-/*!****************************!*\
-  !*** ./assets/bass_01.mp3 ***!
-  \****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./assets/index.js":
+/*!*************************!*\
+  !*** ./assets/index.js ***!
+  \*************************/
+/*! exports provided: mp3, ogg */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/bass_01-4ERcW.mp3";
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _mp3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mp3 */ "./assets/mp3/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "mp3", function() { return _mp3__WEBPACK_IMPORTED_MODULE_0__["mp3"]; });
 
-/***/ }),
+/* harmony import */ var _ogg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ogg */ "./assets/ogg/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ogg", function() { return _ogg__WEBPACK_IMPORTED_MODULE_1__["ogg"]; });
 
-/***/ "./assets/bass_02.mp3":
-/*!****************************!*\
-  !*** ./assets/bass_02.mp3 ***!
-  \****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/bass_02-16akh.mp3";
 
-/***/ }),
 
-/***/ "./assets/bass_03.mp3":
-/*!****************************!*\
-  !*** ./assets/bass_03.mp3 ***!
-  \****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "assets/bass_03-2SwVS.mp3";
 
 /***/ }),
 
-/***/ "./assets/bass_04.mp3":
-/*!****************************!*\
-  !*** ./assets/bass_04.mp3 ***!
-  \****************************/
+/***/ "./assets/mp3/bass-1.mp3":
+/*!*******************************!*\
+  !*** ./assets/mp3/bass-1.mp3 ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/bass_04-1LiDf.mp3";
+module.exports = __webpack_require__.p + "assets/bass-1-33_lx.mp3";
 
 /***/ }),
 
-/***/ "./assets/beat_01.mp3":
-/*!****************************!*\
-  !*** ./assets/beat_01.mp3 ***!
-  \****************************/
+/***/ "./assets/mp3/bass-2.mp3":
+/*!*******************************!*\
+  !*** ./assets/mp3/bass-2.mp3 ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/beat_01-24XjH.mp3";
+module.exports = __webpack_require__.p + "assets/bass-2-1yse6.mp3";
 
 /***/ }),
 
-/***/ "./assets/beat_02.mp3":
-/*!****************************!*\
-  !*** ./assets/beat_02.mp3 ***!
-  \****************************/
+/***/ "./assets/mp3/bass-3.mp3":
+/*!*******************************!*\
+  !*** ./assets/mp3/bass-3.mp3 ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/beat_02-3wenB.mp3";
+module.exports = __webpack_require__.p + "assets/bass-3-2tMew.mp3";
 
 /***/ }),
 
-/***/ "./assets/beat_03.mp3":
-/*!****************************!*\
-  !*** ./assets/beat_03.mp3 ***!
-  \****************************/
+/***/ "./assets/mp3/bass-4.mp3":
+/*!*******************************!*\
+  !*** ./assets/mp3/bass-4.mp3 ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/beat_03-1WsjX.mp3";
+module.exports = __webpack_require__.p + "assets/bass-4-1H7r2.mp3";
 
 /***/ }),
 
-/***/ "./assets/beat_04.mp3":
-/*!****************************!*\
-  !*** ./assets/beat_04.mp3 ***!
-  \****************************/
+/***/ "./assets/mp3/beat-1.mp3":
+/*!*******************************!*\
+  !*** ./assets/mp3/beat-1.mp3 ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/beat_04-Np3Gf.mp3";
+module.exports = __webpack_require__.p + "assets/beat-1-3rZ9s.mp3";
 
 /***/ }),
 
-/***/ "./assets/hihats_01.mp3":
-/*!******************************!*\
-  !*** ./assets/hihats_01.mp3 ***!
-  \******************************/
+/***/ "./assets/mp3/beat-2.mp3":
+/*!*******************************!*\
+  !*** ./assets/mp3/beat-2.mp3 ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/hihats_01-3FU7W.mp3";
+module.exports = __webpack_require__.p + "assets/beat-2-2XwmK.mp3";
 
 /***/ }),
 
-/***/ "./assets/hihats_02.mp3":
-/*!******************************!*\
-  !*** ./assets/hihats_02.mp3 ***!
-  \******************************/
+/***/ "./assets/mp3/beat-3.mp3":
+/*!*******************************!*\
+  !*** ./assets/mp3/beat-3.mp3 ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/hihats_02-3TcW6.mp3";
+module.exports = __webpack_require__.p + "assets/beat-3-3E98G.mp3";
 
 /***/ }),
 
-/***/ "./assets/hihats_03.mp3":
-/*!******************************!*\
-  !*** ./assets/hihats_03.mp3 ***!
-  \******************************/
+/***/ "./assets/mp3/beat-4.mp3":
+/*!*******************************!*\
+  !*** ./assets/mp3/beat-4.mp3 ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/hihats_03-1a5Cu.mp3";
+module.exports = __webpack_require__.p + "assets/beat-4-8II0f.mp3";
 
 /***/ }),
 
-/***/ "./assets/hihats_04.mp3":
-/*!******************************!*\
-  !*** ./assets/hihats_04.mp3 ***!
-  \******************************/
+/***/ "./assets/mp3/hats-1.mp3":
+/*!*******************************!*\
+  !*** ./assets/mp3/hats-1.mp3 ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/hihats_04-3m9Ma.mp3";
+module.exports = __webpack_require__.p + "assets/hats-1--Imlu.mp3";
 
 /***/ }),
 
-/***/ "./assets/tune_01.mp3":
-/*!****************************!*\
-  !*** ./assets/tune_01.mp3 ***!
-  \****************************/
+/***/ "./assets/mp3/hats-2.mp3":
+/*!*******************************!*\
+  !*** ./assets/mp3/hats-2.mp3 ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/tune_01-3lBL1.mp3";
+module.exports = __webpack_require__.p + "assets/hats-2-104ht.mp3";
 
 /***/ }),
 
-/***/ "./assets/tune_02.mp3":
-/*!****************************!*\
-  !*** ./assets/tune_02.mp3 ***!
-  \****************************/
+/***/ "./assets/mp3/hats-3.mp3":
+/*!*******************************!*\
+  !*** ./assets/mp3/hats-3.mp3 ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/tune_02-2MCvy.mp3";
+module.exports = __webpack_require__.p + "assets/hats-3-174sy.mp3";
 
 /***/ }),
 
-/***/ "./assets/tune_03.mp3":
-/*!****************************!*\
-  !*** ./assets/tune_03.mp3 ***!
-  \****************************/
+/***/ "./assets/mp3/hats-4.mp3":
+/*!*******************************!*\
+  !*** ./assets/mp3/hats-4.mp3 ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/tune_03-1YaYR.mp3";
+module.exports = __webpack_require__.p + "assets/hats-4-2QZrd.mp3";
 
 /***/ }),
 
-/***/ "./assets/tune_04.mp3":
-/*!****************************!*\
-  !*** ./assets/tune_04.mp3 ***!
-  \****************************/
+/***/ "./assets/mp3/index.js":
+/*!*****************************!*\
+  !*** ./assets/mp3/index.js ***!
+  \*****************************/
+/*! exports provided: mp3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mp3", function() { return mp3; });
+/* harmony import */ var _beat_1_mp3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./beat-1.mp3 */ "./assets/mp3/beat-1.mp3");
+/* harmony import */ var _beat_1_mp3__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_beat_1_mp3__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _beat_2_mp3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./beat-2.mp3 */ "./assets/mp3/beat-2.mp3");
+/* harmony import */ var _beat_2_mp3__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_beat_2_mp3__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _beat_3_mp3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./beat-3.mp3 */ "./assets/mp3/beat-3.mp3");
+/* harmony import */ var _beat_3_mp3__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_beat_3_mp3__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _beat_4_mp3__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./beat-4.mp3 */ "./assets/mp3/beat-4.mp3");
+/* harmony import */ var _beat_4_mp3__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_beat_4_mp3__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _hats_1_mp3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./hats-1.mp3 */ "./assets/mp3/hats-1.mp3");
+/* harmony import */ var _hats_1_mp3__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_hats_1_mp3__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _hats_2_mp3__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./hats-2.mp3 */ "./assets/mp3/hats-2.mp3");
+/* harmony import */ var _hats_2_mp3__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_hats_2_mp3__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _hats_3_mp3__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./hats-3.mp3 */ "./assets/mp3/hats-3.mp3");
+/* harmony import */ var _hats_3_mp3__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_hats_3_mp3__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _hats_4_mp3__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./hats-4.mp3 */ "./assets/mp3/hats-4.mp3");
+/* harmony import */ var _hats_4_mp3__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_hats_4_mp3__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _bass_1_mp3__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./bass-1.mp3 */ "./assets/mp3/bass-1.mp3");
+/* harmony import */ var _bass_1_mp3__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_bass_1_mp3__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _bass_2_mp3__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./bass-2.mp3 */ "./assets/mp3/bass-2.mp3");
+/* harmony import */ var _bass_2_mp3__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_bass_2_mp3__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _bass_3_mp3__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./bass-3.mp3 */ "./assets/mp3/bass-3.mp3");
+/* harmony import */ var _bass_3_mp3__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_bass_3_mp3__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _bass_4_mp3__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./bass-4.mp3 */ "./assets/mp3/bass-4.mp3");
+/* harmony import */ var _bass_4_mp3__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_bass_4_mp3__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _tema_1_mp3__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./tema-1.mp3 */ "./assets/mp3/tema-1.mp3");
+/* harmony import */ var _tema_1_mp3__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_tema_1_mp3__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _tema_2_mp3__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./tema-2.mp3 */ "./assets/mp3/tema-2.mp3");
+/* harmony import */ var _tema_2_mp3__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_tema_2_mp3__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _tema_3_mp3__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./tema-3.mp3 */ "./assets/mp3/tema-3.mp3");
+/* harmony import */ var _tema_3_mp3__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_tema_3_mp3__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _tema_4_mp3__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./tema-4.mp3 */ "./assets/mp3/tema-4.mp3");
+/* harmony import */ var _tema_4_mp3__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_tema_4_mp3__WEBPACK_IMPORTED_MODULE_15__);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const mp3 = {
+  beat1: (_beat_1_mp3__WEBPACK_IMPORTED_MODULE_0___default()),
+  beat2: (_beat_2_mp3__WEBPACK_IMPORTED_MODULE_1___default()),
+  beat3: (_beat_3_mp3__WEBPACK_IMPORTED_MODULE_2___default()),
+  beat4: (_beat_4_mp3__WEBPACK_IMPORTED_MODULE_3___default()),
+  hats1: (_hats_1_mp3__WEBPACK_IMPORTED_MODULE_4___default()),
+  hats2: (_hats_2_mp3__WEBPACK_IMPORTED_MODULE_5___default()),
+  hats3: (_hats_3_mp3__WEBPACK_IMPORTED_MODULE_6___default()),
+  hats4: (_hats_4_mp3__WEBPACK_IMPORTED_MODULE_7___default()),
+  bass1: (_bass_1_mp3__WEBPACK_IMPORTED_MODULE_8___default()),
+  bass2: (_bass_2_mp3__WEBPACK_IMPORTED_MODULE_9___default()),
+  bass3: (_bass_3_mp3__WEBPACK_IMPORTED_MODULE_10___default()),
+  bass4: (_bass_4_mp3__WEBPACK_IMPORTED_MODULE_11___default()),
+  tema1: (_tema_1_mp3__WEBPACK_IMPORTED_MODULE_12___default()),
+  tema2: (_tema_2_mp3__WEBPACK_IMPORTED_MODULE_13___default()),
+  tema3: (_tema_3_mp3__WEBPACK_IMPORTED_MODULE_14___default()),
+  tema4: (_tema_4_mp3__WEBPACK_IMPORTED_MODULE_15___default())
+};
+
+/***/ }),
+
+/***/ "./assets/mp3/tema-1.mp3":
+/*!*******************************!*\
+  !*** ./assets/mp3/tema-1.mp3 ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/tune_04-35J_C.mp3";
+module.exports = __webpack_require__.p + "assets/tema-1-2MTC4.mp3";
+
+/***/ }),
+
+/***/ "./assets/mp3/tema-2.mp3":
+/*!*******************************!*\
+  !*** ./assets/mp3/tema-2.mp3 ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/tema-2-2Nwq0.mp3";
+
+/***/ }),
+
+/***/ "./assets/mp3/tema-3.mp3":
+/*!*******************************!*\
+  !*** ./assets/mp3/tema-3.mp3 ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/tema-3-2b6mc.mp3";
+
+/***/ }),
+
+/***/ "./assets/mp3/tema-4.mp3":
+/*!*******************************!*\
+  !*** ./assets/mp3/tema-4.mp3 ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/tema-4-l7Oe2.mp3";
+
+/***/ }),
+
+/***/ "./assets/ogg/bass-1.ogg":
+/*!*******************************!*\
+  !*** ./assets/ogg/bass-1.ogg ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/bass-1-13f7m.ogg";
+
+/***/ }),
+
+/***/ "./assets/ogg/bass-2.ogg":
+/*!*******************************!*\
+  !*** ./assets/ogg/bass-2.ogg ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/bass-2-1M1aS.ogg";
+
+/***/ }),
+
+/***/ "./assets/ogg/bass-3.ogg":
+/*!*******************************!*\
+  !*** ./assets/ogg/bass-3.ogg ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/bass-3-3_ecE.ogg";
+
+/***/ }),
+
+/***/ "./assets/ogg/bass-4.ogg":
+/*!*******************************!*\
+  !*** ./assets/ogg/bass-4.ogg ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/bass-4-1iPOf.ogg";
+
+/***/ }),
+
+/***/ "./assets/ogg/beat-1.ogg":
+/*!*******************************!*\
+  !*** ./assets/ogg/beat-1.ogg ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/beat-1-ZS0kV.ogg";
+
+/***/ }),
+
+/***/ "./assets/ogg/beat-2.ogg":
+/*!*******************************!*\
+  !*** ./assets/ogg/beat-2.ogg ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/beat-2-3IoUP.ogg";
+
+/***/ }),
+
+/***/ "./assets/ogg/beat-3.ogg":
+/*!*******************************!*\
+  !*** ./assets/ogg/beat-3.ogg ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/beat-3-1ckg0.ogg";
+
+/***/ }),
+
+/***/ "./assets/ogg/beat-4.ogg":
+/*!*******************************!*\
+  !*** ./assets/ogg/beat-4.ogg ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/beat-4-1Ug27.ogg";
+
+/***/ }),
+
+/***/ "./assets/ogg/hats-1.ogg":
+/*!*******************************!*\
+  !*** ./assets/ogg/hats-1.ogg ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/hats-1-1yx3W.ogg";
+
+/***/ }),
+
+/***/ "./assets/ogg/hats-2.ogg":
+/*!*******************************!*\
+  !*** ./assets/ogg/hats-2.ogg ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/hats-2-3TZvD.ogg";
+
+/***/ }),
+
+/***/ "./assets/ogg/hats-3.ogg":
+/*!*******************************!*\
+  !*** ./assets/ogg/hats-3.ogg ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/hats-3-pRpFh.ogg";
+
+/***/ }),
+
+/***/ "./assets/ogg/hats-4.ogg":
+/*!*******************************!*\
+  !*** ./assets/ogg/hats-4.ogg ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/hats-4-3zVU0.ogg";
+
+/***/ }),
+
+/***/ "./assets/ogg/index.js":
+/*!*****************************!*\
+  !*** ./assets/ogg/index.js ***!
+  \*****************************/
+/*! exports provided: ogg */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ogg", function() { return ogg; });
+/* harmony import */ var _beat_1_ogg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./beat-1.ogg */ "./assets/ogg/beat-1.ogg");
+/* harmony import */ var _beat_1_ogg__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_beat_1_ogg__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _beat_2_ogg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./beat-2.ogg */ "./assets/ogg/beat-2.ogg");
+/* harmony import */ var _beat_2_ogg__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_beat_2_ogg__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _beat_3_ogg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./beat-3.ogg */ "./assets/ogg/beat-3.ogg");
+/* harmony import */ var _beat_3_ogg__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_beat_3_ogg__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _beat_4_ogg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./beat-4.ogg */ "./assets/ogg/beat-4.ogg");
+/* harmony import */ var _beat_4_ogg__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_beat_4_ogg__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _hats_1_ogg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./hats-1.ogg */ "./assets/ogg/hats-1.ogg");
+/* harmony import */ var _hats_1_ogg__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_hats_1_ogg__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _hats_2_ogg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./hats-2.ogg */ "./assets/ogg/hats-2.ogg");
+/* harmony import */ var _hats_2_ogg__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_hats_2_ogg__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _hats_3_ogg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./hats-3.ogg */ "./assets/ogg/hats-3.ogg");
+/* harmony import */ var _hats_3_ogg__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_hats_3_ogg__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _hats_4_ogg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./hats-4.ogg */ "./assets/ogg/hats-4.ogg");
+/* harmony import */ var _hats_4_ogg__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_hats_4_ogg__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _bass_1_ogg__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./bass-1.ogg */ "./assets/ogg/bass-1.ogg");
+/* harmony import */ var _bass_1_ogg__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_bass_1_ogg__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _bass_2_ogg__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./bass-2.ogg */ "./assets/ogg/bass-2.ogg");
+/* harmony import */ var _bass_2_ogg__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_bass_2_ogg__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _bass_3_ogg__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./bass-3.ogg */ "./assets/ogg/bass-3.ogg");
+/* harmony import */ var _bass_3_ogg__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_bass_3_ogg__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _bass_4_ogg__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./bass-4.ogg */ "./assets/ogg/bass-4.ogg");
+/* harmony import */ var _bass_4_ogg__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_bass_4_ogg__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _tema_1_ogg__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./tema-1.ogg */ "./assets/ogg/tema-1.ogg");
+/* harmony import */ var _tema_1_ogg__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_tema_1_ogg__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _tema_2_ogg__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./tema-2.ogg */ "./assets/ogg/tema-2.ogg");
+/* harmony import */ var _tema_2_ogg__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_tema_2_ogg__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _tema_3_ogg__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./tema-3.ogg */ "./assets/ogg/tema-3.ogg");
+/* harmony import */ var _tema_3_ogg__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_tema_3_ogg__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _tema_4_ogg__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./tema-4.ogg */ "./assets/ogg/tema-4.ogg");
+/* harmony import */ var _tema_4_ogg__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_tema_4_ogg__WEBPACK_IMPORTED_MODULE_15__);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const ogg = {
+  beat1: (_beat_1_ogg__WEBPACK_IMPORTED_MODULE_0___default()),
+  beat2: (_beat_2_ogg__WEBPACK_IMPORTED_MODULE_1___default()),
+  beat3: (_beat_3_ogg__WEBPACK_IMPORTED_MODULE_2___default()),
+  beat4: (_beat_4_ogg__WEBPACK_IMPORTED_MODULE_3___default()),
+  hats1: (_hats_1_ogg__WEBPACK_IMPORTED_MODULE_4___default()),
+  hats2: (_hats_2_ogg__WEBPACK_IMPORTED_MODULE_5___default()),
+  hats3: (_hats_3_ogg__WEBPACK_IMPORTED_MODULE_6___default()),
+  hats4: (_hats_4_ogg__WEBPACK_IMPORTED_MODULE_7___default()),
+  bass1: (_bass_1_ogg__WEBPACK_IMPORTED_MODULE_8___default()),
+  bass2: (_bass_2_ogg__WEBPACK_IMPORTED_MODULE_9___default()),
+  bass3: (_bass_3_ogg__WEBPACK_IMPORTED_MODULE_10___default()),
+  bass4: (_bass_4_ogg__WEBPACK_IMPORTED_MODULE_11___default()),
+  tema1: (_tema_1_ogg__WEBPACK_IMPORTED_MODULE_12___default()),
+  tema2: (_tema_2_ogg__WEBPACK_IMPORTED_MODULE_13___default()),
+  tema3: (_tema_3_ogg__WEBPACK_IMPORTED_MODULE_14___default()),
+  tema4: (_tema_4_ogg__WEBPACK_IMPORTED_MODULE_15___default())
+};
+
+/***/ }),
+
+/***/ "./assets/ogg/tema-1.ogg":
+/*!*******************************!*\
+  !*** ./assets/ogg/tema-1.ogg ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/tema-1-1z8Ce.ogg";
+
+/***/ }),
+
+/***/ "./assets/ogg/tema-2.ogg":
+/*!*******************************!*\
+  !*** ./assets/ogg/tema-2.ogg ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/tema-2-1eSgW.ogg";
+
+/***/ }),
+
+/***/ "./assets/ogg/tema-3.ogg":
+/*!*******************************!*\
+  !*** ./assets/ogg/tema-3.ogg ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/tema-3-31DxM.ogg";
+
+/***/ }),
+
+/***/ "./assets/ogg/tema-4.ogg":
+/*!*******************************!*\
+  !*** ./assets/ogg/tema-4.ogg ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "assets/tema-4-1sMcq.ogg";
 
 /***/ }),
 
@@ -1094,9 +1449,9 @@ const GAGameStart = () => {
   }
 };
 
-const GAStartRecord = () => {
-  let isFirstStart = true;
+let isFirstStart = true;
 
+const GAStartRecord = () => {
   if (window.ga) {
     window.ga('send', 'event', GAME_NAME, 'start_record');
 
@@ -1109,9 +1464,9 @@ const GAStartRecord = () => {
   }
 };
 
-const GAStopRecord = () => {
-  let isFirstStop = true;
+let isFirstStop = true;
 
+const GAStopRecord = () => {
   if (window.ga) {
     window.ga('send', 'event', GAME_NAME, 'stop_record');
 
@@ -1124,9 +1479,9 @@ const GAStopRecord = () => {
   }
 };
 
-const GAInteractTrack = track => {
-  let isFirstInteractTrack = true;
+let isFirstInteractTrack = true;
 
+const GAInteractTrack = track => {
   if (window.ga) {
     window.ga('send', 'event', GAME_NAME, 'interact_track', track);
 
@@ -1139,9 +1494,9 @@ const GAInteractTrack = track => {
   }
 };
 
-const GAInteractZag = zag => {
-  let isFirstInteractZag = true;
+let isFirstInteractZag = true;
 
+const GAInteractZag = zag => {
   if (window.ga) {
     window.ga('send', 'event', GAME_NAME, 'interact_zag', zag);
 
@@ -2289,7 +2644,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ducks_record__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../ducks/record */ "./src/ducks/record.js");
 /* harmony import */ var _ducks_playback__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../ducks/playback */ "./src/ducks/playback.js");
 /* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../consts */ "./src/consts.js");
+/* harmony import */ var _assets__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../assets */ "./assets/index.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2324,7 +2681,7 @@ class SoundManagerComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Componen
 
     for (const loop of this.props.loops) {
       this.howls[loop.id] = new howler__WEBPACK_IMPORTED_MODULE_2__["Howl"]({
-        src: [loop.src],
+        src: [_assets__WEBPACK_IMPORTED_MODULE_7__["ogg"][loop.src], _assets__WEBPACK_IMPORTED_MODULE_7__["mp3"][loop.src]],
         preload: true,
         onload: () => {
           this.props.setLoopState([{
@@ -2499,8 +2856,8 @@ const LoopState = {
 };
 const MAXIMUM_RECORD_TURNS = 32;
 const MAXIMUM_NEWS_READ = 15;
-const BPM = 75;
-const BEATS_IN_LOOP = 8;
+const BPM = 90;
+const BEATS_IN_LOOP = 16;
 const LOOP_DURATION_SEC = BEATS_IN_LOOP / (BPM / 60);
 
 /***/ }),
@@ -2518,54 +2875,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loops", function() { return loops; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "news", function() { return news; });
 /* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./consts */ "./src/consts.js");
-/* harmony import */ var _assets_beat_01_mp3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/beat_01.mp3 */ "./assets/beat_01.mp3");
-/* harmony import */ var _assets_beat_01_mp3__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_assets_beat_01_mp3__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _assets_beat_02_mp3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/beat_02.mp3 */ "./assets/beat_02.mp3");
-/* harmony import */ var _assets_beat_02_mp3__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_assets_beat_02_mp3__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _assets_beat_03_mp3__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../assets/beat_03.mp3 */ "./assets/beat_03.mp3");
-/* harmony import */ var _assets_beat_03_mp3__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_assets_beat_03_mp3__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _assets_beat_04_mp3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../assets/beat_04.mp3 */ "./assets/beat_04.mp3");
-/* harmony import */ var _assets_beat_04_mp3__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_assets_beat_04_mp3__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _assets_hihats_01_mp3__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../assets/hihats_01.mp3 */ "./assets/hihats_01.mp3");
-/* harmony import */ var _assets_hihats_01_mp3__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_assets_hihats_01_mp3__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _assets_hihats_02_mp3__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../assets/hihats_02.mp3 */ "./assets/hihats_02.mp3");
-/* harmony import */ var _assets_hihats_02_mp3__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_assets_hihats_02_mp3__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _assets_hihats_03_mp3__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../assets/hihats_03.mp3 */ "./assets/hihats_03.mp3");
-/* harmony import */ var _assets_hihats_03_mp3__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_assets_hihats_03_mp3__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _assets_hihats_04_mp3__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../assets/hihats_04.mp3 */ "./assets/hihats_04.mp3");
-/* harmony import */ var _assets_hihats_04_mp3__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_assets_hihats_04_mp3__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _assets_bass_01_mp3__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../assets/bass_01.mp3 */ "./assets/bass_01.mp3");
-/* harmony import */ var _assets_bass_01_mp3__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_assets_bass_01_mp3__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _assets_bass_02_mp3__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../assets/bass_02.mp3 */ "./assets/bass_02.mp3");
-/* harmony import */ var _assets_bass_02_mp3__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_assets_bass_02_mp3__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _assets_bass_03_mp3__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../assets/bass_03.mp3 */ "./assets/bass_03.mp3");
-/* harmony import */ var _assets_bass_03_mp3__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_assets_bass_03_mp3__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _assets_bass_04_mp3__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../assets/bass_04.mp3 */ "./assets/bass_04.mp3");
-/* harmony import */ var _assets_bass_04_mp3__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_assets_bass_04_mp3__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _assets_tune_01_mp3__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../assets/tune_01.mp3 */ "./assets/tune_01.mp3");
-/* harmony import */ var _assets_tune_01_mp3__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_assets_tune_01_mp3__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _assets_tune_02_mp3__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../assets/tune_02.mp3 */ "./assets/tune_02.mp3");
-/* harmony import */ var _assets_tune_02_mp3__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_assets_tune_02_mp3__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _assets_tune_03_mp3__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../assets/tune_03.mp3 */ "./assets/tune_03.mp3");
-/* harmony import */ var _assets_tune_03_mp3__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_assets_tune_03_mp3__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var _assets_tune_04_mp3__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../assets/tune_04.mp3 */ "./assets/tune_04.mp3");
-/* harmony import */ var _assets_tune_04_mp3__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_assets_tune_04_mp3__WEBPACK_IMPORTED_MODULE_16__);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const categories = [{
   id: "beats",
@@ -2588,115 +2897,100 @@ const loops = [{
   id: "bt1",
   categoryId: "beats",
   groupId: "beats",
-  src: _assets_beat_01_mp3__WEBPACK_IMPORTED_MODULE_1___default.a,
+  src: "beat1",
   state: _consts__WEBPACK_IMPORTED_MODULE_0__["LoopState"].Loading
 }, {
   id: "bt2",
   categoryId: "beats",
   groupId: "beats",
-  src: _assets_beat_02_mp3__WEBPACK_IMPORTED_MODULE_2___default.a,
+  src: "beat2",
   state: _consts__WEBPACK_IMPORTED_MODULE_0__["LoopState"].Loading
 }, {
   id: "bt3",
   categoryId: "beats",
   groupId: "beats",
-  src: _assets_beat_03_mp3__WEBPACK_IMPORTED_MODULE_3___default.a,
+  src: "beat3",
   state: _consts__WEBPACK_IMPORTED_MODULE_0__["LoopState"].Loading
 }, {
   id: "bt4",
   categoryId: "beats",
   groupId: "beats",
-  src: _assets_beat_04_mp3__WEBPACK_IMPORTED_MODULE_4___default.a,
+  src: "beat4",
   state: _consts__WEBPACK_IMPORTED_MODULE_0__["LoopState"].Loading
 }, {
   id: "h1",
   categoryId: "hihats",
   groupId: "hihats",
-  src: _assets_hihats_01_mp3__WEBPACK_IMPORTED_MODULE_5___default.a,
+  src: "hats1",
   state: _consts__WEBPACK_IMPORTED_MODULE_0__["LoopState"].Loading
 }, {
   id: "h2",
   categoryId: "hihats",
   groupId: "hihats",
-  src: _assets_hihats_02_mp3__WEBPACK_IMPORTED_MODULE_6___default.a,
+  src: "hats2",
   state: _consts__WEBPACK_IMPORTED_MODULE_0__["LoopState"].Loading
 }, {
   id: "h3",
   categoryId: "hihats",
   groupId: "hihats",
-  src: _assets_hihats_03_mp3__WEBPACK_IMPORTED_MODULE_7___default.a,
+  src: "hats3",
   state: _consts__WEBPACK_IMPORTED_MODULE_0__["LoopState"].Loading
 }, {
   id: "h4",
   categoryId: "hihats",
   groupId: "hihats",
-  src: _assets_hihats_04_mp3__WEBPACK_IMPORTED_MODULE_8___default.a,
+  src: "hats4",
   state: _consts__WEBPACK_IMPORTED_MODULE_0__["LoopState"].Loading
 }, {
   id: "b1",
   categoryId: "bass",
   groupId: "bass",
-  src: _assets_bass_01_mp3__WEBPACK_IMPORTED_MODULE_9___default.a,
+  src: "bass1",
   state: _consts__WEBPACK_IMPORTED_MODULE_0__["LoopState"].Loading
 }, {
   id: "b2",
   categoryId: "bass",
   groupId: "bass",
-  src: _assets_bass_02_mp3__WEBPACK_IMPORTED_MODULE_10___default.a,
+  src: "bass2",
   state: _consts__WEBPACK_IMPORTED_MODULE_0__["LoopState"].Loading
 }, {
   id: "b3",
   categoryId: "bass",
   groupId: "bass",
-  src: _assets_bass_03_mp3__WEBPACK_IMPORTED_MODULE_11___default.a,
+  src: "bass3",
   state: _consts__WEBPACK_IMPORTED_MODULE_0__["LoopState"].Loading
 }, {
   id: "b4",
   categoryId: "bass",
   groupId: "bass",
-  src: _assets_bass_04_mp3__WEBPACK_IMPORTED_MODULE_12___default.a,
+  src: "bass4",
   state: _consts__WEBPACK_IMPORTED_MODULE_0__["LoopState"].Loading
 }, {
   id: "t1",
   categoryId: "tune",
   groupId: "tune",
-  src: _assets_tune_01_mp3__WEBPACK_IMPORTED_MODULE_13___default.a,
+  src: "tema1",
   state: _consts__WEBPACK_IMPORTED_MODULE_0__["LoopState"].Loading
 }, {
   id: "t2",
   categoryId: "tune",
   groupId: "tune",
-  src: _assets_tune_02_mp3__WEBPACK_IMPORTED_MODULE_14___default.a,
+  src: "tema2",
   state: _consts__WEBPACK_IMPORTED_MODULE_0__["LoopState"].Loading
 }, {
   id: "t3",
   categoryId: "tune",
   groupId: "tune",
-  src: _assets_tune_03_mp3__WEBPACK_IMPORTED_MODULE_15___default.a,
+  src: "tema3",
   state: _consts__WEBPACK_IMPORTED_MODULE_0__["LoopState"].Loading
 }, {
   id: "t4",
   categoryId: "tune",
   groupId: "tune",
-  src: _assets_tune_04_mp3__WEBPACK_IMPORTED_MODULE_16___default.a,
+  src: "tema4",
   state: _consts__WEBPACK_IMPORTED_MODULE_0__["LoopState"].Loading
 }];
-const news = [// {
-//     id: "0",
-//     link: "https://zona.media/news/2018/09/17/urlashov",
-//     text: "Путин отказался помиловать экс-мэра Ярославля Урлашова",
-// },
-// {
-//     id: "1",
-//     link: "https://zona.media/news/2018/09/17/nenasheva",
-//     text: "Художницу Катрин Ненашеву задержали в центре Москвы во время акции против пыток",
-// },
-// {
-//     id: "2",
-//     link: "https://zona.media/news/2018/09/17/sagynbaev",
-//     text: "Тяжелобольного фигуранта «пензенского дела» поместили в карцер после отказа от признательных показаний и рассказа о пытках",
-// }
-{
+const news = [{
   id: "0",
   link: "https://zona.media/news/2018/10/14/free",
   text: "Навальный вышел на свободу после 50 суток ареста"
@@ -3210,18 +3504,24 @@ if (recordHash !== null) {
   }
 }
 
-const rootNode = document.createElement("div");
-rootNode.className = _index_css__WEBPACK_IMPORTED_MODULE_12__["rootCOntainer"];
-const body = document.body;
+let rootNode = document.getElementById("rap_root");
 
-if (body !== null) {
-  body.appendChild(rootNode);
+if (!rootNode) {
+  rootNode = document.createElement("div");
+  rootNode.className = _index_css__WEBPACK_IMPORTED_MODULE_12__["rootContainer"];
+  const body = document.body;
+
+  if (body !== null) {
+    body.appendChild(rootNode);
+  }
 }
 
 const renderApp = Component => {
-  Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["render"])(react__WEBPACK_IMPORTED_MODULE_0__["createElement"](react_redux__WEBPACK_IMPORTED_MODULE_2__["Provider"], {
-    store: store
-  }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Component, null)), rootNode);
+  if (rootNode) {
+    Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["render"])(react__WEBPACK_IMPORTED_MODULE_0__["createElement"](react_redux__WEBPACK_IMPORTED_MODULE_2__["Provider"], {
+      store: store
+    }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Component, null)), rootNode);
+  }
 };
 
 renderApp(_App__WEBPACK_IMPORTED_MODULE_8__["App"]);

@@ -2,7 +2,94 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="619eeb10-5219-493e-849a-aa6e9cdc643d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/analytics.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/mp3/bass-1.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/mp3/bass-2.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/mp3/bass-3.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/mp3/bass-4.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/mp3/beat-1.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/mp3/beat-2.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/mp3/beat-3.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/mp3/beat-4.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/mp3/hats-1.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/mp3/hats-2.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/mp3/hats-3.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/mp3/hats-4.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/mp3/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/mp3/tema-1.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/mp3/tema-2.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/mp3/tema-3.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/mp3/tema-4.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ogg/bass-1.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ogg/bass-2.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ogg/bass-3.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ogg/bass-4.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ogg/beat-1.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ogg/beat-2.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ogg/beat-3.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ogg/beat-4.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ogg/hats-1.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ogg/hats-2.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ogg/hats-3.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ogg/hats-4.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ogg/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ogg/tema-1.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ogg/tema-2.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ogg/tema-3.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ogg/tema-4.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/bass-1-13f7m.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/bass-1-33_lx.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/bass-2-1M1aS.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/bass-2-1yse6.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/bass-3-2tMew.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/bass-3-3_ecE.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/bass-4-1H7r2.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/bass-4-1iPOf.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/beat-1-3rZ9s.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/beat-1-ZS0kV.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/beat-2-2XwmK.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/beat-2-3IoUP.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/beat-3-1ckg0.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/beat-3-3E98G.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/beat-4-1Ug27.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/beat-4-8II0f.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/hats-1--Imlu.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/hats-1-1yx3W.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/hats-2-104ht.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/hats-2-3TZvD.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/hats-3-174sy.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/hats-3-pRpFh.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/hats-4-2QZrd.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/hats-4-3zVU0.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/tema-1-1z8Ce.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/tema-1-2MTC4.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/tema-2-1eSgW.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/tema-2-2Nwq0.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/tema-3-2b6mc.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/tema-3-31DxM.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/tema-4-1sMcq.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/tema-4-l7Oe2.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/record.schema.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flowconfig" beforeDir="false" afterPath="$PROJECT_DIR$/.flowconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TODO.md" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/bass_01.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/bass_02.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/bass_03.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/bass_04.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/beat_01.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/beat_02.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/beat_03.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/beat_04.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/hihats_01.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/hihats_02.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/hihats_03.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/hihats_04.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tune_01.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tune_02.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tune_03.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tune_04.mp3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/assets/bass_01-4ERcW.mp3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/assets/bass_02-16akh.mp3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/assets/bass_03-2SwVS.mp3" beforeDir="false" />
@@ -19,14 +106,17 @@
       <change beforePath="$PROJECT_DIR$/dist/assets/tune_02-2MCvy.mp3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/assets/tune_03-1YaYR.mp3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/assets/tune_04-35J_C.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/vendor.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Loop/Loop.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Loop/Loop.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/News/NewsContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/News/NewsContainer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Player/Player.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Player/Player.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ducks/record.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ducks/record.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flow/mp3-resolver.js" beforeDir="false" afterPath="$PROJECT_DIR$/flow/sound-file-resolver.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/analytics.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/analytics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SoundManager/SoundManager.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SoundManager/SoundManager.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/consts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/consts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -53,7 +143,7 @@
           <entry key="flowconfig" value="1" />
           <entry key="gitignore" value="1" />
           <entry key="html" value="1" />
-          <entry key="js" value="51" />
+          <entry key="js" value="52" />
           <entry key="json" value="6" />
           <entry key="jsx" value="14" />
         </counts>
@@ -64,14 +154,14 @@
           <entry key="HTML" value="1" />
           <entry key="JSON" value="6" />
           <entry key="JSX Harmony" value="14" />
-          <entry key="JavaScript" value="51" />
+          <entry key="JavaScript" value="52" />
           <entry key="PLAIN_TEXT" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="6" />
-          <entry key="js" value="1008" />
+          <entry key="js" value="1024" />
           <entry key="json" value="1" />
           <entry key="jsx" value="381" />
         </counts>
@@ -80,7 +170,7 @@
         <counts>
           <entry key="JSON" value="1" />
           <entry key="JSX Harmony" value="381" />
-          <entry key="JavaScript" value="1008" />
+          <entry key="JavaScript" value="1024" />
           <entry key="PLAIN_TEXT" value="6" />
         </counts>
       </usages-collector>
@@ -103,20 +193,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/analytics.js">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webpack.config.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+            <state relative-caret-position="165">
+              <caret line="11" column="43" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/consts.js">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/analytics.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="45" lean-forward="true" selection-start-column="45" selection-end-column="45" />
+            <state relative-caret-position="274">
+              <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
             </state>
           </provider>
         </entry>
@@ -289,20 +379,6 @@
               <item name="mz-rap-game" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="components" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Loop" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="mz-rap-game" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="components" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="LoopsCategory" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="mz-rap-game" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="ducks" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
@@ -354,12 +430,12 @@
       <updated>1540892447837</updated>
       <workItem from="1540892449832" duration="17771000" />
       <workItem from="1540974660101" duration="1420000" />
-      <workItem from="1540976107982" duration="12729000" />
+      <workItem from="1540976107982" duration="13885000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31920000" />
+    <option name="totallyTimeSpent" value="33076000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -511,13 +587,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webpack.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-368">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12012">
@@ -659,10 +728,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/webpack.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="43" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/analytics.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+        <state relative-caret-position="274">
+          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
         </state>
       </provider>
     </entry>

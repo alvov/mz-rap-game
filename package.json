@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "flow check && flow stop",
     "build": "npm run lint && webpack && npm run flow-stop",
+    "build-github": "PUBLIC_URL=./ npm run build",
     "start": "webpack-dev-server --hot",
     "flow-stop": "flow stop"
   },

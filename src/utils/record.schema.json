@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "./record.schema.json",
+  "title": "MZ rap record schema",
+  "description": "Schema for the post/get data format of the rap record",
+  "type": "object",
+  "properties": {
+    "loops": {
+      "description": "A sequence of played loops",
+      "type": "array",
+      "items": {
+        "description": "Loops played at a single step",
+        "type": "array",
+        "items": {
+          "description": "Loop name",
+          "type": "string"
+        }
+      }
+    },
+    "shots": {
+      "description": "A single sound shot (i.e. news or fx) with a timestamp",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Unique id of a shot",
+            "type": "string"
+          },
+          "timestamp": {
+            "description": "Number of ms from the start of the song when this shot should start playing",
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "required": ["id", "timestamp"]
+      }
+    }
+  },
+  "required": ["loops", "shots"]
+}

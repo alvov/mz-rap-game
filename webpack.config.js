@@ -1,8 +1,38 @@
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const webpack = require('webpack');
+const webpack = require("webpack");
 const path = require("path");
+const fs = require("fs");
+const url = require("url");
+
+const appDirectory = fs.realpathSync(process.cwd());
+const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
+
+const envPublicUrl = process.env.PUBLIC_URL;
+
+function ensureSlash(path, needsSlash) {
+  const hasSlash = path.endsWith("/");
+  if (hasSlash && !needsSlash) {
+    return path.substr(path, path.length - 1);
+  } else if (!hasSlash && needsSlash) {
+    return `${path}/`;
+  } else {
+    return path;
+  }
+}
+
+const getPublicUrl = appPackageJson =>
+  envPublicUrl || require(appPackageJson).homepage;
+
+function getServedPath(appPackageJson) {
+  const publicUrl = getPublicUrl(appPackageJson);
+  const servedUrl =
+    envPublicUrl || (publicUrl ? url.parse(publicUrl).pathname : "/");
+  return ensureSlash(servedUrl, true);
+}
+
+const publicPath = getServedPath(resolveApp("package.json"));
 
 module.exports = {
     entry: {
@@ -11,12 +41,16 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "[name].js",
+        publicPath: publicPath,
     },
     module: {
         rules: [
             {
                 test: /\.jsx?$/,
-                include: path.resolve(__dirname, "src"),
+                include: [
+                    path.resolve(__dirname, "src"),
+                    path.resolve(__dirname, "assets"),
+                ],
                 use: [
                     {
                         loader: "babel-loader",
@@ -49,7 +83,7 @@ module.exports = {
                 ],
             },
             {
-                test: /\.mp3$/,
+                test: /\.(mp3|ogg)$/,
                 use: [
                     {
                         loader: "file-loader",
