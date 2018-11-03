@@ -44,6 +44,7 @@
   font: 500 13px 'Graphik LC';
   line-height: 1.54;
   letter-spacing: 1px;
+  text-transform: uppercase;
   color: #ffffff;
   background: none;
   cursor: pointer;

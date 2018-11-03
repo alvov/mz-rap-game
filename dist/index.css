@@ -370,6 +370,7 @@
   font: 500 13px 'Graphik LC';
   line-height: 1.54;
   letter-spacing: 1px;
+  text-transform: uppercase;
   color: #ffffff;
   background: none;
   cursor: pointer;
@@ -436,16 +437,16 @@
 
 @font-face {
   font-family: "Graphik LC";
-  src: url(/rap_game/assets/Graphik-Bold-Cy-Web-1idU1.eot);
-  src: url(/rap_game/assets/Graphik-Bold-Cy-Web-1idU1.eot?#iefix) format("embedded-opentype"),url(/rap_game/assets/Graphik-Bold-Cy-Web-2lGlB.woff) format("woff"),url(/rap_game/assets/Graphik-Bold-Cy-Web-2JpbQ.ttf) format("truetype");
+  src: url(./assets/Graphik-Bold-Cy-Web-1idU1.eot);
+  src: url(./assets/Graphik-Bold-Cy-Web-1idU1.eot?#iefix) format("embedded-opentype"),url(./assets/Graphik-Bold-Cy-Web-2lGlB.woff) format("woff"),url(./assets/Graphik-Bold-Cy-Web-2JpbQ.ttf) format("truetype");
   font-weight: 700;
   font-style: normal
 }
 
 @font-face {
   font-family: "Graphik LC";
-  src: url(/rap_game/assets/Graphik-Regular-Cy-Web-1qioZ.eot);
-  src: url(/rap_game/assets/Graphik-Regular-Cy-Web-1qioZ.eot?#iefix) format("embedded-opentype"),url(/rap_game/assets/Graphik-Regular-Cy-Web-3dAl3.woff) format("woff"),url(/rap_game/assets/Graphik-Regular-Cy-Web-35C8W.ttf) format("truetype");
+  src: url(./assets/Graphik-Regular-Cy-Web-1qioZ.eot);
+  src: url(./assets/Graphik-Regular-Cy-Web-1qioZ.eot?#iefix) format("embedded-opentype"),url(./assets/Graphik-Regular-Cy-Web-3dAl3.woff) format("woff"),url(./assets/Graphik-Regular-Cy-Web-35C8W.ttf) format("truetype");
   font-weight: 400;
   font-style: normal;
   font-stretch: normal
