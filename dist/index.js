@@ -113,7 +113,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "f95a24d240bc382e18bf";
+/******/ 	var hotCurrentHash = "b93d134ebf8696007891";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1436,9 +1436,9 @@ const GAME_NAME = 'rap_game';
 
 const GAGameStart = () => {
   if (window.ga) {
-    const isRepeatStartGame = localStorage.getItem('isRepeatStartGame');
+    const isRepeatStartGame = !!localStorage.getItem('isRepeatStartGame');
 
-    if (isRepeatStartGame !== null) {
+    if (!isRepeatStartGame) {
       window.ga('send', 'event', GAME_NAME, 'unique_start_game');
     }
 
@@ -1546,9 +1546,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ducks_playback__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../ducks/playback */ "./src/ducks/playback.js");
 /* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../consts */ "./src/consts.js");
 /* harmony import */ var _TitlePage_TitlePage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./TitlePage/TitlePage */ "./src/components/TitlePage/TitlePage.jsx");
-/* harmony import */ var _Dashboard_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Dashboard.css */ "./src/components/Dashboard.css");
-/* harmony import */ var _Dashboard_css__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_Dashboard_css__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _analytics__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../analytics */ "./src/analytics.js");
+/* harmony import */ var _Dashboard_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Dashboard.css */ "./src/components/Dashboard.css");
+/* harmony import */ var _Dashboard_css__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_Dashboard_css__WEBPACK_IMPORTED_MODULE_10__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1567,6 +1569,7 @@ class DashboardComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Component"]
     _defineProperty(this, "percentUpdateTimer", void 0);
 
     _defineProperty(this, "startGame", () => {
+      _analytics__WEBPACK_IMPORTED_MODULE_9__["GAGameStart"]();
       this.setState(() => ({
         isStart: true
       }));
@@ -1594,11 +1597,11 @@ class DashboardComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Component"]
     }
 
     return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
-      className: _Dashboard_css__WEBPACK_IMPORTED_MODULE_9__["dashboard"]
+      className: _Dashboard_css__WEBPACK_IMPORTED_MODULE_10__["dashboard"]
     }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Player_Player__WEBPACK_IMPORTED_MODULE_5__["Player"], null), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
-      className: _Dashboard_css__WEBPACK_IMPORTED_MODULE_9__["triggers"]
+      className: _Dashboard_css__WEBPACK_IMPORTED_MODULE_10__["triggers"]
     }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
-      className: _Dashboard_css__WEBPACK_IMPORTED_MODULE_9__["loopsContainer"]
+      className: _Dashboard_css__WEBPACK_IMPORTED_MODULE_10__["loopsContainer"]
     }, categories.map(category => this.renderLoopCategory(category))), react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_News_NewsContainer__WEBPACK_IMPORTED_MODULE_4__["NewsContainer"], null)));
   }
 

@@ -2,11 +2,11 @@ const GAME_NAME = 'rap_game'
 
 const GAGameStart = () => {
   if (window.ga) {
-    const isRepeatStartGame: ?string = localStorage.getItem('isRepeatStartGame')
-    if(isRepeatStartGame !== null) {
-      window.ga('send', 'event', GAME_NAME, 'unique_start_game')
+    const isRepeatStartGame: boolean = !!localStorage.getItem('isRepeatStartGame');
+    if(!isRepeatStartGame) {
+      window.ga('send', 'event', GAME_NAME, 'unique_start_game');
     }
-    window.ga('send', 'event', GAME_NAME, 'start_game')
+    window.ga('send', 'event', GAME_NAME, 'start_game');
     localStorage.setItem('isRepeatStartGame', '1');
   } else {
     console.error('No GA in WINDOW')

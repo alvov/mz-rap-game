@@ -2,28 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="619eeb10-5219-493e-849a-aa6e9cdc643d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Share/Share.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Share/Share.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/TitlePage/TitlePage.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/TitlePage/TitlePage.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/icons.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/fonts/GraphikLC/Graphik-Bold-Cy-Web.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/fonts/GraphikLC/Graphik-Bold-Cy-Web.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/fonts/GraphikLC/Graphik-Bold-Cy-Web.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/fonts/GraphikLC/Graphik-Bold-Cy-Web.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/fonts/GraphikLC/Graphik-Regular-Cy-Web.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/fonts/GraphikLC/Graphik-Regular-Cy-Web.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/fonts/GraphikLC/Graphik-Regular-Cy-Web.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/fonts/GraphikLC/Graphik-Regular-Cy-Web.woff" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/analytics.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/analytics.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Dashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -52,9 +34,9 @@
           <entry key="flowconfig" value="2" />
           <entry key="gitignore" value="3" />
           <entry key="html" value="1" />
-          <entry key="js" value="59" />
+          <entry key="js" value="60" />
           <entry key="json" value="8" />
-          <entry key="jsx" value="27" />
+          <entry key="jsx" value="28" />
           <entry key="lock" value="1" />
           <entry key="md" value="1" />
           <entry key="svg" value="6" />
@@ -65,8 +47,8 @@
           <entry key="CSS" value="13" />
           <entry key="HTML" value="1" />
           <entry key="JSON" value="8" />
-          <entry key="JSX Harmony" value="27" />
-          <entry key="JavaScript" value="59" />
+          <entry key="JSX Harmony" value="28" />
+          <entry key="JavaScript" value="60" />
           <entry key="PLAIN_TEXT" value="10" />
           <entry key="SVG" value="6" />
           <entry key="yarn.lock" value="1" />
@@ -77,9 +59,9 @@
           <entry key="css" value="393" />
           <entry key="env" value="7" />
           <entry key="gitignore" value="11" />
-          <entry key="js" value="1159" />
+          <entry key="js" value="1194" />
           <entry key="json" value="1" />
-          <entry key="jsx" value="1990" />
+          <entry key="jsx" value="2066" />
           <entry key="svg" value="1" />
         </counts>
       </usages-collector>
@@ -87,8 +69,8 @@
         <counts>
           <entry key="CSS" value="393" />
           <entry key="JSON" value="1" />
-          <entry key="JSX Harmony" value="1990" />
-          <entry key="JavaScript" value="1159" />
+          <entry key="JSX Harmony" value="2066" />
+          <entry key="JavaScript" value="1194" />
           <entry key="PLAIN_TEXT" value="18" />
           <entry key="SVG" value="1" />
         </counts>
@@ -110,6 +92,27 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Dashboard.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="145">
+              <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/analytics.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flow/sound-file-resolver.js">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
@@ -125,15 +128,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webpack.config.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="120" column="16" lean-forward="true" selection-start-line="120" selection-start-column="16" selection-end-line="120" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Share/Share.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="184">
@@ -145,7 +139,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/TitlePage/TitlePage.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
@@ -170,11 +164,6 @@
               <caret line="2" column="5" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TODO.md">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -217,18 +206,18 @@
         <option value="$PROJECT_DIR$/src/components/News/NewsContainer.jsx" />
         <option value="$PROJECT_DIR$/src/ducks/record.js" />
         <option value="$PROJECT_DIR$/src/components/Loop/Loop.jsx" />
-        <option value="$PROJECT_DIR$/src/analytics.js" />
         <option value="$USER_HOME$/Downloads/fb.svg" />
         <option value="$PROJECT_DIR$/src/components/icons.jsx" />
         <option value="$PROJECT_DIR$/src/components/Share/Share.css" />
         <option value="$PROJECT_DIR$/src/index.css" />
-        <option value="$PROJECT_DIR$/src/components/Dashboard.jsx" />
         <option value="$PROJECT_DIR$/src/components/Share/Share.jsx" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/src/components/TitlePage/TitlePage.jsx" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/src/components/TitlePage/TitlePage.css" />
+        <option value="$PROJECT_DIR$/src/components/Dashboard.jsx" />
+        <option value="$PROJECT_DIR$/src/analytics.js" />
       </list>
     </option>
   </component>
@@ -295,7 +284,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/TitlePage/TitlePage.jsx&#10;title&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/TitlePage/TitlePage.jsx&#10;an&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/analytics.js&#10;u&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/Player/utils.js" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/analytics.js&#10;title&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/TitlePage/TitlePage.jsx&#10;an&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/analytics.js&#10;u&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/Player/utils.js" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -332,12 +321,12 @@
       <workItem from="1540892449832" duration="17771000" />
       <workItem from="1540974660101" duration="1420000" />
       <workItem from="1540976107982" duration="15026000" />
-      <workItem from="1541241535102" duration="14738000" />
+      <workItem from="1541241535102" duration="16654000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48955000" />
+    <option name="totallyTimeSpent" value="50871000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -352,7 +341,7 @@
     <frame x="0" y="23" width="1440" height="821" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49785408" visible="true" weight="0.14799154" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49785408" visible="true" weight="0.14799154" />
       <window_info id="Structure" order="1" sideWeight="0.50214595" side_tool="true" weight="0.14869626" />
       <window_info id="npm" order="2" sideWeight="0.5030303" side_tool="true" weight="0.14722222" />
       <window_info id="Favorites" order="3" sideWeight="0.5030675" side_tool="true" weight="0.15010571" />
@@ -364,10 +353,10 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4918957" visible="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49119097" weight="0.3286119" />
       <window_info anchor="bottom" id="Messages" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5081043" side_tool="true" visible="true" weight="0.3286119" />
-      <window_info anchor="bottom" x="10" y="313" width="1419" height="240" id="Terminal" order="11" sideWeight="0.49400985" weight="0.33994335" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50739956" side_tool="true" visible="true" weight="0.33994335" />
+      <window_info active="true" anchor="bottom" x="10" y="313" width="1419" height="240" id="Terminal" order="11" sideWeight="0.4926004" visible="true" weight="0.33994335" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -506,13 +495,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/analytics.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="44" selection-start-line="44" selection-end-line="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Downloads/vk.svg">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -617,16 +599,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Dashboard.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="688">
-          <caret line="48" column="28" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/yarn.lock">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -668,13 +640,6 @@
     <entry file="file://$PROJECT_DIR$/flow/sound-file-resolver.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/TitlePage/TitlePage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="31" lean-forward="true" selection-start-column="31" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -709,6 +674,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/TitlePage/TitlePage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="31" lean-forward="true" selection-start-column="31" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Dashboard.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/analytics.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
         </state>
       </provider>
     </entry>

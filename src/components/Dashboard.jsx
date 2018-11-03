@@ -9,6 +9,7 @@ import {LOOP_DURATION_SEC} from "../consts";
 import type {Category} from "../types";
 import type {RootState} from "../ducks";
 import {TitlePage} from "./TitlePage/TitlePage";
+import * as analytic from "../analytics";
 
 import * as styles from "./Dashboard.css";
 
@@ -35,6 +36,7 @@ export class DashboardComponent extends React.Component<DashboardComponentProps,
   }
 
   startGame = () => {
+    analytic.GAGameStart();
     this.setState(() => ({
       isStart: true
     }))
