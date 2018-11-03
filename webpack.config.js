@@ -5,6 +5,7 @@ const webpack = require("webpack");
 const path = require("path");
 const fs = require("fs");
 const url = require("url");
+const Dotenv = require('dotenv-webpack');
 
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
@@ -94,6 +95,16 @@ module.exports = {
                     },
                 ],
             },
+            {
+                test: /\.(ttf|eot|svg|gif|woff)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: "[name]-[hash:base64:5].[ext]",
+                        outputPath: "assets/",
+                    },
+                }]
+            }
         ],
     },
     resolve: {
@@ -104,6 +115,7 @@ module.exports = {
         extensions: [".js", ".jsx", ".css"],
     },
     plugins: [
+        new Dotenv(),
         new CleanWebpackPlugin("dist"),
         new MiniCssExtractPlugin({
             filename: "[name].css",
