@@ -1,8 +1,8 @@
 # TODO
 
 ## Intro page
-- [ ] Intro page
-- [ ] Intro page with play button
+- [x] Intro page
+- [x] Intro page with play button
 
 ## News
 - [x] News layout  
@@ -31,12 +31,15 @@
 - [x] Loops progress bar  
 - [x] News progress bar  
 - [ ] Playback progress bar  
-- [ ] Implement new design 
+- [x] Implement new design
 
 ## Sounds
-- [x] Replace sounds  
-- [x] Add bass  
-- [x] Add keys  
+- [x] Replace sounds
+- [x] Add bass
+- [x] Add keys
+- [ ] Reduce loops volume
+- [ ] <s>Calculate loops duration</s>
+- [ ] Add FX
 
 ## Tech debt
 - [x] Create repo  
@@ -50,3 +53,7 @@
 
 ## Bugs
 - [ ] Sounds on mobile
+- [ ] Blinking animation on mobile 
+
+## Question
+- [ ] Ability to pause news?

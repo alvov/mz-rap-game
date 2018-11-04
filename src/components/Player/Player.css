@@ -1,82 +1,69 @@
 .player {
   display: flex;
-  padding: 10px 0;
-  margin-bottom: 10px;
-}
-
-.button,
-.share {
-  border-radius: 1px;
-  font-size: 14px;
-  color: #333;
-  cursor: pointer;
-  transition: background .2s, color .2s;
-}
-
-.button,
-.shareLabel {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 17px;
-  min-height: 40px;
 }
 
 .button {
-  background-color: #e8e8e8;
-  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  padding: 0 30px;
+  min-height: 45px;
+  border: 1px solid #8a8a8a;
+  background: transparent;
+  font: bold 12px Graphik LC, sans-serif;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #fff;
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
   outline: 0;
   user-select: none;
 }
 
 .button:hover:not(:disabled):not(.active) {
-  background-color: #bcbcbc;
+  border-color: #fff;
 }
 
-.button:disabled,
-.shareDisabled .shareLabel {
+.button:disabled {
   opacity: 0.5;
   color: #666;
   cursor: not-allowed;
 }
 
-.button + .button,
-.button + .share {
+.button + .button {
   margin: 0 0 0 10px;
 }
 
-.active {
-  box-shadow: inset 3px 3px 1px 0 rgba(0, 0, 0, 0.4);
-}
-
 .icon {
-  margin: 0 7px 0 0;
+  display: inline-block;
+  margin-right: 10px;
 }
 
 .active .icon {
   animation: blink 1s steps(1) infinite;
 }
 
-.recButton {
-  color: #c70000;
+.recButton .icon {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #e8615b;
 }
 
 .recButton.active {
-  color: #fff;
-  background-color: #c70000;
+  border-color: #e8615b;
 }
 
-.playButton {
-  color: #00c700;
+.playButton .icon {
+  border: 5px solid #111;
+  border-left: 9px solid;
+  border-right-width: 0;
+  background-color: currentColor;
 }
 
 .playButton.active {
-  color: #fff;
-  background-color: #00c700;
-}
-
-.shareButton {
-  display: none;
+  border-color: #5d9e5d;
 }
 
 @keyframes blink {
@@ -90,44 +77,9 @@
   }
 }
 
-.share {
-  flex: 1 1 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  background-color: #ccc;
-}
-
-.shareLink {
-  flex: 1 1 auto;
-  border: 0;
-  outline: 0;
-  padding: 0 10px;
-  background-color: #fff;
-  font: inherit;
-}
-
-.shareDisabled .shareLink {
-  cursor: not-allowed;
-}
-
 @media (max-width: 450px) {
   .button {
     padding: 0;
     flex: 1 0 auto;
-  }
-
-  .shareButton {
-    display: flex;
-  }
-
-  .share {
-    display: none;
-  }
-}
-
-@media (max-width: 900px) {
-  .playTitleAdd {
-    display: none;
   }
 }

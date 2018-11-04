@@ -4,7 +4,6 @@ import { Progress } from "../Progress/ProgressCircle";
 import { LoopState } from "../../consts";
 import type { LoopStateEnum } from "../../types";
 import * as analytic from '../../analytics';
-import {loops} from '../../data';
 
 import * as styles from "./Loop.css";
 
@@ -31,11 +30,13 @@ export class Loop extends React.Component<LoopProps> {
             >
                 <div className={styles.background} />
                 <div className={styles.indicator} />
-                <Progress
-                    radius={15}
-                    stroke={3}
-                    percent={state !== LoopState.Off ? playbackPercent : 0}
-                />
+                <div className={styles.progress}>
+                    <Progress
+                        size="38%"
+                        strokeWidth={4}
+                        percent={state !== LoopState.Off ? playbackPercent : 0}
+                    />
+                </div>
                 <div className={styles.name}>
                     {name}
                 </div>
@@ -44,7 +45,7 @@ export class Loop extends React.Component<LoopProps> {
     }
 
     onClick = () => {
-        analytic.GAInteractTrack(this.props.id)
+        analytic.GAInteractTrack(this.props.id);
         this.props.onClick(this.props.id);
     }
 }

@@ -147,3 +147,7 @@ export function selectRecordLoops(state: RootState): RecordLoops[] {
 export function selectRecordNews(state: RootState): RecordNews[] {
     return selectState(state).news;
 }
+
+export function selectHasRecord(state: RootState): boolean {
+    return !selectIsRecording(state) && selectRecordLoops(state).length !== 0;
+}

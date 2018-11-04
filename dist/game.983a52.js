@@ -1,865 +1,4 @@
-/******/ (function(modules) { // webpackBootstrap
-/******/ 	// install a JSONP callback for chunk loading
-/******/ 	function webpackJsonpCallback(data) {
-/******/ 		var chunkIds = data[0];
-/******/ 		var moreModules = data[1];
-/******/ 		var executeModules = data[2];
-/******/
-/******/ 		// add "moreModules" to the modules object,
-/******/ 		// then flag all "chunkIds" as loaded and fire callback
-/******/ 		var moduleId, chunkId, i = 0, resolves = [];
-/******/ 		for(;i < chunkIds.length; i++) {
-/******/ 			chunkId = chunkIds[i];
-/******/ 			if(installedChunks[chunkId]) {
-/******/ 				resolves.push(installedChunks[chunkId][0]);
-/******/ 			}
-/******/ 			installedChunks[chunkId] = 0;
-/******/ 		}
-/******/ 		for(moduleId in moreModules) {
-/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
-/******/ 				modules[moduleId] = moreModules[moduleId];
-/******/ 			}
-/******/ 		}
-/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
-/******/
-/******/ 		while(resolves.length) {
-/******/ 			resolves.shift()();
-/******/ 		}
-/******/
-/******/ 		// add entry modules from loaded chunk to deferred list
-/******/ 		deferredModules.push.apply(deferredModules, executeModules || []);
-/******/
-/******/ 		// run deferred modules when all chunks ready
-/******/ 		return checkDeferredModules();
-/******/ 	};
-/******/ 	function checkDeferredModules() {
-/******/ 		var result;
-/******/ 		for(var i = 0; i < deferredModules.length; i++) {
-/******/ 			var deferredModule = deferredModules[i];
-/******/ 			var fulfilled = true;
-/******/ 			for(var j = 1; j < deferredModule.length; j++) {
-/******/ 				var depId = deferredModule[j];
-/******/ 				if(installedChunks[depId] !== 0) fulfilled = false;
-/******/ 			}
-/******/ 			if(fulfilled) {
-/******/ 				deferredModules.splice(i--, 1);
-/******/ 				result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
-/******/ 			}
-/******/ 		}
-/******/ 		return result;
-/******/ 	}
-/******/ 	function hotDisposeChunk(chunkId) {
-/******/ 		delete installedChunks[chunkId];
-/******/ 	}
-/******/ 	var parentHotUpdateCallback = window["webpackHotUpdate"];
-/******/ 	window["webpackHotUpdate"] = // eslint-disable-next-line no-unused-vars
-/******/ 	function webpackHotUpdateCallback(chunkId, moreModules) {
-/******/ 		hotAddUpdateChunk(chunkId, moreModules);
-/******/ 		if (parentHotUpdateCallback) parentHotUpdateCallback(chunkId, moreModules);
-/******/ 	} ;
-/******/
-/******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	function hotDownloadUpdateChunk(chunkId) {
-/******/ 		var head = document.getElementsByTagName("head")[0];
-/******/ 		var script = document.createElement("script");
-/******/ 		script.charset = "utf-8";
-/******/ 		script.src = __webpack_require__.p + "" + chunkId + "." + hotCurrentHash + ".hot-update.js";
-/******/ 		;
-/******/ 		head.appendChild(script);
-/******/ 	}
-/******/
-/******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	function hotDownloadManifest(requestTimeout) {
-/******/ 		requestTimeout = requestTimeout || 10000;
-/******/ 		return new Promise(function(resolve, reject) {
-/******/ 			if (typeof XMLHttpRequest === "undefined") {
-/******/ 				return reject(new Error("No browser support"));
-/******/ 			}
-/******/ 			try {
-/******/ 				var request = new XMLHttpRequest();
-/******/ 				var requestPath = __webpack_require__.p + "" + hotCurrentHash + ".hot-update.json";
-/******/ 				request.open("GET", requestPath, true);
-/******/ 				request.timeout = requestTimeout;
-/******/ 				request.send(null);
-/******/ 			} catch (err) {
-/******/ 				return reject(err);
-/******/ 			}
-/******/ 			request.onreadystatechange = function() {
-/******/ 				if (request.readyState !== 4) return;
-/******/ 				if (request.status === 0) {
-/******/ 					// timeout
-/******/ 					reject(
-/******/ 						new Error("Manifest request to " + requestPath + " timed out.")
-/******/ 					);
-/******/ 				} else if (request.status === 404) {
-/******/ 					// no update available
-/******/ 					resolve();
-/******/ 				} else if (request.status !== 200 && request.status !== 304) {
-/******/ 					// other failure
-/******/ 					reject(new Error("Manifest request to " + requestPath + " failed."));
-/******/ 				} else {
-/******/ 					// success
-/******/ 					try {
-/******/ 						var update = JSON.parse(request.responseText);
-/******/ 					} catch (e) {
-/******/ 						reject(e);
-/******/ 						return;
-/******/ 					}
-/******/ 					resolve(update);
-/******/ 				}
-/******/ 			};
-/******/ 		});
-/******/ 	}
-/******/
-/******/ 	var hotApplyOnUpdate = true;
-/******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "a670a97d34830365ffe9";
-/******/ 	var hotRequestTimeout = 10000;
-/******/ 	var hotCurrentModuleData = {};
-/******/ 	var hotCurrentChildModule;
-/******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentParents = [];
-/******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentParentsTemp = [];
-/******/
-/******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	function hotCreateRequire(moduleId) {
-/******/ 		var me = installedModules[moduleId];
-/******/ 		if (!me) return __webpack_require__;
-/******/ 		var fn = function(request) {
-/******/ 			if (me.hot.active) {
-/******/ 				if (installedModules[request]) {
-/******/ 					if (installedModules[request].parents.indexOf(moduleId) === -1) {
-/******/ 						installedModules[request].parents.push(moduleId);
-/******/ 					}
-/******/ 				} else {
-/******/ 					hotCurrentParents = [moduleId];
-/******/ 					hotCurrentChildModule = request;
-/******/ 				}
-/******/ 				if (me.children.indexOf(request) === -1) {
-/******/ 					me.children.push(request);
-/******/ 				}
-/******/ 			} else {
-/******/ 				console.warn(
-/******/ 					"[HMR] unexpected require(" +
-/******/ 						request +
-/******/ 						") from disposed module " +
-/******/ 						moduleId
-/******/ 				);
-/******/ 				hotCurrentParents = [];
-/******/ 			}
-/******/ 			return __webpack_require__(request);
-/******/ 		};
-/******/ 		var ObjectFactory = function ObjectFactory(name) {
-/******/ 			return {
-/******/ 				configurable: true,
-/******/ 				enumerable: true,
-/******/ 				get: function() {
-/******/ 					return __webpack_require__[name];
-/******/ 				},
-/******/ 				set: function(value) {
-/******/ 					__webpack_require__[name] = value;
-/******/ 				}
-/******/ 			};
-/******/ 		};
-/******/ 		for (var name in __webpack_require__) {
-/******/ 			if (
-/******/ 				Object.prototype.hasOwnProperty.call(__webpack_require__, name) &&
-/******/ 				name !== "e" &&
-/******/ 				name !== "t"
-/******/ 			) {
-/******/ 				Object.defineProperty(fn, name, ObjectFactory(name));
-/******/ 			}
-/******/ 		}
-/******/ 		fn.e = function(chunkId) {
-/******/ 			if (hotStatus === "ready") hotSetStatus("prepare");
-/******/ 			hotChunksLoading++;
-/******/ 			return __webpack_require__.e(chunkId).then(finishChunkLoading, function(err) {
-/******/ 				finishChunkLoading();
-/******/ 				throw err;
-/******/ 			});
-/******/
-/******/ 			function finishChunkLoading() {
-/******/ 				hotChunksLoading--;
-/******/ 				if (hotStatus === "prepare") {
-/******/ 					if (!hotWaitingFilesMap[chunkId]) {
-/******/ 						hotEnsureUpdateChunk(chunkId);
-/******/ 					}
-/******/ 					if (hotChunksLoading === 0 && hotWaitingFiles === 0) {
-/******/ 						hotUpdateDownloaded();
-/******/ 					}
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 		fn.t = function(value, mode) {
-/******/ 			if (mode & 1) value = fn(value);
-/******/ 			return __webpack_require__.t(value, mode & ~1);
-/******/ 		};
-/******/ 		return fn;
-/******/ 	}
-/******/
-/******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	function hotCreateModule(moduleId) {
-/******/ 		var hot = {
-/******/ 			// private stuff
-/******/ 			_acceptedDependencies: {},
-/******/ 			_declinedDependencies: {},
-/******/ 			_selfAccepted: false,
-/******/ 			_selfDeclined: false,
-/******/ 			_disposeHandlers: [],
-/******/ 			_main: hotCurrentChildModule !== moduleId,
-/******/
-/******/ 			// Module API
-/******/ 			active: true,
-/******/ 			accept: function(dep, callback) {
-/******/ 				if (dep === undefined) hot._selfAccepted = true;
-/******/ 				else if (typeof dep === "function") hot._selfAccepted = dep;
-/******/ 				else if (typeof dep === "object")
-/******/ 					for (var i = 0; i < dep.length; i++)
-/******/ 						hot._acceptedDependencies[dep[i]] = callback || function() {};
-/******/ 				else hot._acceptedDependencies[dep] = callback || function() {};
-/******/ 			},
-/******/ 			decline: function(dep) {
-/******/ 				if (dep === undefined) hot._selfDeclined = true;
-/******/ 				else if (typeof dep === "object")
-/******/ 					for (var i = 0; i < dep.length; i++)
-/******/ 						hot._declinedDependencies[dep[i]] = true;
-/******/ 				else hot._declinedDependencies[dep] = true;
-/******/ 			},
-/******/ 			dispose: function(callback) {
-/******/ 				hot._disposeHandlers.push(callback);
-/******/ 			},
-/******/ 			addDisposeHandler: function(callback) {
-/******/ 				hot._disposeHandlers.push(callback);
-/******/ 			},
-/******/ 			removeDisposeHandler: function(callback) {
-/******/ 				var idx = hot._disposeHandlers.indexOf(callback);
-/******/ 				if (idx >= 0) hot._disposeHandlers.splice(idx, 1);
-/******/ 			},
-/******/
-/******/ 			// Management API
-/******/ 			check: hotCheck,
-/******/ 			apply: hotApply,
-/******/ 			status: function(l) {
-/******/ 				if (!l) return hotStatus;
-/******/ 				hotStatusHandlers.push(l);
-/******/ 			},
-/******/ 			addStatusHandler: function(l) {
-/******/ 				hotStatusHandlers.push(l);
-/******/ 			},
-/******/ 			removeStatusHandler: function(l) {
-/******/ 				var idx = hotStatusHandlers.indexOf(l);
-/******/ 				if (idx >= 0) hotStatusHandlers.splice(idx, 1);
-/******/ 			},
-/******/
-/******/ 			//inherit from previous dispose call
-/******/ 			data: hotCurrentModuleData[moduleId]
-/******/ 		};
-/******/ 		hotCurrentChildModule = undefined;
-/******/ 		return hot;
-/******/ 	}
-/******/
-/******/ 	var hotStatusHandlers = [];
-/******/ 	var hotStatus = "idle";
-/******/
-/******/ 	function hotSetStatus(newStatus) {
-/******/ 		hotStatus = newStatus;
-/******/ 		for (var i = 0; i < hotStatusHandlers.length; i++)
-/******/ 			hotStatusHandlers[i].call(null, newStatus);
-/******/ 	}
-/******/
-/******/ 	// while downloading
-/******/ 	var hotWaitingFiles = 0;
-/******/ 	var hotChunksLoading = 0;
-/******/ 	var hotWaitingFilesMap = {};
-/******/ 	var hotRequestedFilesMap = {};
-/******/ 	var hotAvailableFilesMap = {};
-/******/ 	var hotDeferred;
-/******/
-/******/ 	// The update info
-/******/ 	var hotUpdate, hotUpdateNewHash;
-/******/
-/******/ 	function toModuleId(id) {
-/******/ 		var isNumber = +id + "" === id;
-/******/ 		return isNumber ? +id : id;
-/******/ 	}
-/******/
-/******/ 	function hotCheck(apply) {
-/******/ 		if (hotStatus !== "idle") {
-/******/ 			throw new Error("check() is only allowed in idle status");
-/******/ 		}
-/******/ 		hotApplyOnUpdate = apply;
-/******/ 		hotSetStatus("check");
-/******/ 		return hotDownloadManifest(hotRequestTimeout).then(function(update) {
-/******/ 			if (!update) {
-/******/ 				hotSetStatus("idle");
-/******/ 				return null;
-/******/ 			}
-/******/ 			hotRequestedFilesMap = {};
-/******/ 			hotWaitingFilesMap = {};
-/******/ 			hotAvailableFilesMap = update.c;
-/******/ 			hotUpdateNewHash = update.h;
-/******/
-/******/ 			hotSetStatus("prepare");
-/******/ 			var promise = new Promise(function(resolve, reject) {
-/******/ 				hotDeferred = {
-/******/ 					resolve: resolve,
-/******/ 					reject: reject
-/******/ 				};
-/******/ 			});
-/******/ 			hotUpdate = {};
-/******/ 			for(var chunkId in installedChunks)
-/******/ 			// eslint-disable-next-line no-lone-blocks
-/******/ 			{
-/******/ 				/*globals chunkId */
-/******/ 				hotEnsureUpdateChunk(chunkId);
-/******/ 			}
-/******/ 			if (
-/******/ 				hotStatus === "prepare" &&
-/******/ 				hotChunksLoading === 0 &&
-/******/ 				hotWaitingFiles === 0
-/******/ 			) {
-/******/ 				hotUpdateDownloaded();
-/******/ 			}
-/******/ 			return promise;
-/******/ 		});
-/******/ 	}
-/******/
-/******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	function hotAddUpdateChunk(chunkId, moreModules) {
-/******/ 		if (!hotAvailableFilesMap[chunkId] || !hotRequestedFilesMap[chunkId])
-/******/ 			return;
-/******/ 		hotRequestedFilesMap[chunkId] = false;
-/******/ 		for (var moduleId in moreModules) {
-/******/ 			if (Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
-/******/ 				hotUpdate[moduleId] = moreModules[moduleId];
-/******/ 			}
-/******/ 		}
-/******/ 		if (--hotWaitingFiles === 0 && hotChunksLoading === 0) {
-/******/ 			hotUpdateDownloaded();
-/******/ 		}
-/******/ 	}
-/******/
-/******/ 	function hotEnsureUpdateChunk(chunkId) {
-/******/ 		if (!hotAvailableFilesMap[chunkId]) {
-/******/ 			hotWaitingFilesMap[chunkId] = true;
-/******/ 		} else {
-/******/ 			hotRequestedFilesMap[chunkId] = true;
-/******/ 			hotWaitingFiles++;
-/******/ 			hotDownloadUpdateChunk(chunkId);
-/******/ 		}
-/******/ 	}
-/******/
-/******/ 	function hotUpdateDownloaded() {
-/******/ 		hotSetStatus("ready");
-/******/ 		var deferred = hotDeferred;
-/******/ 		hotDeferred = null;
-/******/ 		if (!deferred) return;
-/******/ 		if (hotApplyOnUpdate) {
-/******/ 			// Wrap deferred object in Promise to mark it as a well-handled Promise to
-/******/ 			// avoid triggering uncaught exception warning in Chrome.
-/******/ 			// See https://bugs.chromium.org/p/chromium/issues/detail?id=465666
-/******/ 			Promise.resolve()
-/******/ 				.then(function() {
-/******/ 					return hotApply(hotApplyOnUpdate);
-/******/ 				})
-/******/ 				.then(
-/******/ 					function(result) {
-/******/ 						deferred.resolve(result);
-/******/ 					},
-/******/ 					function(err) {
-/******/ 						deferred.reject(err);
-/******/ 					}
-/******/ 				);
-/******/ 		} else {
-/******/ 			var outdatedModules = [];
-/******/ 			for (var id in hotUpdate) {
-/******/ 				if (Object.prototype.hasOwnProperty.call(hotUpdate, id)) {
-/******/ 					outdatedModules.push(toModuleId(id));
-/******/ 				}
-/******/ 			}
-/******/ 			deferred.resolve(outdatedModules);
-/******/ 		}
-/******/ 	}
-/******/
-/******/ 	function hotApply(options) {
-/******/ 		if (hotStatus !== "ready")
-/******/ 			throw new Error("apply() is only allowed in ready status");
-/******/ 		options = options || {};
-/******/
-/******/ 		var cb;
-/******/ 		var i;
-/******/ 		var j;
-/******/ 		var module;
-/******/ 		var moduleId;
-/******/
-/******/ 		function getAffectedStuff(updateModuleId) {
-/******/ 			var outdatedModules = [updateModuleId];
-/******/ 			var outdatedDependencies = {};
-/******/
-/******/ 			var queue = outdatedModules.slice().map(function(id) {
-/******/ 				return {
-/******/ 					chain: [id],
-/******/ 					id: id
-/******/ 				};
-/******/ 			});
-/******/ 			while (queue.length > 0) {
-/******/ 				var queueItem = queue.pop();
-/******/ 				var moduleId = queueItem.id;
-/******/ 				var chain = queueItem.chain;
-/******/ 				module = installedModules[moduleId];
-/******/ 				if (!module || module.hot._selfAccepted) continue;
-/******/ 				if (module.hot._selfDeclined) {
-/******/ 					return {
-/******/ 						type: "self-declined",
-/******/ 						chain: chain,
-/******/ 						moduleId: moduleId
-/******/ 					};
-/******/ 				}
-/******/ 				if (module.hot._main) {
-/******/ 					return {
-/******/ 						type: "unaccepted",
-/******/ 						chain: chain,
-/******/ 						moduleId: moduleId
-/******/ 					};
-/******/ 				}
-/******/ 				for (var i = 0; i < module.parents.length; i++) {
-/******/ 					var parentId = module.parents[i];
-/******/ 					var parent = installedModules[parentId];
-/******/ 					if (!parent) continue;
-/******/ 					if (parent.hot._declinedDependencies[moduleId]) {
-/******/ 						return {
-/******/ 							type: "declined",
-/******/ 							chain: chain.concat([parentId]),
-/******/ 							moduleId: moduleId,
-/******/ 							parentId: parentId
-/******/ 						};
-/******/ 					}
-/******/ 					if (outdatedModules.indexOf(parentId) !== -1) continue;
-/******/ 					if (parent.hot._acceptedDependencies[moduleId]) {
-/******/ 						if (!outdatedDependencies[parentId])
-/******/ 							outdatedDependencies[parentId] = [];
-/******/ 						addAllToSet(outdatedDependencies[parentId], [moduleId]);
-/******/ 						continue;
-/******/ 					}
-/******/ 					delete outdatedDependencies[parentId];
-/******/ 					outdatedModules.push(parentId);
-/******/ 					queue.push({
-/******/ 						chain: chain.concat([parentId]),
-/******/ 						id: parentId
-/******/ 					});
-/******/ 				}
-/******/ 			}
-/******/
-/******/ 			return {
-/******/ 				type: "accepted",
-/******/ 				moduleId: updateModuleId,
-/******/ 				outdatedModules: outdatedModules,
-/******/ 				outdatedDependencies: outdatedDependencies
-/******/ 			};
-/******/ 		}
-/******/
-/******/ 		function addAllToSet(a, b) {
-/******/ 			for (var i = 0; i < b.length; i++) {
-/******/ 				var item = b[i];
-/******/ 				if (a.indexOf(item) === -1) a.push(item);
-/******/ 			}
-/******/ 		}
-/******/
-/******/ 		// at begin all updates modules are outdated
-/******/ 		// the "outdated" status can propagate to parents if they don't accept the children
-/******/ 		var outdatedDependencies = {};
-/******/ 		var outdatedModules = [];
-/******/ 		var appliedUpdate = {};
-/******/
-/******/ 		var warnUnexpectedRequire = function warnUnexpectedRequire() {
-/******/ 			console.warn(
-/******/ 				"[HMR] unexpected require(" + result.moduleId + ") to disposed module"
-/******/ 			);
-/******/ 		};
-/******/
-/******/ 		for (var id in hotUpdate) {
-/******/ 			if (Object.prototype.hasOwnProperty.call(hotUpdate, id)) {
-/******/ 				moduleId = toModuleId(id);
-/******/ 				/** @type {TODO} */
-/******/ 				var result;
-/******/ 				if (hotUpdate[id]) {
-/******/ 					result = getAffectedStuff(moduleId);
-/******/ 				} else {
-/******/ 					result = {
-/******/ 						type: "disposed",
-/******/ 						moduleId: id
-/******/ 					};
-/******/ 				}
-/******/ 				/** @type {Error|false} */
-/******/ 				var abortError = false;
-/******/ 				var doApply = false;
-/******/ 				var doDispose = false;
-/******/ 				var chainInfo = "";
-/******/ 				if (result.chain) {
-/******/ 					chainInfo = "\nUpdate propagation: " + result.chain.join(" -> ");
-/******/ 				}
-/******/ 				switch (result.type) {
-/******/ 					case "self-declined":
-/******/ 						if (options.onDeclined) options.onDeclined(result);
-/******/ 						if (!options.ignoreDeclined)
-/******/ 							abortError = new Error(
-/******/ 								"Aborted because of self decline: " +
-/******/ 									result.moduleId +
-/******/ 									chainInfo
-/******/ 							);
-/******/ 						break;
-/******/ 					case "declined":
-/******/ 						if (options.onDeclined) options.onDeclined(result);
-/******/ 						if (!options.ignoreDeclined)
-/******/ 							abortError = new Error(
-/******/ 								"Aborted because of declined dependency: " +
-/******/ 									result.moduleId +
-/******/ 									" in " +
-/******/ 									result.parentId +
-/******/ 									chainInfo
-/******/ 							);
-/******/ 						break;
-/******/ 					case "unaccepted":
-/******/ 						if (options.onUnaccepted) options.onUnaccepted(result);
-/******/ 						if (!options.ignoreUnaccepted)
-/******/ 							abortError = new Error(
-/******/ 								"Aborted because " + moduleId + " is not accepted" + chainInfo
-/******/ 							);
-/******/ 						break;
-/******/ 					case "accepted":
-/******/ 						if (options.onAccepted) options.onAccepted(result);
-/******/ 						doApply = true;
-/******/ 						break;
-/******/ 					case "disposed":
-/******/ 						if (options.onDisposed) options.onDisposed(result);
-/******/ 						doDispose = true;
-/******/ 						break;
-/******/ 					default:
-/******/ 						throw new Error("Unexception type " + result.type);
-/******/ 				}
-/******/ 				if (abortError) {
-/******/ 					hotSetStatus("abort");
-/******/ 					return Promise.reject(abortError);
-/******/ 				}
-/******/ 				if (doApply) {
-/******/ 					appliedUpdate[moduleId] = hotUpdate[moduleId];
-/******/ 					addAllToSet(outdatedModules, result.outdatedModules);
-/******/ 					for (moduleId in result.outdatedDependencies) {
-/******/ 						if (
-/******/ 							Object.prototype.hasOwnProperty.call(
-/******/ 								result.outdatedDependencies,
-/******/ 								moduleId
-/******/ 							)
-/******/ 						) {
-/******/ 							if (!outdatedDependencies[moduleId])
-/******/ 								outdatedDependencies[moduleId] = [];
-/******/ 							addAllToSet(
-/******/ 								outdatedDependencies[moduleId],
-/******/ 								result.outdatedDependencies[moduleId]
-/******/ 							);
-/******/ 						}
-/******/ 					}
-/******/ 				}
-/******/ 				if (doDispose) {
-/******/ 					addAllToSet(outdatedModules, [result.moduleId]);
-/******/ 					appliedUpdate[moduleId] = warnUnexpectedRequire;
-/******/ 				}
-/******/ 			}
-/******/ 		}
-/******/
-/******/ 		// Store self accepted outdated modules to require them later by the module system
-/******/ 		var outdatedSelfAcceptedModules = [];
-/******/ 		for (i = 0; i < outdatedModules.length; i++) {
-/******/ 			moduleId = outdatedModules[i];
-/******/ 			if (
-/******/ 				installedModules[moduleId] &&
-/******/ 				installedModules[moduleId].hot._selfAccepted
-/******/ 			)
-/******/ 				outdatedSelfAcceptedModules.push({
-/******/ 					module: moduleId,
-/******/ 					errorHandler: installedModules[moduleId].hot._selfAccepted
-/******/ 				});
-/******/ 		}
-/******/
-/******/ 		// Now in "dispose" phase
-/******/ 		hotSetStatus("dispose");
-/******/ 		Object.keys(hotAvailableFilesMap).forEach(function(chunkId) {
-/******/ 			if (hotAvailableFilesMap[chunkId] === false) {
-/******/ 				hotDisposeChunk(chunkId);
-/******/ 			}
-/******/ 		});
-/******/
-/******/ 		var idx;
-/******/ 		var queue = outdatedModules.slice();
-/******/ 		while (queue.length > 0) {
-/******/ 			moduleId = queue.pop();
-/******/ 			module = installedModules[moduleId];
-/******/ 			if (!module) continue;
-/******/
-/******/ 			var data = {};
-/******/
-/******/ 			// Call dispose handlers
-/******/ 			var disposeHandlers = module.hot._disposeHandlers;
-/******/ 			for (j = 0; j < disposeHandlers.length; j++) {
-/******/ 				cb = disposeHandlers[j];
-/******/ 				cb(data);
-/******/ 			}
-/******/ 			hotCurrentModuleData[moduleId] = data;
-/******/
-/******/ 			// disable module (this disables requires from this module)
-/******/ 			module.hot.active = false;
-/******/
-/******/ 			// remove module from cache
-/******/ 			delete installedModules[moduleId];
-/******/
-/******/ 			// when disposing there is no need to call dispose handler
-/******/ 			delete outdatedDependencies[moduleId];
-/******/
-/******/ 			// remove "parents" references from all children
-/******/ 			for (j = 0; j < module.children.length; j++) {
-/******/ 				var child = installedModules[module.children[j]];
-/******/ 				if (!child) continue;
-/******/ 				idx = child.parents.indexOf(moduleId);
-/******/ 				if (idx >= 0) {
-/******/ 					child.parents.splice(idx, 1);
-/******/ 				}
-/******/ 			}
-/******/ 		}
-/******/
-/******/ 		// remove outdated dependency from module children
-/******/ 		var dependency;
-/******/ 		var moduleOutdatedDependencies;
-/******/ 		for (moduleId in outdatedDependencies) {
-/******/ 			if (
-/******/ 				Object.prototype.hasOwnProperty.call(outdatedDependencies, moduleId)
-/******/ 			) {
-/******/ 				module = installedModules[moduleId];
-/******/ 				if (module) {
-/******/ 					moduleOutdatedDependencies = outdatedDependencies[moduleId];
-/******/ 					for (j = 0; j < moduleOutdatedDependencies.length; j++) {
-/******/ 						dependency = moduleOutdatedDependencies[j];
-/******/ 						idx = module.children.indexOf(dependency);
-/******/ 						if (idx >= 0) module.children.splice(idx, 1);
-/******/ 					}
-/******/ 				}
-/******/ 			}
-/******/ 		}
-/******/
-/******/ 		// Not in "apply" phase
-/******/ 		hotSetStatus("apply");
-/******/
-/******/ 		hotCurrentHash = hotUpdateNewHash;
-/******/
-/******/ 		// insert new code
-/******/ 		for (moduleId in appliedUpdate) {
-/******/ 			if (Object.prototype.hasOwnProperty.call(appliedUpdate, moduleId)) {
-/******/ 				modules[moduleId] = appliedUpdate[moduleId];
-/******/ 			}
-/******/ 		}
-/******/
-/******/ 		// call accept handlers
-/******/ 		var error = null;
-/******/ 		for (moduleId in outdatedDependencies) {
-/******/ 			if (
-/******/ 				Object.prototype.hasOwnProperty.call(outdatedDependencies, moduleId)
-/******/ 			) {
-/******/ 				module = installedModules[moduleId];
-/******/ 				if (module) {
-/******/ 					moduleOutdatedDependencies = outdatedDependencies[moduleId];
-/******/ 					var callbacks = [];
-/******/ 					for (i = 0; i < moduleOutdatedDependencies.length; i++) {
-/******/ 						dependency = moduleOutdatedDependencies[i];
-/******/ 						cb = module.hot._acceptedDependencies[dependency];
-/******/ 						if (cb) {
-/******/ 							if (callbacks.indexOf(cb) !== -1) continue;
-/******/ 							callbacks.push(cb);
-/******/ 						}
-/******/ 					}
-/******/ 					for (i = 0; i < callbacks.length; i++) {
-/******/ 						cb = callbacks[i];
-/******/ 						try {
-/******/ 							cb(moduleOutdatedDependencies);
-/******/ 						} catch (err) {
-/******/ 							if (options.onErrored) {
-/******/ 								options.onErrored({
-/******/ 									type: "accept-errored",
-/******/ 									moduleId: moduleId,
-/******/ 									dependencyId: moduleOutdatedDependencies[i],
-/******/ 									error: err
-/******/ 								});
-/******/ 							}
-/******/ 							if (!options.ignoreErrored) {
-/******/ 								if (!error) error = err;
-/******/ 							}
-/******/ 						}
-/******/ 					}
-/******/ 				}
-/******/ 			}
-/******/ 		}
-/******/
-/******/ 		// Load self accepted modules
-/******/ 		for (i = 0; i < outdatedSelfAcceptedModules.length; i++) {
-/******/ 			var item = outdatedSelfAcceptedModules[i];
-/******/ 			moduleId = item.module;
-/******/ 			hotCurrentParents = [moduleId];
-/******/ 			try {
-/******/ 				__webpack_require__(moduleId);
-/******/ 			} catch (err) {
-/******/ 				if (typeof item.errorHandler === "function") {
-/******/ 					try {
-/******/ 						item.errorHandler(err);
-/******/ 					} catch (err2) {
-/******/ 						if (options.onErrored) {
-/******/ 							options.onErrored({
-/******/ 								type: "self-accept-error-handler-errored",
-/******/ 								moduleId: moduleId,
-/******/ 								error: err2,
-/******/ 								originalError: err
-/******/ 							});
-/******/ 						}
-/******/ 						if (!options.ignoreErrored) {
-/******/ 							if (!error) error = err2;
-/******/ 						}
-/******/ 						if (!error) error = err;
-/******/ 					}
-/******/ 				} else {
-/******/ 					if (options.onErrored) {
-/******/ 						options.onErrored({
-/******/ 							type: "self-accept-errored",
-/******/ 							moduleId: moduleId,
-/******/ 							error: err
-/******/ 						});
-/******/ 					}
-/******/ 					if (!options.ignoreErrored) {
-/******/ 						if (!error) error = err;
-/******/ 					}
-/******/ 				}
-/******/ 			}
-/******/ 		}
-/******/
-/******/ 		// handle errors in accept handlers and self accepted module load
-/******/ 		if (error) {
-/******/ 			hotSetStatus("fail");
-/******/ 			return Promise.reject(error);
-/******/ 		}
-/******/
-/******/ 		hotSetStatus("idle");
-/******/ 		return new Promise(function(resolve) {
-/******/ 			resolve(outdatedModules);
-/******/ 		});
-/******/ 	}
-/******/
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// object to store loaded and loading chunks
-/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 	// Promise = chunk loading, 0 = chunk loaded
-/******/ 	var installedChunks = {
-/******/ 		"index": 0
-/******/ 	};
-/******/
-/******/ 	var deferredModules = [];
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {},
-/******/ 			hot: hotCreateModule(moduleId),
-/******/ 			parents: (hotCurrentParentsTemp = hotCurrentParents, hotCurrentParents = [], hotCurrentParentsTemp),
-/******/ 			children: []
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, hotCreateRequire(moduleId));
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "./";
-/******/
-/******/ 	// __webpack_hash__
-/******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
-/******/
-/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
-/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
-/******/ 	jsonpArray.push = webpackJsonpCallback;
-/******/ 	jsonpArray = jsonpArray.slice();
-/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
-/******/ 	var parentJsonpFunction = oldJsonpFunction;
-/******/
-/******/
-/******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push(["./src/index.js","vendor"]);
-/******/ 	// run deferred modules when ready
-/******/ 	return checkDeferredModules();
-/******/ })
-/************************************************************************/
-/******/ ({
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["game"],{
 
 /***/ "./assets/index.js":
 /*!*************************!*\
@@ -1521,7 +660,7 @@ const GAInteractZag = zag => {
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-module.exports = {"dashboard":"dashboard--12uZ6","triggers":"triggers--pD_vy","loopsContainer":"loopsContainer--qiYwQ"};
+module.exports = {"dashboard":"dashboard--12uZ6","loopsContainer":"loopsContainer--qiYwQ","separator":"separator--U8aXK","playerContainer":"playerContainer--2hveQ","newsContainer":"newsContainer--2QPJ6","shareContainer":"shareContainer--3L4g1"};
 
 /***/ }),
 
@@ -1546,10 +685,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ducks_playback__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../ducks/playback */ "./src/ducks/playback.js");
 /* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../consts */ "./src/consts.js");
 /* harmony import */ var _TitlePage_TitlePage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./TitlePage/TitlePage */ "./src/components/TitlePage/TitlePage.jsx");
-/* harmony import */ var _analytics__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../analytics */ "./src/analytics.js");
-/* harmony import */ var _Dashboard_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Dashboard.css */ "./src/components/Dashboard.css");
-/* harmony import */ var _Dashboard_css__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_Dashboard_css__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _Share_Share__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Share/Share */ "./src/components/Share/Share.jsx");
+/* harmony import */ var _ducks_record__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../ducks/record */ "./src/ducks/record.js");
+/* harmony import */ var _analytics__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../analytics */ "./src/analytics.js");
+/* harmony import */ var _Dashboard_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Dashboard.css */ "./src/components/Dashboard.css");
+/* harmony import */ var _Dashboard_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_Dashboard_css__WEBPACK_IMPORTED_MODULE_12__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -1569,7 +712,7 @@ class DashboardComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Component"]
     _defineProperty(this, "percentUpdateTimer", void 0);
 
     _defineProperty(this, "startGame", () => {
-      _analytics__WEBPACK_IMPORTED_MODULE_9__["GAGameStart"]();
+      _analytics__WEBPACK_IMPORTED_MODULE_11__["GAGameStart"]();
       this.setState(() => ({
         isStart: true
       }));
@@ -1584,7 +727,8 @@ class DashboardComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Component"]
 
   render() {
     const {
-      categories
+      categories,
+      hasRecord
     } = this.props;
     const {
       isStart
@@ -1597,12 +741,22 @@ class DashboardComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Component"]
     }
 
     return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
-      className: _Dashboard_css__WEBPACK_IMPORTED_MODULE_10__["dashboard"]
-    }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Player_Player__WEBPACK_IMPORTED_MODULE_5__["Player"], null), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
-      className: _Dashboard_css__WEBPACK_IMPORTED_MODULE_10__["triggers"]
+      className: _Dashboard_css__WEBPACK_IMPORTED_MODULE_12__["dashboard"]
     }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
-      className: _Dashboard_css__WEBPACK_IMPORTED_MODULE_10__["loopsContainer"]
-    }, categories.map(category => this.renderLoopCategory(category))), react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_News_NewsContainer__WEBPACK_IMPORTED_MODULE_4__["NewsContainer"], null)));
+      className: _Dashboard_css__WEBPACK_IMPORTED_MODULE_12__["loopsContainer"]
+    }, categories.map(category => this.renderLoopCategory(category))), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
+      className: _Dashboard_css__WEBPACK_IMPORTED_MODULE_12__["playerContainer"]
+    }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Player_Player__WEBPACK_IMPORTED_MODULE_5__["Player"], null)), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
+      className: _Dashboard_css__WEBPACK_IMPORTED_MODULE_12__["newsContainer"]
+    }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_News_NewsContainer__WEBPACK_IMPORTED_MODULE_4__["NewsContainer"], null)), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
+      className: _Dashboard_css__WEBPACK_IMPORTED_MODULE_12__["separator"]
+    }), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
+      className: _Dashboard_css__WEBPACK_IMPORTED_MODULE_12__["shareContainer"]
+    }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Share_Share__WEBPACK_IMPORTED_MODULE_9__["Share"], {
+      link: "/",
+      theme: "inline",
+      hasRecord: hasRecord
+    })));
   }
 
   renderLoopCategory(category) {
@@ -1623,7 +777,7 @@ class DashboardComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Component"]
     });
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.playback.timestamp !== this.props.playback.timestamp) {
       this.setPercent(0);
 
@@ -1636,6 +790,10 @@ class DashboardComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Component"]
           this.setPercent();
         }, 100);
       }
+    }
+
+    if (prevState.isStart !== this.state.isStart && this.state.isStart) {
+      window.scrollTo(0, 0);
     }
   }
 
@@ -1663,7 +821,8 @@ class DashboardComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Component"]
 const mapStateToProps = state => {
   return {
     categories: Object(_ducks_categories__WEBPACK_IMPORTED_MODULE_2__["selectState"])(state),
-    playback: Object(_ducks_playback__WEBPACK_IMPORTED_MODULE_6__["selectState"])(state)
+    playback: Object(_ducks_playback__WEBPACK_IMPORTED_MODULE_6__["selectState"])(state),
+    hasRecord: Object(_ducks_record__WEBPACK_IMPORTED_MODULE_10__["selectHasRecord"])(state)
   };
 };
 
@@ -1679,7 +838,7 @@ const Dashboard = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(ma
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-module.exports = {"loop":"loop--2DJRX","background":"background--3SZdO","indicator":"indicator--2PWg2","name":"name--2PFDj","loading":"loading--3OSge","nextOn":"nextOn--A0q1J","blinkOn":"blinkOn--3icSU","nextOff":"nextOff--3vO3o","blinkOff":"blinkOff--WxXvt","active":"active--2pwVi"};
+module.exports = {"loop":"loop--2DJRX","background":"background--3SZdO","indicator":"indicator--2PWg2","progress":"progress--3cqlO","name":"name--2PFDj","loading":"loading--3OSge","nextOff":"nextOff--3vO3o","nextOn":"nextOn--A0q1J","blink":"blink--FZCY_","active":"active--2pwVi"};
 
 /***/ }),
 
@@ -1700,11 +859,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Progress_ProgressCircle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Progress/ProgressCircle */ "./src/components/Progress/ProgressCircle.jsx");
 /* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../consts */ "./src/consts.js");
 /* harmony import */ var _analytics__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../analytics */ "./src/analytics.js");
-/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../data */ "./src/data.js");
-/* harmony import */ var _Loop_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Loop.css */ "./src/components/Loop/Loop.css");
-/* harmony import */ var _Loop_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_Loop_css__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _Loop_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Loop.css */ "./src/components/Loop/Loop.css");
+/* harmony import */ var _Loop_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_Loop_css__WEBPACK_IMPORTED_MODULE_5__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -1729,23 +886,25 @@ class Loop extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       playbackPercent
     } = this.props;
     return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("button", {
-      className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(_Loop_css__WEBPACK_IMPORTED_MODULE_6__["loop"], {
-        [_Loop_css__WEBPACK_IMPORTED_MODULE_6__["loading"]]: state === _consts__WEBPACK_IMPORTED_MODULE_3__["LoopState"].Loading,
-        [_Loop_css__WEBPACK_IMPORTED_MODULE_6__["nextOn"]]: state === _consts__WEBPACK_IMPORTED_MODULE_3__["LoopState"].NextOn,
-        [_Loop_css__WEBPACK_IMPORTED_MODULE_6__["active"]]: state === _consts__WEBPACK_IMPORTED_MODULE_3__["LoopState"].Active,
-        [_Loop_css__WEBPACK_IMPORTED_MODULE_6__["nextOff"]]: state === _consts__WEBPACK_IMPORTED_MODULE_3__["LoopState"].NextOff
+      className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(_Loop_css__WEBPACK_IMPORTED_MODULE_5__["loop"], {
+        [_Loop_css__WEBPACK_IMPORTED_MODULE_5__["loading"]]: state === _consts__WEBPACK_IMPORTED_MODULE_3__["LoopState"].Loading,
+        [_Loop_css__WEBPACK_IMPORTED_MODULE_5__["nextOn"]]: state === _consts__WEBPACK_IMPORTED_MODULE_3__["LoopState"].NextOn,
+        [_Loop_css__WEBPACK_IMPORTED_MODULE_5__["active"]]: state === _consts__WEBPACK_IMPORTED_MODULE_3__["LoopState"].Active,
+        [_Loop_css__WEBPACK_IMPORTED_MODULE_5__["nextOff"]]: state === _consts__WEBPACK_IMPORTED_MODULE_3__["LoopState"].NextOff
       }),
       onClick: this.onClick
     }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
-      className: _Loop_css__WEBPACK_IMPORTED_MODULE_6__["background"]
+      className: _Loop_css__WEBPACK_IMPORTED_MODULE_5__["background"]
     }), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
-      className: _Loop_css__WEBPACK_IMPORTED_MODULE_6__["indicator"]
-    }), react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Progress_ProgressCircle__WEBPACK_IMPORTED_MODULE_2__["Progress"], {
-      radius: 15,
-      stroke: 3,
+      className: _Loop_css__WEBPACK_IMPORTED_MODULE_5__["indicator"]
+    }), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
+      className: _Loop_css__WEBPACK_IMPORTED_MODULE_5__["progress"]
+    }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Progress_ProgressCircle__WEBPACK_IMPORTED_MODULE_2__["Progress"], {
+      size: "38%",
+      strokeWidth: 4,
       percent: state !== _consts__WEBPACK_IMPORTED_MODULE_3__["LoopState"].Off ? playbackPercent : 0
-    }), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
-      className: _Loop_css__WEBPACK_IMPORTED_MODULE_6__["name"]
+    })), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
+      className: _Loop_css__WEBPACK_IMPORTED_MODULE_5__["name"]
     }, name));
   }
 
@@ -1891,7 +1050,7 @@ const LoopCategory = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-module.exports = {"news":"news--pQJ6h","link":"link--2bJcb","progress":"progress--31uJ0"};
+module.exports = {"news":"news--pQJ6h","progress":"progress--31uJ0"};
 
 /***/ }),
 
@@ -1907,7 +1066,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "News", function() { return News; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Progress_ProgressBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Progress/ProgressBar */ "./src/components/Progress/ProgressBar.jsx");
+/* harmony import */ var _Progress_ProgressCircle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Progress/ProgressCircle */ "./src/components/Progress/ProgressCircle.jsx");
 /* harmony import */ var _News_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./News.css */ "./src/components/News/News.css");
 /* harmony import */ var _News_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_News_css__WEBPACK_IMPORTED_MODULE_2__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1930,22 +1089,21 @@ class News extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
   render() {
     const {
-      link,
       text,
       progress
     } = this.props;
     return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
       className: _News_css__WEBPACK_IMPORTED_MODULE_2__["news"],
       onClick: this.onClick
-    }, text, "\xA0[", react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("a", {
-      className: _News_css__WEBPACK_IMPORTED_MODULE_2__["link"],
-      href: link,
-      target: "_blank"
-    }, "\u0441\u0441\u044B\u043B\u043A\u0430"), "]", react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
       className: _News_css__WEBPACK_IMPORTED_MODULE_2__["progress"]
-    }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Progress_ProgressBar__WEBPACK_IMPORTED_MODULE_1__["Progress"], {
+    }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Progress_ProgressCircle__WEBPACK_IMPORTED_MODULE_1__["Progress"], {
+      size: "40px",
+      strokeWidth: 4,
+      stroke: "#e8615b",
+      bgStroke: "transparent",
       percent: progress
-    })));
+    })), text);
   }
 
 }
@@ -2060,13 +1218,11 @@ class NewsContainerComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Compone
       className: _NewsContainer_css__WEBPACK_IMPORTED_MODULE_7__["newsContainer"]
     }, news.map(({
       id,
-      link,
       text
     }) => {
       return react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_News__WEBPACK_IMPORTED_MODULE_4__["News"], {
         key: id,
         id: id,
-        link: link,
         text: text,
         progress: currentNews && currentNews.id === id ? currentNews.progress : 0,
         onClick: this.onClickNews
@@ -2129,7 +1285,7 @@ const NewsContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"]
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-module.exports = {"player":"player--B75zn","button":"button--uYpn-","share":"share--3i9u0","shareLabel":"shareLabel--322f4","active":"active--2PqyO","shareDisabled":"shareDisabled--1U3KU","icon":"icon--fDLiq","blink":"blink--3HMbw","recButton":"recButton--1eX8w","playButton":"playButton--2RIbq","shareButton":"shareButton--3eXo2","shareLink":"shareLink--1PjFd","playTitleAdd":"playTitleAdd--3FFP9"};
+module.exports = {"player":"player--B75zn","button":"button--uYpn-","active":"active--2PqyO","icon":"icon--fDLiq","blink":"blink--3HMbw","recButton":"recButton--1eX8w","playButton":"playButton--2RIbq"};
 
 /***/ }),
 
@@ -2170,8 +1326,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 class PlayerComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
-
-    _defineProperty(this, "refLink", void 0);
 
     _defineProperty(this, "onClickRecord", () => {
       if (this.props.isRecording) {
@@ -2222,29 +1376,9 @@ class PlayerComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }
     });
 
-    _defineProperty(this, "onClickLink", () => {
-      const input = this.refLink.current;
-
-      if (input !== null) {
-        input.focus();
-        input.select();
-      }
-
-      try {
-        const successful = document.execCommand("copy");
-
-        if (!successful) {
-          throw new Error("");
-        }
-      } catch (err) {
-        console.error("Не скопировалось :(");
-      }
-    });
-
     this.state = {
       shareLink: this.generateLink()
     };
-    this.refLink = react__WEBPACK_IMPORTED_MODULE_0__["createRef"]();
   }
 
   shouldComponentUpdate(prevProps) {
@@ -2255,10 +1389,9 @@ class PlayerComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const {
       isRecording,
       isPlayingRecord,
-      recordLoops,
-      allLoaded
+      allLoaded,
+      hasRecord
     } = this.props;
-    const hasRecord = !isRecording && recordLoops.length !== 0 && allLoaded;
     return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
       className: _Player_css__WEBPACK_IMPORTED_MODULE_8__["player"]
     }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("button", {
@@ -2269,40 +1402,15 @@ class PlayerComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       onClick: this.onClickRecord
     }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("span", {
       className: _Player_css__WEBPACK_IMPORTED_MODULE_8__["icon"]
-    }, "\u25CF"), "Rec"), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("button", {
+    }), "Rec"), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("button", {
       className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(_Player_css__WEBPACK_IMPORTED_MODULE_8__["button"], _Player_css__WEBPACK_IMPORTED_MODULE_8__["playButton"], {
         [_Player_css__WEBPACK_IMPORTED_MODULE_8__["active"]]: isPlayingRecord
       }),
-      disabled: !hasRecord,
+      disabled: !hasRecord || !allLoaded,
       onClick: this.onClickPlay
     }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("span", {
       className: _Player_css__WEBPACK_IMPORTED_MODULE_8__["icon"]
-    }, "\u25B6"), "\u0418\u0433\u0440\u0430\u0442\u044C", react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("span", {
-      className: _Player_css__WEBPACK_IMPORTED_MODULE_8__["playTitleAdd"]
-    }, "\xA0\u0437\u0430\u043F\u0438\u0441\u044C")), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("button", {
-      className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(_Player_css__WEBPACK_IMPORTED_MODULE_8__["button"], _Player_css__WEBPACK_IMPORTED_MODULE_8__["shareButton"]),
-      disabled: !hasRecord,
-      onClick: this.onClickLink
-    }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("span", {
-      className: _Player_css__WEBPACK_IMPORTED_MODULE_8__["icon"]
-    }, "\u21EB"), "\u041F\u043E\u0434\u0435\u043B\u0438\u0442\u044C\u0441\u044F"), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("label", {
-      className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(_Player_css__WEBPACK_IMPORTED_MODULE_8__["share"], {
-        [_Player_css__WEBPACK_IMPORTED_MODULE_8__["shareDisabled"]]: !hasRecord
-      }),
-      onClick: this.onClickLink,
-      title: hasRecord ? "Копировать" : null
-    }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("span", {
-      className: _Player_css__WEBPACK_IMPORTED_MODULE_8__["shareLabel"]
-    }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("span", {
-      className: _Player_css__WEBPACK_IMPORTED_MODULE_8__["icon"]
-    }, "\u21EB"), "\u041F\u043E\u0434\u0435\u043B\u0438\u0442\u044C\u0441\u044F:"), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("input", {
-      className: _Player_css__WEBPACK_IMPORTED_MODULE_8__["shareLink"],
-      type: "text",
-      placeholder: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u043A\u043D\u043E\u043F\u043A\u0443 Rec, \u0447\u0442\u043E\u0431\u044B \u0437\u0430\u043F\u0438\u0441\u0430\u0442\u044C \u0441\u0432\u043E\u0439 \u0442\u0440\u0435\u043A",
-      readOnly: true,
-      value: this.state.shareLink,
-      ref: this.refLink
-    })));
+    }), "\u0418\u0433\u0440\u0430\u0442\u044C \u0437\u0430\u043F\u0438\u0441\u044C"));
   }
 
   componentDidUpdate(prevProps) {
@@ -2384,7 +1492,8 @@ const mapStateToProps = state => ({
   startTimestamp: Object(_ducks_record__WEBPACK_IMPORTED_MODULE_3__["selectStartTimestamp"])(state),
   recordLoops: Object(_ducks_record__WEBPACK_IMPORTED_MODULE_3__["selectRecordLoops"])(state),
   recordNews: Object(_ducks_record__WEBPACK_IMPORTED_MODULE_3__["selectRecordNews"])(state),
-  playback: Object(_ducks_playback__WEBPACK_IMPORTED_MODULE_6__["selectState"])(state)
+  playback: Object(_ducks_playback__WEBPACK_IMPORTED_MODULE_6__["selectState"])(state),
+  hasRecord: Object(_ducks_record__WEBPACK_IMPORTED_MODULE_3__["selectHasRecord"])(state)
 });
 
 const mapDispatchToProps = {
@@ -2558,43 +1667,6 @@ module.exports = {"circle":"circle--ziIVg","barContainer":"barContainer--3lRfl",
 
 /***/ }),
 
-/***/ "./src/components/Progress/ProgressBar.jsx":
-/*!*************************************************!*\
-  !*** ./src/components/Progress/ProgressBar.jsx ***!
-  \*************************************************/
-/*! exports provided: Progress */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Progress", function() { return Progress; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Progress_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Progress.css */ "./src/components/Progress/Progress.css");
-/* harmony import */ var _Progress_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_Progress_css__WEBPACK_IMPORTED_MODULE_2__);
-
-
-
-function Progress(props) {
-  const {
-    percent
-  } = props;
-  return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
-    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(_Progress_css__WEBPACK_IMPORTED_MODULE_2__["barContainer"], {
-      [_Progress_css__WEBPACK_IMPORTED_MODULE_2__["active"]]: percent > 0 && percent < 0.9
-    })
-  }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
-    className: _Progress_css__WEBPACK_IMPORTED_MODULE_2__["bar"],
-    style: {
-      width: `${percent * 100}%`
-    }
-  }));
-}
-
-/***/ }),
-
 /***/ "./src/components/Progress/ProgressCircle.jsx":
 /*!****************************************************!*\
   !*** ./src/components/Progress/ProgressCircle.jsx ***!
@@ -2611,34 +1683,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Progress_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Progress_css__WEBPACK_IMPORTED_MODULE_1__);
 
 
+const radius = 20;
 function Progress(props) {
   const {
-    radius,
-    stroke,
+    size,
+    strokeWidth,
+    stroke = "#ffffff",
+    bgStroke = stroke,
     percent
   } = props;
-  const normalizedRadius = radius - stroke / 2;
+  const normalizedRadius = radius - strokeWidth / 2;
   const circumference = 2 * Math.PI * normalizedRadius;
   const offset = circumference * (1 - percent);
   return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("svg", {
-    width: radius * 2,
-    height: radius * 2
+    width: size,
+    height: size,
+    viewBox: `0 0 ${radius * 2} ${radius * 2}`
   }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("circle", {
-    stroke: "#000000",
-    strokeWidth: stroke,
+    stroke: bgStroke,
+    strokeWidth: strokeWidth,
     fill: "transparent",
-    r: radius - stroke / 2,
+    r: radius - strokeWidth / 2,
     cx: radius,
     cy: radius,
     opacity: 0.3
   }), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("circle", {
     className: _Progress_css__WEBPACK_IMPORTED_MODULE_1__["circle"],
-    stroke: "#ffffff",
-    strokeWidth: stroke,
+    stroke: stroke,
+    strokeWidth: strokeWidth,
     strokeDasharray: `${circumference} ${circumference}`,
     strokeDashoffset: offset,
     fill: "transparent",
-    r: radius - stroke / 2,
+    r: radius - strokeWidth / 2,
     cx: radius,
     cy: radius
   }));
@@ -2654,7 +1730,7 @@ function Progress(props) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-module.exports = {"share":"share--D4_en","title":"title--mbvkR","shareIcons":"shareIcons--1EqgV"};
+module.exports = {"share":"share--D4_en","title":"title--mbvkR","shareIcons":"shareIcons--1EqgV","inline":"inline--2f1pA"};
 
 /***/ }),
 
@@ -2668,35 +1744,43 @@ module.exports = {"share":"share--D4_en","title":"title--mbvkR","shareIcons":"sh
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Share", function() { return Share; });
-/* harmony import */ var _Share_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Share.css */ "./src/components/Share/Share.css");
-/* harmony import */ var _Share_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Share_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../icons */ "./src/components/icons.jsx");
+/* harmony import */ var _Share_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Share.css */ "./src/components/Share/Share.css");
+/* harmony import */ var _Share_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_Share_css__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
 function Share(props) {
   const {
-    link
+    link,
+    theme,
+    hasRecord
   } = props;
-  return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", {
-    className: _Share_css__WEBPACK_IMPORTED_MODULE_0__["share"]
-  }, react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("p", {
-    className: _Share_css__WEBPACK_IMPORTED_MODULE_0__["title"]
-  }, "\u043F\u043E\u0434\u0435\u043B\u0438\u0442\u044C\u0441\u044F"), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", {
-    className: _Share_css__WEBPACK_IMPORTED_MODULE_0__["shareIcons"]
-  }, react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("a", {
+  return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(_Share_css__WEBPACK_IMPORTED_MODULE_3__["share"], {
+      [_Share_css__WEBPACK_IMPORTED_MODULE_3__["inline"]]: theme === "inline",
+      [_Share_css__WEBPACK_IMPORTED_MODULE_3__["hasRecord"]]: hasRecord
+    })
+  }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("p", {
+    className: _Share_css__WEBPACK_IMPORTED_MODULE_3__["title"]
+  }, "\u043F\u043E\u0434\u0435\u043B\u0438\u0442\u044C\u0441\u044F", hasRecord === true && ' результатом'), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
+    className: _Share_css__WEBPACK_IMPORTED_MODULE_3__["shareIcons"]
+  }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("a", {
     href: `http://vk.com/share.php?url=${link}`
-  }, react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_icons__WEBPACK_IMPORTED_MODULE_2__["Vk"], null)), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("a", {
+  }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_icons__WEBPACK_IMPORTED_MODULE_2__["Vk"], null)), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("a", {
     href: `https://twitter.com/intent/tweet?text==${link}`
-  }, react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_icons__WEBPACK_IMPORTED_MODULE_2__["Tw"], null)), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("a", {
+  }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_icons__WEBPACK_IMPORTED_MODULE_2__["Tw"], null)), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("a", {
     href: `https://www.facebook.com/dialog/share?app_id=1727953450799543&display=popup&href=${link}`
-  }, react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_icons__WEBPACK_IMPORTED_MODULE_2__["Fb"], null)), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("a", {
+  }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_icons__WEBPACK_IMPORTED_MODULE_2__["Fb"], null)), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("a", {
     href: `https://connect.ok.ru/offer?url=${link}`
-  }, react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_icons__WEBPACK_IMPORTED_MODULE_2__["Ok"], null)), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("a", {
+  }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_icons__WEBPACK_IMPORTED_MODULE_2__["Ok"], null)), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("a", {
     href: `https://t.me/share/url?url=${link}`
-  }, react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_icons__WEBPACK_IMPORTED_MODULE_2__["Tg"], null))));
+  }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_icons__WEBPACK_IMPORTED_MODULE_2__["Tg"], null))));
 }
 
 /***/ }),
@@ -3128,19 +2212,19 @@ __webpack_require__.r(__webpack_exports__);
 const categories = [{
   id: "beats",
   name: "Бит",
-  color: "#af5c14"
+  color: "#c67331"
 }, {
   id: "hihats",
   name: "Хай-хэт",
-  color: "#be8b1a"
+  color: "#ce9937"
 }, {
   id: "bass",
   name: "Бас",
-  color: "#3462c3"
+  color: "#356de9"
 }, {
   id: "tune",
   name: "Синт",
-  color: "#7b45af"
+  color: "#7639ca"
 }];
 const loops = [{
   id: "bt1",
@@ -3241,51 +2325,39 @@ const loops = [{
 }];
 const news = [{
   id: "0",
-  link: "https://zona.media/news/2018/10/14/free",
   text: "Навальный вышел на свободу после 50 суток ареста"
 }, {
   id: "1",
-  link: "https://zona.media/news/2018/10/13/fire",
   text: "В Москве подожгли храм и воскресную школу"
 }, {
   id: "2",
-  link: "https://zona.media/news/2018/10/08/masha",
   text: "В Красноярском крае пенсионерку обязали выплатить 160 тысяч рублей за продажу односельчанам самодельных «Маши и медведя»"
 }, {
   id: "3",
-  link: "https://zona.media/news/2018/10/09/school",
   text: "В новосибирской школе девятиклассник напал с ножом на сверстника"
 }, {
   id: "4",
-  link: "https://zona.media/news/2018/10/05/mailru-jokes",
   text: "Вице-президент Mail.ru предложил создать орган, проверяющий шутки на экстремизм"
 }, {
   id: "5",
-  link: "https://zona.media/news/2018/10/03/shagdarov",
   text: "В Забайкалье следователя заподозрили в хищении вещдоков по делу о хищении вещдоков"
 }, {
   id: "6",
-  link: "https://zona.media/news/2018/10/01/policemen",
   text: "В Москве двое полицейских задержаны за стрельбу из травматического пистолета по прохожему"
 }, {
   id: "7",
-  link: "https://zona.media/news/2018/09/19/karaoke",
   text: "Троих жителей Чебоксар заподозрили в нападении на полицейских после драки в караоке"
 }, {
   id: "8",
-  link: "https://zona.media/news/2018/09/18/hm",
   text: "В Брянской области пресвитера адвентистов оштрафовали после жалобы православной местной жительницы"
 }, {
   id: "9",
-  link: "https://zona.media/news/2018/09/11/hutorok",
   text: "В Краснодаре после конфликта лесоруба и местной жительницы, выступающей против вырубки леса, один судья осудил обоих"
 }, {
   id: "10",
-  link: "https://zona.media/news/2018/09/07/sledovatel-bik",
   text: "Волгоградского следователя, пообещавшего разбить голову пожилой потерпевшей, заподозрили в превышении полномочий"
 }, {
   id: "11",
-  link: "https://zona.media/news/2018/09/06/90s",
   text: "В Подмосковье пятерых человек арестовали по обвинению в похищении предпринимателей"
 }];
 
@@ -3547,7 +2619,7 @@ function selectState(rootState) {
 /*!*****************************!*\
   !*** ./src/ducks/record.js ***!
   \*****************************/
-/*! exports provided: SET_IS_RECORDING, SET_IS_PLAYING_RECORD, ADD_LOOPS, ADD_NEWS, setIsRecording, setIsPlayingRecord, addLoops, addNews, recordReducer, selectState, selectIsRecording, selectIsPlayingRecord, selectStartTimestamp, selectRecordLoops, selectRecordNews */
+/*! exports provided: SET_IS_RECORDING, SET_IS_PLAYING_RECORD, ADD_LOOPS, ADD_NEWS, setIsRecording, setIsPlayingRecord, addLoops, addNews, recordReducer, selectState, selectIsRecording, selectIsPlayingRecord, selectStartTimestamp, selectRecordLoops, selectRecordNews, selectHasRecord */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3567,6 +2639,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectStartTimestamp", function() { return selectStartTimestamp; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectRecordLoops", function() { return selectRecordLoops; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectRecordNews", function() { return selectRecordNews; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectHasRecord", function() { return selectHasRecord; });
 /* harmony import */ var _analytics__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../analytics */ "./src/analytics.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -3674,6 +2747,9 @@ function selectRecordLoops(state) {
 }
 function selectRecordNews(state) {
   return selectState(state).news;
+}
+function selectHasRecord(state) {
+  return !selectIsRecording(state) && selectRecordLoops(state).length !== 0;
 }
 
 /***/ }),
@@ -3896,4 +2972,4 @@ class Reader {
 
 /***/ })
 
-/******/ });
+},[["./src/index.js","runtime","vendor"]]]);

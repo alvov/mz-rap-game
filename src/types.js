@@ -33,7 +33,6 @@ export type Loop = {|
 
 export type News = {|
     id: string,
-    link: string,
     text: string,
 |};
 
@@ -54,3 +53,5 @@ export type LoopKeyEnum =
     "tema2" |
     "tema3" |
     "tema4";
+
+export type ShareThemeEnum = "default" | "inline";

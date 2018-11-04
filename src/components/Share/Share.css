@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 245px;
 }
 
 .title {
@@ -17,7 +16,7 @@
 .shareIcons {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .shareIcons a {
@@ -29,4 +28,26 @@
 
 .shareIcons a:first-child {
   margin-left: 0;
+}
+
+.share.inline {
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: auto;
+  height: 100%;
+}
+
+.share.inline .title {
+  margin: 0 20px 0 0;
+}
+
+@media (max-width: 479px) {
+  .share.inline .title {
+    display: none;
+  }
+
+  .share.inline .shareIcons {
+    width: 100%;
+  }
 }

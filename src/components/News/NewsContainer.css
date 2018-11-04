@@ -1,6 +1,28 @@
 .newsContainer {
-  background-color: #fff;
-  color: #333;
-  padding: 0 20px;
-  flex: 1 1 auto;
+  padding-top: 40px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.6;
+  box-sizing: border-box;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+@media (orientation: landscape) {
+  .newsContainer {
+    max-height: 50vw;
+  }
+}
+@media (orientation: portrait) {
+  .newsContainer {
+    max-height: 75vh;
+  }
+}
+
+@media (max-width: 767px) {
+  .newsContainer {
+    overflow: visible;
+    max-height: none;
+    min-height: 0;
+  }
 }
