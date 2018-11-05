@@ -1,10 +1,24 @@
 .titlePage {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
   align-items: center;
-  margin: 65px 0 40px;
+  width: 100%;
+  padding: 65px 20px 40px;
+  box-sizing: border-box;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("./mz_game_rap.jpg") 50% 50% / auto 100% no-repeat;
+  opacity: 0.5;
+  z-index: -1;
 }
 
 .body {
@@ -12,7 +26,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
   margin-bottom: 96px;
 }
 

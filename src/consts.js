@@ -11,5 +11,5 @@ export const LoopState: { [string]: LoopStateEnum } = {
 export const MAXIMUM_RECORD_TURNS = 32;
 export const MAXIMUM_NEWS_READ = 15;
 export const BPM = 90;
-export const BEATS_IN_LOOP = 16;
+export const BEATS_IN_LOOP = 8;
 export const LOOP_DURATION_SEC = BEATS_IN_LOOP / (BPM / 60);

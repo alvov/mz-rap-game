@@ -89,7 +89,7 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(mp3|ogg)$/,
+                test: /\.(mp3|ogg|jpg)$/,
                 use: [
                     {
                         loader: "file-loader",

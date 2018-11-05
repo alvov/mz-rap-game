@@ -7,7 +7,7 @@
     "lint": "flow check && flow stop",
     "build": "npm run lint && webpack && npm run flow-stop",
     "build-github": "PUBLIC_URL=./ TARGET=github npm run build",
-    "start": "TARGET=github webpack-dev-server --hot",
+    "start": "TARGET=github webpack-dev-server --hot --host 0.0.0.0",
     "flow-stop": "flow stop"
   },
   "author": "",

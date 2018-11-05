@@ -34,7 +34,7 @@ type SoundManagerComponentProps = SoundManagerComponentStateProps & SoundManager
 export class SoundManagerComponent extends React.Component<SoundManagerComponentProps> {
     ctxCurrentTime: number | null;
     isPlaying: boolean;
-    howls: { [string]: Class<Howl> };
+    +howls: { [string]: Class<Howl> };
     checkInterval: IntervalID | void;
     constructor(props: SoundManagerComponentProps) {
         super(props);
@@ -47,6 +47,7 @@ export class SoundManagerComponent extends React.Component<SoundManagerComponent
             this.howls[loop.id] = new Howl({
                 src: [ogg[loop.src], mp3[loop.src]],
                 preload: true,
+                volume: 0.5,
                 onload: () => {
                     this.props.setLoopState([{ id: loop.id, state: LoopState.Off }]);
                 },

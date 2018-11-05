@@ -22,6 +22,7 @@ export function TitlePage(props: titleProps) {
 
   return (
     <div className={styles.titlePage}>
+      <div className={styles.background}/>
       <div className={styles.body}>
         <h2 className={styles.title}>Рэпчик от Медиазоны</h2>
         <p className={styles.description}>Проснувшись однажды утром после беспокойного сна, вы решили стать

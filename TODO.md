@@ -2,7 +2,8 @@
 
 ## Intro page
 - [x] Intro page
-- [x] Intro page with play button
+- [ ] Intro page with play button
+- [x] Intro page image
 
 ## News
 - [x] News layout  
@@ -37,7 +38,7 @@
 - [x] Replace sounds
 - [x] Add bass
 - [x] Add keys
-- [ ] Reduce loops volume
+- [x] Reduce loops volume
 - [ ] <s>Calculate loops duration</s>
 - [ ] Add FX
 
@@ -51,9 +52,13 @@
 - [ ] <s>Add Emotion.js</s>
 - [ ] Production build
 
+## Instructions
+- [ ] Put headphones on
+- [ ] On iphone - turn off silent mode
+
 ## Bugs
-- [ ] Sounds on mobile
-- [ ] Blinking animation on mobile 
+- [x] Sounds on mobile
+- [x] Blinking animation on mobile
 
 ## Question
 - [ ] Ability to pause news?
