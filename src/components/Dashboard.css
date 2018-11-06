@@ -1,25 +1,60 @@
 .dashboard {
   display: flex;
   flex-direction: column;
-}
-
-.triggers {
-  display: flex;
-  justify-content: space-between;
+  max-width: 900px;
+  padding: 20px;
+  margin: 0 auto;
+  margin-top: 60px;
+  background-color: black;
 }
 
 .loopsContainer {
-  flex: 1 0 60%;
-  max-width: 640px;
-  margin-right: 20px;
+  padding-bottom: 10px;
 }
 
-@media (max-width: 450px) {
-  .triggers {
+.separator {
+  border-bottom: 1px solid #3b3b3b;
+  margin: 0 0 40px;
+}
+
+@media (min-width: 768px) {
+  .dashboard {
+    flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+    padding: 0 20px;
   }
 
   .loopsContainer {
-    margin-right: 0;
+    flex: 0 0 54%;
+    order: 4;
+    padding: 40px 0 0;
+  }
+
+  .playerContainer {
+    order: 1;
+  }
+
+  .newsContainer {
+    order: 5;
+    flex: 0 0 40%;
+  }
+
+  .separator {
+    order: 3;
+    flex: 1 0 100%;
+    margin: 40px 0 0;
+  }
+
+  .shareContainer {
+    order: 2;
+    flex: 0 0 40%;
+  }
+}
+
+@media (min-width: 990px) {
+  .playerContainer {
+    flex: 0 0 60%;
   }
 }

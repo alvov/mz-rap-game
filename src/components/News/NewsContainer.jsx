@@ -59,11 +59,10 @@ class NewsContainerComponent extends React.Component<NewsContainerComponentProps
         const { currentNews } = this.state;
         return (
             <div className={styles.newsContainer}>
-                {news.map(({ id, link, text }) => {
+                {news.map(({ id, text }) => {
                     return <News
                         key={id}
                         id={id}
-                        link={link}
                         text={text}
                         progress={currentNews && currentNews.id === id ? currentNews.progress : 0}
                         onClick={this.onClickNews}

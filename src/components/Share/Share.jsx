@@ -1,5 +1,5 @@
-import * as styles from "./Share.css";
-import * as React from "react";
+import * as React from 'react';
+import cn from 'classnames';
 import {
   Vk,
   Tg,
@@ -7,19 +7,31 @@ import {
   Fb,
   Tw
 } from '../icons';
+import type {ShareThemeEnum} from "../../types";
+import * as styles from './Share.css';
 
-type shareProps = {|
+type ShareProps = {|
   +link: string,
+  +theme?: ShareThemeEnum,
+  +hasRecord?: boolean,
 |}
 
-export function Share(props: shareProps) {
+export function Share(props: ShareProps) {
   const {
-    link
+    link,
+    theme,
+    hasRecord,
   } = props;
 
   return (
-    <div className={styles.share}>
-      <p className={styles.title}>поделиться</p>
+    <div className={cn(styles.share, {
+      [styles.inline]: theme === "inline",
+      [styles.hasRecord]: hasRecord,
+    })}>
+      <p className={styles.title}>
+        поделиться
+        {hasRecord === true && ' результатом'}
+      </p>
       <div className={styles.shareIcons}>
         <a href={`http://vk.com/share.php?url=${link}`}><Vk/></a>
         <a href={`https://twitter.com/intent/tweet?text==${link}`}><Tw/></a>

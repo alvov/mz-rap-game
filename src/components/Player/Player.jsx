@@ -9,6 +9,7 @@ import {
     selectIsPlayingRecord,
     selectRecordLoops,
     selectRecordNews,
+    selectHasRecord,
 } from "../../ducks/record";
 import { generateShareHash } from "./utils";
 import { selectAllLoaded, setLoopState, stopAllLoops } from "../../ducks/loops";
@@ -26,6 +27,7 @@ type PlayerComponentStateProps = {|
     +recordLoops: $Call<typeof selectRecordLoops, RootState>,
     +recordNews: $Call<typeof selectRecordNews, RootState>,
     +playback: $Call<typeof selectPlayback, RootState>,
+    +hasRecord: $Call<typeof selectHasRecord, RootState>,
 |}
 
 type PlayerComponentDispatchProps = {|
@@ -42,15 +44,12 @@ type PlayerComponentState = {|
 |}
 
 export class PlayerComponent extends React.Component<PlayerComponentProps, PlayerComponentState> {
-    refLink: { current: null | HTMLInputElement };
     constructor(props: PlayerComponentProps) {
         super(props);
 
         this.state = {
             shareLink: this.generateLink(),
         };
-
-        this.refLink = React.createRef();
     }
 
     shouldComponentUpdate(prevProps: PlayerComponentProps) {
@@ -62,8 +61,7 @@ export class PlayerComponent extends React.Component<PlayerComponentProps, Playe
     }
 
     render() {
-        const { isRecording, isPlayingRecord, recordLoops, allLoaded } = this.props;
-        const hasRecord = !isRecording && recordLoops.length !== 0 && allLoaded;
+        const { isRecording, isPlayingRecord, allLoaded, hasRecord } = this.props;
         return (
             <div className={styles.player}>
                 <button
@@ -73,48 +71,19 @@ export class PlayerComponent extends React.Component<PlayerComponentProps, Playe
                     disabled={isPlayingRecord || !allLoaded}
                     onClick={this.onClickRecord}
                 >
-                    <span className={styles.icon}>●</span>
+                    <span className={styles.icon} />
                     Rec
                 </button>
                 <button
                     className={cn(styles.button, styles.playButton, {
                         [styles.active]: isPlayingRecord,
                     })}
-                    disabled={!hasRecord}
+                    disabled={!hasRecord || !allLoaded}
                     onClick={this.onClickPlay}
                 >
-                    <span className={styles.icon}>▶</span>
-                    Играть
-                    <span className={styles.playTitleAdd}>&nbsp;запись</span>
+                    <span className={styles.icon} />
+                    Играть запись
                 </button>
-                <button
-                    className={cn(styles.button, styles.shareButton)}
-                    disabled={!hasRecord}
-                    onClick={this.onClickLink}
-                >
-                    <span className={styles.icon}>⇫</span>
-                    Поделиться
-                </button>
-                <label
-                    className={cn(styles.share, {
-                        [styles.shareDisabled]: !hasRecord,
-                    })}
-                    onClick={this.onClickLink}
-                    title={hasRecord ? "Копировать": null}
-                >
-                    <span className={styles.shareLabel}>
-                        <span className={styles.icon}>⇫</span>
-                        Поделиться:
-                    </span>
-                    <input
-                        className={styles.shareLink}
-                        type="text"
-                        placeholder="Используйте кнопку Rec, чтобы записать свой трек"
-                        readOnly={true}
-                        value={this.state.shareLink}
-                        ref={this.refLink}
-                    />
-                </label>
             </div>
         );
     }
@@ -158,18 +127,18 @@ export class PlayerComponent extends React.Component<PlayerComponentProps, Playe
                     'Content-Type': 'application/json'
                 }
             }).then(async res => {
-              const data = await res.json()
-              console.log(data)
+                const data = await res.json();
+                console.log(data)
+            });
+            fetch(url + `?rec=1540988048541-4x/kavr`, {
+                method: 'GET', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(async res => {
+                const data = await res.json();
+                console.log(data)
             })
-          fetch(url + `?rec=1540988048541-4x/kavr`, {
-            method: 'GET', // or 'PUT'
-            headers:{
-              'Content-Type': 'application/json'
-            }
-          }).then(async res => {
-            const data = await res.json()
-            console.log(data)
-          })
         } else {
             this.props.setIsRecording(true);
         }
@@ -182,22 +151,6 @@ export class PlayerComponent extends React.Component<PlayerComponentProps, Playe
         } else {
             this.props.setIsPlayingRecord(true);
             this.setNextLoops(0);
-        }
-    };
-
-    onClickLink = () => {
-        const input = this.refLink.current;
-        if (input !== null) {
-            input.focus();
-            input.select();
-        }
-        try {
-            const successful = document.execCommand("copy");
-            if (!successful) {
-                throw new Error("");
-            }
-        } catch (err) {
-            console.error("Не скопировалось :(");
         }
     };
 
@@ -246,6 +199,7 @@ const mapStateToProps = (state: RootState): PlayerComponentStateProps => ({
     recordLoops: selectRecordLoops(state),
     recordNews: selectRecordNews(state),
     playback: selectPlayback(state),
+    hasRecord: selectHasRecord(state),
 });
 
 const mapDispatchToProps: PlayerComponentDispatchProps = {

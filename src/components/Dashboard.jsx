@@ -9,6 +9,8 @@ import {LOOP_DURATION_SEC} from "../consts";
 import type {Category} from "../types";
 import type {RootState} from "../ducks";
 import {TitlePage} from "./TitlePage/TitlePage";
+import {Share} from "./Share/Share";
+import {selectHasRecord} from "../ducks/record";
 import * as analytic from "../analytics";
 
 import * as styles from "./Dashboard.css";
@@ -16,6 +18,7 @@ import * as styles from "./Dashboard.css";
 type DashboardComponentProps = {|
   +categories: $Call<typeof selectCategories, RootState>,
   +playback: $Call<typeof selectPlayback, RootState>,
+  +hasRecord: $Call<typeof selectHasRecord, RootState>,
 |}
 type DashboardComponentState = {|
   +playbackPercent: number,
@@ -43,7 +46,7 @@ export class DashboardComponent extends React.Component<DashboardComponentProps,
   };
 
   render() {
-    const {categories} = this.props;
+    const {categories, hasRecord} = this.props;
     const {isStart} = this.state;
 
     if(!isStart) {
@@ -54,15 +57,24 @@ export class DashboardComponent extends React.Component<DashboardComponentProps,
 
     return (
       <div className={styles.dashboard}>
-        <Player/>
-        <div className={styles.triggers}>
-          <div className={styles.loopsContainer}>
-            {categories.map(category => this.renderLoopCategory(category))}
-          </div>
-          <NewsContainer/>
+        <div className={styles.loopsContainer}>
+          {categories.map(category => this.renderLoopCategory(category))}
+        </div>
+        <div className={styles.playerContainer}>
+          <Player />
+        </div>
+        <div className={styles.newsContainer}>
+          <NewsContainer />
+        </div>
+        <div className={styles.separator} />
+        <div className={styles.shareContainer}>
+          <Share
+            link={"/"}
+            theme="inline"
+            hasRecord={hasRecord}
+          />
         </div>
       </div>
-
     );
   }
 
@@ -80,7 +92,7 @@ export class DashboardComponent extends React.Component<DashboardComponentProps,
     );
   }
 
-  componentDidUpdate(prevProps: DashboardComponentProps) {
+  componentDidUpdate(prevProps: DashboardComponentProps, prevState: DashboardComponentState) {
     if (prevProps.playback.timestamp !== this.props.playback.timestamp) {
       this.setPercent(0);
       if (this.percentUpdateTimer !== null) {
@@ -91,6 +103,9 @@ export class DashboardComponent extends React.Component<DashboardComponentProps,
           this.setPercent();
         }, 100);
       }
+    }
+    if (prevState.isStart !== this.state.isStart && this.state.isStart) {
+      window.scrollTo(0, 0);
     }
   }
 
@@ -122,6 +137,7 @@ const mapStateToProps = (state: RootState) => {
   return {
     categories: selectCategories(state),
     playback: selectPlayback(state),
+    hasRecord: selectHasRecord(state),
   };
 };
 

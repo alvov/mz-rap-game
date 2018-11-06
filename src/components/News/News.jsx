@@ -1,11 +1,10 @@
 import * as React from "react";
-import { Progress } from "../Progress/ProgressBar";
+import { Progress } from "../Progress/ProgressCircle";
 
 import * as styles from "./News.css";
 
 type NewsProps = {|
     +id: string,
-    +link: string,
     +text: string,
     +progress: number,
     +onClick: (string) => void,
@@ -13,17 +12,22 @@ type NewsProps = {|
 
 export class News extends React.Component<NewsProps> {
     render() {
-        const { link, text, progress } = this.props;
+        const { text, progress } = this.props;
         return (
             <div
                 className={styles.news}
                 onClick={this.onClick}
             >
-                {text}
-                &nbsp;[<a className={styles.link} href={link} target="_blank">ссылка</a>]
                 <div className={styles.progress}>
-                    <Progress percent={progress} />
+                    <Progress
+                        size="40px"
+                        strokeWidth={4}
+                        stroke="#e8615b"
+                        bgStroke="transparent"
+                        percent={progress}
+                    />
                 </div>
+                {text}
             </div>
         );
     }

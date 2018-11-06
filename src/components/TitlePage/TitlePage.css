@@ -1,19 +1,31 @@
 .titlePage {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
   align-items: center;
-  margin-top: 65px;
+  width: 100%;
+  height: 100vh;
+  min-height: 620px;
+  background: #111111;
+  padding: 65px 20px 40px;
+  box-sizing: border-box;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("./mz_game_rap.jpg") 50% 50% / auto 100% no-repeat;
+  opacity: 0.5;
 }
 
 .body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
   margin-bottom: 96px;
+  z-index: 2;
 }
 
 .title {
@@ -30,13 +42,16 @@
   font: 15px 'Graphik LC';
   line-height: 1.47;
   color: #ffffff;
-  width: 445px;
+  max-width: 445px;
   text-align: center;
 }
 
 .startGame {
+  display: flex;
+  justify-content: center;
   width: 230px;
   height: 45px;
+  margin: 0 auto;
   outline: none;
   border-radius: 2px;
   border: solid 1px rgba(255, 255, 255, 0.5);
@@ -44,8 +59,26 @@
   font: 500 13px 'Graphik LC';
   line-height: 1.54;
   letter-spacing: 1px;
+  text-transform: uppercase;
   color: #ffffff;
   background: none;
   cursor: pointer;
 }
 
+@media (max-width: 420px) {
+  .titlePage {
+    padding-top: 25px;
+  }
+  .body {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 320px) {
+  .titlePage {
+    padding-top: 10px;
+  }
+  .body {
+    margin-bottom: 20px;
+  }
+}
