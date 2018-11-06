@@ -2,7 +2,7 @@ const GAME_NAME = 'rap_game'
 
 const GAGameStart = () => {
   if (window.ga) {
-    const isRepeatStartGame: boolean = !!localStorage.getItem('isRepeatStartGame');
+    const isRepeatStartGame: boolean   = !!localStorage.getItem('isRepeatStartGame');
     if(!isRepeatStartGame) {
       window.ga('send', 'event', GAME_NAME, 'unique_start_game');
     }
