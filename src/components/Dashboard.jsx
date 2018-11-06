@@ -10,7 +10,7 @@ import type {Category} from "../types";
 import type {RootState} from "../ducks";
 import {TitlePage} from "./TitlePage/TitlePage";
 import {Share} from "./Share/Share";
-import {selectHasRecord} from "../ducks/record";
+import {selectHasRecord, selectRecordLink} from "../ducks/record";
 import * as analytic from "../analytics";
 
 import * as styles from "./Dashboard.css";
@@ -19,6 +19,7 @@ type DashboardComponentProps = {|
   +categories: $Call<typeof selectCategories, RootState>,
   +playback: $Call<typeof selectPlayback, RootState>,
   +hasRecord: $Call<typeof selectHasRecord, RootState>,
+  +recordLink: $Call<typeof selectRecordLink, RootState>
 |}
 type DashboardComponentState = {|
   +playbackPercent: number,
@@ -46,7 +47,7 @@ export class DashboardComponent extends React.Component<DashboardComponentProps,
   };
 
   render() {
-    const {categories, hasRecord} = this.props;
+    const {categories, hasRecord, recordLink} = this.props;
     const {isStart} = this.state;
 
     if(!isStart) {
@@ -69,7 +70,7 @@ export class DashboardComponent extends React.Component<DashboardComponentProps,
         <div className={styles.separator} />
         <div className={styles.shareContainer}>
           <Share
-            link={"/"}
+            link={recordLink}
             theme="inline"
             hasRecord={hasRecord}
           />
@@ -138,6 +139,7 @@ const mapStateToProps = (state: RootState) => {
     categories: selectCategories(state),
     playback: selectPlayback(state),
     hasRecord: selectHasRecord(state),
+    recordLink: selectRecordLink(state)
   };
 };
 

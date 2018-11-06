@@ -1,7 +1,8 @@
 import * as React from "react";
+import ReduxThunk from 'redux-thunk'
 import { render } from "react-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { combinedReducers } from "./ducks";
 import { setLoops } from "./ducks/loops";
 import { setCategories } from "./ducks/categories";
@@ -12,7 +13,10 @@ import { generatePlayList, getRecordFromUrl, validateLoopId } from "./components
 import { addLoops, addNews } from "./ducks/record";
 import * as styles from "./index.css";
 
-const store = createStore(combinedReducers);
+const store = createStore(
+  combinedReducers,
+  applyMiddleware(ReduxThunk)
+);
 
 // valid ids are required to be able to create a share link
 loops.forEach(({ id }) => validateLoopId(id));

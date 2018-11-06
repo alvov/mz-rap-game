@@ -6,6 +6,7 @@ import {
     setIsRecording,
     selectStartTimestamp,
     setIsPlayingRecord,
+    setGenerateLink,
     selectIsPlayingRecord,
     selectRecordLoops,
     selectRecordNews,
@@ -16,6 +17,7 @@ import { selectAllLoaded, setLoopState, stopAllLoops } from "../../ducks/loops";
 import { selectState as selectPlayback } from "../../ducks/playback";
 import { LoopState } from "../../consts";
 import type { RootState } from "../../ducks";
+import type { RecordNews, RecordLoops } from "../../ducks/record";
 
 import * as styles from "./Player.css";
 
@@ -27,7 +29,7 @@ type PlayerComponentStateProps = {|
     +recordLoops: $Call<typeof selectRecordLoops, RootState>,
     +recordNews: $Call<typeof selectRecordNews, RootState>,
     +playback: $Call<typeof selectPlayback, RootState>,
-    +hasRecord: $Call<typeof selectHasRecord, RootState>,
+    +hasRecord: $Call<typeof selectHasRecord, RootState>
 |}
 
 type PlayerComponentDispatchProps = {|
@@ -35,6 +37,7 @@ type PlayerComponentDispatchProps = {|
     +setIsPlayingRecord: typeof setIsPlayingRecord,
     +stopAllLoops: typeof stopAllLoops,
     +setLoopState: typeof setLoopState,
+    +setGenerateLink: typeof setGenerateLink
 |}
 
 type PlayerComponentProps = PlayerComponentStateProps & PlayerComponentDispatchProps;
@@ -42,6 +45,7 @@ type PlayerComponentProps = PlayerComponentStateProps & PlayerComponentDispatchP
 type PlayerComponentState = {|
     shareLink: string,
 |}
+
 
 export class PlayerComponent extends React.Component<PlayerComponentProps, PlayerComponentState> {
     constructor(props: PlayerComponentProps) {
@@ -113,32 +117,16 @@ export class PlayerComponent extends React.Component<PlayerComponentProps, Playe
     onClickRecord = () => {
         if (this.props.isRecording) {
             this.props.setIsRecording(false);
+
+            const loops: Array<RecordLoops> = this.props.recordLoops;
+            const news: Array<RecordNews> = this.props.recordNews;
+
+            if(!loops instanceof Array) return;
+
+            this.props.setGenerateLink({loops, news});
             this.setState({
                 shareLink: this.generateLink(),
             });
-              var url = 'http://localhost:8080/api/rap_rec';
-
-            var dataJSON = {data: this.generateLink(), r: 'ls'};
-
-            fetch(url, {
-                method: 'POST', // or 'PUT'
-                body: JSON.stringify(dataJSON), // data can be `string` or {object}!
-                headers:{
-                    'Content-Type': 'application/json'
-                }
-            }).then(async res => {
-                const data = await res.json();
-                console.log(data)
-            });
-            fetch(url + `?rec=1540988048541-4x/kavr`, {
-                method: 'GET', // or 'PUT'
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(async res => {
-                const data = await res.json();
-                console.log(data)
-            })
         } else {
             this.props.setIsRecording(true);
         }
@@ -207,6 +195,7 @@ const mapDispatchToProps: PlayerComponentDispatchProps = {
     setIsPlayingRecord,
     stopAllLoops,
     setLoopState,
+    setGenerateLink
 };
 
 export const Player = connect(mapStateToProps, mapDispatchToProps)(PlayerComponent);

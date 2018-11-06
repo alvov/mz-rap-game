@@ -1,8 +1,9 @@
 import type { RootState } from "./index";
+import type { ThunkDispatch } from 'redux-thunk';
 import * as analytic from '../analytics';
-
 export const SET_IS_RECORDING = "record/SET_IS_RECORDING";
 export const SET_IS_PLAYING_RECORD = "record/SET_IS_PLAYING_RECORD";
+export const SET_IS_GENERATE_LINK = "record/SET_IS_GENERATE_LINK";
 export const ADD_LOOPS = "record/ADD_LOOPS";
 export const ADD_NEWS = "record/ADD_NEWS";
 
@@ -18,6 +19,7 @@ export type RecordState = {|
     +isPlayingRecord: boolean,
     +loops: RecordLoops[],
     +news: RecordNews[],
+    +recordLink: string
 |};
 
 const initialState: RecordState = {
@@ -26,6 +28,7 @@ const initialState: RecordState = {
     isPlayingRecord: false,
     loops: [],
     news: [],
+    recordLink: ''
 };
 
 type SetIsRecordingAction = {|
@@ -76,6 +79,81 @@ export function addNews({ id, timestamp }: RecordNews): AddNewsAction {
     }
 }
 
+export type SetGenerateLink = {|
+  +loops: Array<RecordLoops>,
+  +news: Array<RecordNews>
+|}
+
+type RapRecData = {|
+  +guid: string
+|}
+
+export const setGenerateLink = ({loops, news}: SetGenerateLink) => async (dispatch: ThunkDispatch): Promise<void> | void => {
+  try {
+    if (loops.length) {
+      const url = `${location.origin}/api/rap_rec`;
+      const dataJSON = {
+        loops,
+        shots: news
+      };
+
+      console.log(url, dataJSON);
+
+      const res: Response = await fetch(url, {
+        method: 'POST', //
+        body: JSON.stringify(dataJSON), // data can be `string` or {object}!
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const data: RapRecData = await res.json();
+      const guid = data.guid;
+
+      if(typeof guid !== 'string') return;
+
+      dispatch({
+        type: SET_IS_GENERATE_LINK,
+        payload: `${location.origin}${location.pathname}?r=${guid}`
+      })
+    }
+  } catch(e) {
+    console.log(e)
+  }
+};
+
+export type GetGenerateLink = {|
+  +guid: string
+|}
+
+export const getGenerateLink = ({guid}: GetGenerateLink) => async (dispatch: ThunkDispatch): Promise<void> | void => {
+  try {
+    if (guid) {
+      const url = `${location.origin}/api/rap_rec`;
+
+      const res: Response = await fetch(url + `?rec=${guid}`, {
+        method: 'GET', //
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const data: Response = await res.json();
+
+      console.log(data);
+
+      if(typeof guid !== 'string') return;
+
+      dispatch({
+        type: SET_IS_GENERATE_LINK,
+        payload: `${location.origin}${location.pathname}?r=${guid}`
+      })
+    }
+  } catch(e) {
+    console.log(e)
+  }
+};
+
 type RecordAction = SetIsRecordingAction |
     SetIsPlayingAction |
     AddLoopsAction |
@@ -85,13 +163,13 @@ export function recordReducer(state: RecordState = initialState, action: RecordA
     switch (action.type) {
         case SET_IS_RECORDING: {
             if (action.payload) {
-                analytic.GAStartRecord()
+                analytic.GAStartRecord();
                 return {
                     ...initialState,
                     isRecording: true,
                 };
             } else {
-                analytic.GAStopRecord()
+                analytic.GAStopRecord();
                 return {
                     ...state,
                     isRecording: false,
@@ -103,6 +181,12 @@ export function recordReducer(state: RecordState = initialState, action: RecordA
                 ...state,
                 isPlayingRecord: action.payload,
             };
+        }
+        case SET_IS_GENERATE_LINK: {
+          return {
+            ...state,
+            recordLink: action.payload
+          }
         }
         case ADD_LOOPS: {
             return {
@@ -146,6 +230,10 @@ export function selectRecordLoops(state: RootState): RecordLoops[] {
 
 export function selectRecordNews(state: RootState): RecordNews[] {
     return selectState(state).news;
+}
+
+export function selectRecordLink(state: RootState): string {
+  return selectState(state).recordLink;
 }
 
 export function selectHasRecord(state: RootState): boolean {

@@ -728,7 +728,8 @@ class DashboardComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Component"]
   render() {
     const {
       categories,
-      hasRecord
+      hasRecord,
+      recordLink
     } = this.props;
     const {
       isStart
@@ -753,7 +754,7 @@ class DashboardComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Component"]
     }), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
       className: _Dashboard_css__WEBPACK_IMPORTED_MODULE_12__["shareContainer"]
     }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Share_Share__WEBPACK_IMPORTED_MODULE_9__["Share"], {
-      link: "/",
+      link: recordLink,
       theme: "inline",
       hasRecord: hasRecord
     })));
@@ -822,7 +823,8 @@ const mapStateToProps = state => {
   return {
     categories: Object(_ducks_categories__WEBPACK_IMPORTED_MODULE_2__["selectState"])(state),
     playback: Object(_ducks_playback__WEBPACK_IMPORTED_MODULE_6__["selectState"])(state),
-    hasRecord: Object(_ducks_record__WEBPACK_IMPORTED_MODULE_10__["selectHasRecord"])(state)
+    hasRecord: Object(_ducks_record__WEBPACK_IMPORTED_MODULE_10__["selectHasRecord"])(state),
+    recordLink: Object(_ducks_record__WEBPACK_IMPORTED_MODULE_10__["selectRecordLink"])(state)
   };
 };
 
@@ -1330,35 +1332,15 @@ class PlayerComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     _defineProperty(this, "onClickRecord", () => {
       if (this.props.isRecording) {
         this.props.setIsRecording(false);
+        const loops = this.props.recordLoops;
+        const news = this.props.recordNews;
+        if (!loops instanceof Array) return;
+        this.props.setGenerateLink({
+          loops,
+          news
+        });
         this.setState({
           shareLink: this.generateLink()
-        });
-        var url = 'http://localhost:8080/api/rap_rec';
-        var dataJSON = {
-          data: this.generateLink(),
-          r: 'ls'
-        };
-        fetch(url, {
-          method: 'POST',
-          // or 'PUT'
-          body: JSON.stringify(dataJSON),
-          // data can be `string` or {object}!
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }).then(async res => {
-          const data = await res.json();
-          console.log(data);
-        });
-        fetch(url + `?rec=1540988048541-4x/kavr`, {
-          method: 'GET',
-          // or 'PUT'
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }).then(async res => {
-          const data = await res.json();
-          console.log(data);
         });
       } else {
         this.props.setIsRecording(true);
@@ -1500,7 +1482,8 @@ const mapDispatchToProps = {
   setIsRecording: _ducks_record__WEBPACK_IMPORTED_MODULE_3__["setIsRecording"],
   setIsPlayingRecord: _ducks_record__WEBPACK_IMPORTED_MODULE_3__["setIsPlayingRecord"],
   stopAllLoops: _ducks_loops__WEBPACK_IMPORTED_MODULE_5__["stopAllLoops"],
-  setLoopState: _ducks_loops__WEBPACK_IMPORTED_MODULE_5__["setLoopState"]
+  setLoopState: _ducks_loops__WEBPACK_IMPORTED_MODULE_5__["setLoopState"],
+  setGenerateLink: _ducks_record__WEBPACK_IMPORTED_MODULE_3__["setGenerateLink"]
 };
 const Player = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(PlayerComponent);
 
@@ -2024,18 +2007,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-let PAGE_URL = "http://localhost:8080/games/rap_game";
-
-if (PAGE_URL === null) {
-  PAGE_URL = 'http://localhost:8081/';
-}
-
 function TitlePage(props) {
   const {
     startGame
   } = props;
-  let link = "";
-  if (typeof PAGE_URL === "string") link = encodeURIComponent(PAGE_URL);
+  const link = `${location.origin}${location.pathname}`;
   return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
     className: _TitlePage_css__WEBPACK_IMPORTED_MODULE_1__["titlePage"]
   }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
@@ -2622,19 +2598,21 @@ function selectState(rootState) {
 /*!*****************************!*\
   !*** ./src/ducks/record.js ***!
   \*****************************/
-/*! exports provided: SET_IS_RECORDING, SET_IS_PLAYING_RECORD, ADD_LOOPS, ADD_NEWS, setIsRecording, setIsPlayingRecord, addLoops, addNews, recordReducer, selectState, selectIsRecording, selectIsPlayingRecord, selectStartTimestamp, selectRecordLoops, selectRecordNews, selectHasRecord */
+/*! exports provided: SET_IS_RECORDING, SET_IS_PLAYING_RECORD, SET_IS_GENERATE_LINK, ADD_LOOPS, ADD_NEWS, setIsRecording, setIsPlayingRecord, addLoops, addNews, setGenerateLink, recordReducer, selectState, selectIsRecording, selectIsPlayingRecord, selectStartTimestamp, selectRecordLoops, selectRecordNews, selectRecordLink, selectHasRecord */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_IS_RECORDING", function() { return SET_IS_RECORDING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_IS_PLAYING_RECORD", function() { return SET_IS_PLAYING_RECORD; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_IS_GENERATE_LINK", function() { return SET_IS_GENERATE_LINK; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_LOOPS", function() { return ADD_LOOPS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_NEWS", function() { return ADD_NEWS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setIsRecording", function() { return setIsRecording; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setIsPlayingRecord", function() { return setIsPlayingRecord; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addLoops", function() { return addLoops; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNews", function() { return addNews; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setGenerateLink", function() { return setGenerateLink; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recordReducer", function() { return recordReducer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectState", function() { return selectState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectIsRecording", function() { return selectIsRecording; });
@@ -2642,6 +2620,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectStartTimestamp", function() { return selectStartTimestamp; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectRecordLoops", function() { return selectRecordLoops; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectRecordNews", function() { return selectRecordNews; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectRecordLink", function() { return selectRecordLink; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectHasRecord", function() { return selectHasRecord; });
 /* harmony import */ var _analytics__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../analytics */ "./src/analytics.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -2651,6 +2630,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 const SET_IS_RECORDING = "record/SET_IS_RECORDING";
 const SET_IS_PLAYING_RECORD = "record/SET_IS_PLAYING_RECORD";
+const SET_IS_GENERATE_LINK = "record/SET_IS_GENERATE_LINK";
 const ADD_LOOPS = "record/ADD_LOOPS";
 const ADD_NEWS = "record/ADD_NEWS";
 const initialState = {
@@ -2658,7 +2638,8 @@ const initialState = {
   isRecording: false,
   isPlayingRecord: false,
   loops: [],
-  news: []
+  news: [],
+  recordLink: ''
 };
 function setIsRecording(value) {
   return {
@@ -2690,6 +2671,39 @@ function addNews({
     }
   };
 }
+const setGenerateLink = ({
+  loops,
+  news
+}) => async dispatch => {
+  try {
+    if (loops.length) {
+      const url = `${location.origin}/api/rap_rec`;
+      const dataJSON = {
+        loops,
+        shots: news
+      };
+      console.log(url, dataJSON);
+      const res = await fetch(url, {
+        method: 'POST',
+        //
+        body: JSON.stringify(dataJSON),
+        // data can be `string` or {object}!
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await res.json();
+      const guid = data.guid;
+      if (typeof guid !== 'string') return;
+      dispatch({
+        type: SET_IS_GENERATE_LINK,
+        payload: `${location.origin}${location.pathname}?r=${guid}`
+      });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
 function recordReducer(state = initialState, action) {
   switch (action.type) {
     case SET_IS_RECORDING:
@@ -2711,6 +2725,13 @@ function recordReducer(state = initialState, action) {
       {
         return _objectSpread({}, state, {
           isPlayingRecord: action.payload
+        });
+      }
+
+    case SET_IS_GENERATE_LINK:
+      {
+        return _objectSpread({}, state, {
+          recordLink: action.payload
         });
       }
 
@@ -2751,6 +2772,9 @@ function selectRecordLoops(state) {
 function selectRecordNews(state) {
   return selectState(state).news;
 }
+function selectRecordLink(state) {
+  return selectState(state).recordLink;
+}
 function selectHasRecord(state) {
   return !selectIsRecording(state) && selectRecordLoops(state).length !== 0;
 }
@@ -2780,20 +2804,21 @@ module.exports = {"rootContainer":"rootContainer--1fTVW"};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _ducks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ducks */ "./src/ducks/index.js");
-/* harmony import */ var _ducks_loops__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ducks/loops */ "./src/ducks/loops.js");
-/* harmony import */ var _ducks_categories__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ducks/categories */ "./src/ducks/categories.js");
-/* harmony import */ var _ducks_news__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ducks/news */ "./src/ducks/news.js");
-/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./App */ "./src/App.jsx");
-/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./data */ "./src/data.js");
-/* harmony import */ var _components_Player_utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Player/utils */ "./src/components/Player/utils.js");
-/* harmony import */ var _ducks_record__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./ducks/record */ "./src/ducks/record.js");
-/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./index.css */ "./src/index.css");
-/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _ducks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ducks */ "./src/ducks/index.js");
+/* harmony import */ var _ducks_loops__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ducks/loops */ "./src/ducks/loops.js");
+/* harmony import */ var _ducks_categories__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ducks/categories */ "./src/ducks/categories.js");
+/* harmony import */ var _ducks_news__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ducks/news */ "./src/ducks/news.js");
+/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./App */ "./src/App.jsx");
+/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./data */ "./src/data.js");
+/* harmony import */ var _components_Player_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Player/utils */ "./src/components/Player/utils.js");
+/* harmony import */ var _ducks_record__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./ducks/record */ "./src/ducks/record.js");
+/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./index.css */ "./src/index.css");
+/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_13__);
 
 
 
@@ -2807,27 +2832,28 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const store = Object(redux__WEBPACK_IMPORTED_MODULE_3__["createStore"])(_ducks__WEBPACK_IMPORTED_MODULE_4__["combinedReducers"]); // valid ids are required to be able to create a share link
 
-_data__WEBPACK_IMPORTED_MODULE_9__["loops"].forEach(({
+const store = Object(redux__WEBPACK_IMPORTED_MODULE_4__["createStore"])(_ducks__WEBPACK_IMPORTED_MODULE_5__["combinedReducers"], Object(redux__WEBPACK_IMPORTED_MODULE_4__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"])); // valid ids are required to be able to create a share link
+
+_data__WEBPACK_IMPORTED_MODULE_10__["loops"].forEach(({
   id
-}) => Object(_components_Player_utils__WEBPACK_IMPORTED_MODULE_10__["validateLoopId"])(id)); // set initial store
+}) => Object(_components_Player_utils__WEBPACK_IMPORTED_MODULE_11__["validateLoopId"])(id)); // set initial store
 
-store.dispatch(Object(_ducks_categories__WEBPACK_IMPORTED_MODULE_6__["setCategories"])(_data__WEBPACK_IMPORTED_MODULE_9__["categories"]));
-store.dispatch(Object(_ducks_loops__WEBPACK_IMPORTED_MODULE_5__["setLoops"])(_data__WEBPACK_IMPORTED_MODULE_9__["loops"]));
-store.dispatch(Object(_ducks_news__WEBPACK_IMPORTED_MODULE_7__["setNews"])(_data__WEBPACK_IMPORTED_MODULE_9__["news"])); // check if there's a record in the url query parameter
+store.dispatch(Object(_ducks_categories__WEBPACK_IMPORTED_MODULE_7__["setCategories"])(_data__WEBPACK_IMPORTED_MODULE_10__["categories"]));
+store.dispatch(Object(_ducks_loops__WEBPACK_IMPORTED_MODULE_6__["setLoops"])(_data__WEBPACK_IMPORTED_MODULE_10__["loops"]));
+store.dispatch(Object(_ducks_news__WEBPACK_IMPORTED_MODULE_8__["setNews"])(_data__WEBPACK_IMPORTED_MODULE_10__["news"])); // check if there's a record in the url query parameter
 
-const recordHash = Object(_components_Player_utils__WEBPACK_IMPORTED_MODULE_10__["getRecordFromUrl"])();
+const recordHash = Object(_components_Player_utils__WEBPACK_IMPORTED_MODULE_11__["getRecordFromUrl"])();
 
 if (recordHash !== null) {
-  const playlist = Object(_components_Player_utils__WEBPACK_IMPORTED_MODULE_10__["generatePlayList"])(recordHash);
+  const playlist = Object(_components_Player_utils__WEBPACK_IMPORTED_MODULE_11__["generatePlayList"])(recordHash);
 
   if (playlist) {
     playlist.loops.forEach(recordedLoops => {
-      store.dispatch(Object(_ducks_record__WEBPACK_IMPORTED_MODULE_11__["addLoops"])(recordedLoops));
+      store.dispatch(Object(_ducks_record__WEBPACK_IMPORTED_MODULE_12__["addLoops"])(recordedLoops));
     });
     playlist.news.forEach(recordedNews => {
-      store.dispatch(Object(_ducks_record__WEBPACK_IMPORTED_MODULE_11__["addNews"])(recordedNews));
+      store.dispatch(Object(_ducks_record__WEBPACK_IMPORTED_MODULE_12__["addNews"])(recordedNews));
     });
   }
 }
@@ -2836,7 +2862,7 @@ let rootNode = document.getElementById("rap_root");
 
 if (!rootNode) {
   rootNode = document.createElement("div");
-  rootNode.className = _index_css__WEBPACK_IMPORTED_MODULE_12__["rootContainer"];
+  rootNode.className = _index_css__WEBPACK_IMPORTED_MODULE_13__["rootContainer"];
   const body = document.body;
 
   if (body !== null) {
@@ -2846,18 +2872,18 @@ if (!rootNode) {
 
 const renderApp = Component => {
   if (rootNode) {
-    Object(react_dom__WEBPACK_IMPORTED_MODULE_1__["render"])(react__WEBPACK_IMPORTED_MODULE_0__["createElement"](react_redux__WEBPACK_IMPORTED_MODULE_2__["Provider"], {
+    Object(react_dom__WEBPACK_IMPORTED_MODULE_2__["render"])(react__WEBPACK_IMPORTED_MODULE_0__["createElement"](react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
       store: store
     }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Component, null)), rootNode);
   }
 };
 
-renderApp(_App__WEBPACK_IMPORTED_MODULE_8__["App"]);
+renderApp(_App__WEBPACK_IMPORTED_MODULE_9__["App"]);
 
 if (module.hot !== undefined) {
-  module.hot.accept(/*! ./App */ "./src/App.jsx", function(__WEBPACK_OUTDATED_DEPENDENCIES__) { /* harmony import */ _App__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./App */ "./src/App.jsx");
+  module.hot.accept(/*! ./App */ "./src/App.jsx", function(__WEBPACK_OUTDATED_DEPENDENCIES__) { /* harmony import */ _App__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./App */ "./src/App.jsx");
 (() => {
-    renderApp(_App__WEBPACK_IMPORTED_MODULE_8__["App"]);
+    renderApp(_App__WEBPACK_IMPORTED_MODULE_9__["App"]);
   })(__WEBPACK_OUTDATED_DEPENDENCIES__); });
 }
 
