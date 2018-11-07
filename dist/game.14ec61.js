@@ -1754,6 +1754,7 @@ function Share(props) {
     theme,
     hasRecord
   } = props;
+  const encodeLink = encodeURIComponent(link);
   return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(_Share_css__WEBPACK_IMPORTED_MODULE_3__["share"], {
       [_Share_css__WEBPACK_IMPORTED_MODULE_3__["inline"]]: theme === "inline",
@@ -1764,15 +1765,20 @@ function Share(props) {
   }, "\u043F\u043E\u0434\u0435\u043B\u0438\u0442\u044C\u0441\u044F", hasRecord === true && ' результатом'), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
     className: _Share_css__WEBPACK_IMPORTED_MODULE_3__["shareIcons"]
   }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("a", {
-    href: `http://vk.com/share.php?url=${link}`
+    target: "_blank",
+    href: `http://vk.com/share.php?url=${encodeLink}`
   }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_icons__WEBPACK_IMPORTED_MODULE_2__["Vk"], null)), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("a", {
-    href: `https://twitter.com/intent/tweet?text=${link}`
+    target: "_blank",
+    href: `https://twitter.com/intent/tweet?text=${encodeLink}`
   }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_icons__WEBPACK_IMPORTED_MODULE_2__["Tw"], null)), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("a", {
-    href: `https://www.facebook.com/dialog/share?app_id=1727953450799543&display=popup&href=${link}`
+    target: "_blank",
+    href: `https://www.facebook.com/dialog/share?app_id=1727953450799543&display=popup&href=${encodeLink}`
   }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_icons__WEBPACK_IMPORTED_MODULE_2__["Fb"], null)), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("a", {
-    href: `https://connect.ok.ru/offer?url=${link}`
+    target: "_blank",
+    href: `https://connect.ok.ru/offer?url=${encodeLink}`
   }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_icons__WEBPACK_IMPORTED_MODULE_2__["Ok"], null)), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("a", {
-    href: `https://t.me/share/url?url=${link}`
+    target: "_blank",
+    href: `https://t.me/share/url?url=${encodeLink}`
   }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_icons__WEBPACK_IMPORTED_MODULE_2__["Tg"], null))));
 }
 
@@ -2065,6 +2071,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Progress_ProgressCircle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Progress/ProgressCircle */ "./src/components/Progress/ProgressCircle.jsx");
 /* harmony import */ var _Player_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Player/utils */ "./src/components/Player/utils.js");
 /* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../consts */ "./src/consts.js");
+/* harmony import */ var _reader_Reader__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../reader/Reader */ "./src/reader/Reader.js");
+/* harmony import */ var _ducks_news__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../ducks/news */ "./src/ducks/news.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -2075,9 +2083,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
 class TitlePlayerComponents extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "readTimeoutsQueue", void 0);
+
+    _defineProperty(this, "newsReader", void 0);
+
+    _defineProperty(this, "onProgress", (id, progress) => {
+      this.setState({
+        currentNews: {
+          id,
+          progress
+        }
+      });
+    });
+
+    _defineProperty(this, "onEnd", () => {
+      this.setState({
+        currentNews: null
+      });
+    });
 
     _defineProperty(this, "handleRecord", () => {
       this.props.stopAllLoops();
@@ -2088,6 +2117,16 @@ class TitlePlayerComponents extends react__WEBPACK_IMPORTED_MODULE_0__["Componen
         this.props.setIsPlayingRecord(true);
         this.setNextLoops(0);
       }
+    });
+
+    this.state = {
+      currentNews: null
+    };
+    this.readTimeoutsQueue = [];
+    this.newsReader = new _reader_Reader__WEBPACK_IMPORTED_MODULE_8__["Reader"]({
+      onReady: () => undefined,
+      onProgress: this.onProgress,
+      onEnd: this.onEnd
     });
   }
 
@@ -2111,6 +2150,34 @@ class TitlePlayerComponents extends react__WEBPACK_IMPORTED_MODULE_0__["Componen
       record.shots.forEach(recordedNews => {
         this.props.addNews(recordedNews);
       });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.isPlayingRecord !== this.props.isPlayingRecord) {
+      if (this.props.isPlayingRecord) {
+        this.readTimeoutsQueue = this.props.recordNews.reduce((timeouts, recordNews) => {
+          const news = this.props.news.find(({
+            id
+          }) => recordNews.id === id);
+
+          if (news) {
+            timeouts.push(setTimeout(() => {
+              this.newsReader.read(news.text, news.id);
+            }, recordNews.timestamp));
+          }
+
+          return timeouts;
+        }, []);
+      } else {
+        this.newsReader.stop();
+
+        for (const timeout of this.readTimeoutsQueue) {
+          clearTimeout(timeout);
+        }
+
+        this.readTimeoutsQueue = [];
+      }
     }
   }
 
@@ -2147,7 +2214,10 @@ class TitlePlayerComponents extends react__WEBPACK_IMPORTED_MODULE_0__["Componen
   }
 
   render() {
-    if (!this.props.record) return null;
+    const {
+      record
+    } = this.props;
+    if (!record.loops.length && !record.shots.length) return null;
     return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
       onClick: this.handleRecord,
       className: _TitlePage_css__WEBPACK_IMPORTED_MODULE_4__["progress"]
@@ -2165,7 +2235,9 @@ class TitlePlayerComponents extends react__WEBPACK_IMPORTED_MODULE_0__["Componen
 const mapStateToProps = state => ({
   record: Object(_ducks_record__WEBPACK_IMPORTED_MODULE_2__["selectGeneratedRecord"])(state),
   isPlayingRecord: Object(_ducks_record__WEBPACK_IMPORTED_MODULE_2__["selectIsPlayingRecord"])(state),
-  recordLoops: Object(_ducks_record__WEBPACK_IMPORTED_MODULE_2__["selectRecordLoops"])(state)
+  recordLoops: Object(_ducks_record__WEBPACK_IMPORTED_MODULE_2__["selectRecordLoops"])(state),
+  recordNews: Object(_ducks_record__WEBPACK_IMPORTED_MODULE_2__["selectRecordNews"])(state),
+  news: Object(_ducks_news__WEBPACK_IMPORTED_MODULE_9__["selectState"])(state)
 });
 
 const mapDispatchToProps = {
@@ -2850,12 +2922,13 @@ const setGenerateLink = ({
           'Content-Type': 'application/json'
         }
       });
+      if (!res.ok) return;
       const data = await res.json();
       const guid = data.guid;
       if (typeof guid !== 'string') return;
       dispatch({
         type: SET_IS_GENERATE_LINK,
-        payload: `${location.origin}${location.pathname}?rec=${guid}`
+        payload: `${location.origin}${location.pathname}?rec=${guid}&_share=1`
       });
     }
   } catch (e) {
@@ -2875,6 +2948,7 @@ const getGeneratedRecord = ({
           'Content-Type': 'application/json'
         }
       });
+      if (!res.ok) return;
       const jsonRes = await res.json();
       const data = jsonRes.data;
       dispatch({

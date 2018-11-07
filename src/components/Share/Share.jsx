@@ -23,6 +23,8 @@ export function Share(props: ShareProps) {
     hasRecord,
   } = props;
 
+  const encodeLink = encodeURIComponent(link);
+
   return (
     <div className={cn(styles.share, {
       [styles.inline]: theme === "inline",
@@ -33,11 +35,11 @@ export function Share(props: ShareProps) {
         {hasRecord === true && ' результатом'}
       </p>
       <div className={styles.shareIcons}>
-        <a href={`http://vk.com/share.php?url=${link}`}><Vk/></a>
-        <a href={`https://twitter.com/intent/tweet?text=${link}`}><Tw/></a>
-        <a href={`https://www.facebook.com/dialog/share?app_id=1727953450799543&display=popup&href=${link}`}><Fb/></a>
-        <a href={`https://connect.ok.ru/offer?url=${link}`}><Ok/></a>
-        <a href={`https://t.me/share/url?url=${link}`}><Tg/></a>
+        <a target="_blank" href={`http://vk.com/share.php?url=${encodeLink}`}><Vk/></a>
+        <a target="_blank" href={`https://twitter.com/intent/tweet?text=${encodeLink}`}><Tw/></a>
+        <a target="_blank" href={`https://www.facebook.com/dialog/share?app_id=1727953450799543&display=popup&href=${encodeLink}`}><Fb/></a>
+        <a target="_blank" href={`https://connect.ok.ru/offer?url=${encodeLink}`}><Ok/></a>
+        <a target="_blank" href={`https://t.me/share/url?url=${encodeLink}`}><Tg/></a>
       </div>
     </div>
   )

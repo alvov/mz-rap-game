@@ -117,6 +117,8 @@ export const setGenerateLink = ({loops, news}: SetGenerateLink) => async (dispat
         }
       });
 
+      if(!res.ok) return;
+
       const data: RapRecData = await res.json();
       const guid = data.guid;
 
@@ -124,7 +126,7 @@ export const setGenerateLink = ({loops, news}: SetGenerateLink) => async (dispat
 
       dispatch({
         type: SET_IS_GENERATE_LINK,
-        payload: `${location.origin}${location.pathname}?rec=${guid}`
+        payload: `${location.origin}${location.pathname}?rec=${guid}&_share=1`
       })
     }
   } catch(e) {
@@ -151,6 +153,8 @@ export const getGeneratedRecord = ({guid}: GetGenerateLink) => async (dispatch: 
           'Content-Type': 'application/json'
         }
       });
+
+      if(!res.ok) return;
 
       const jsonRes: GeneratedRecData = await res.json();
       const data = jsonRes.data;
