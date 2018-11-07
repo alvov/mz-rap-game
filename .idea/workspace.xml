@@ -2,21 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="619eeb10-5219-493e-849a-aa6e9cdc643d" name="Default Changelist" comment="implement new design">
+      <change afterPath="$PROJECT_DIR$/src/components/TitlePage/TitlePlayer.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/game.8a710f.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/game.8a710f.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/game.cb9872.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/game.cb9872.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/runtime.8a710f.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/vendor.8a710f.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/runtime.cb9872.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/vendor.cb9872.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Dashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Player/Player.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Player/Player.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Share/Share.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Share/Share.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Player/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Player/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TitlePage/TitlePage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TitlePage/TitlePage.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TitlePage/TitlePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TitlePage/TitlePage.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ducks/record.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ducks/record.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -41,14 +40,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="css" value="15" />
+          <entry key="css" value="18" />
           <entry key="env" value="5" />
           <entry key="flowconfig" value="4" />
           <entry key="gitignore" value="5" />
           <entry key="html" value="1" />
-          <entry key="js" value="70" />
+          <entry key="js" value="73" />
           <entry key="json" value="10" />
-          <entry key="jsx" value="38" />
+          <entry key="jsx" value="44" />
           <entry key="lock" value="1" />
           <entry key="md" value="1" />
           <entry key="svg" value="6" />
@@ -57,11 +56,11 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key=".env file" value="1" />
-          <entry key="CSS" value="15" />
+          <entry key="CSS" value="18" />
           <entry key="HTML" value="1" />
           <entry key="JSON" value="10" />
-          <entry key="JSX Harmony" value="38" />
-          <entry key="JavaScript" value="70" />
+          <entry key="JSX Harmony" value="44" />
+          <entry key="JavaScript" value="73" />
           <entry key="PLAIN_TEXT" value="14" />
           <entry key="SVG" value="6" />
           <entry key="yarn.lock" value="1" />
@@ -69,22 +68,22 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="551" />
+          <entry key="css" value="678" />
           <entry key="env" value="7" />
           <entry key="flowconfig" value="107" />
           <entry key="gitignore" value="12" />
-          <entry key="js" value="2308" />
+          <entry key="js" value="2675" />
           <entry key="json" value="1" />
-          <entry key="jsx" value="3129" />
+          <entry key="jsx" value="3996" />
           <entry key="svg" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="551" />
+          <entry key="CSS" value="678" />
           <entry key="JSON" value="1" />
-          <entry key="JSX Harmony" value="3129" />
-          <entry key="JavaScript" value="2308" />
+          <entry key="JSX Harmony" value="3996" />
+          <entry key="JavaScript" value="2675" />
           <entry key="PLAIN_TEXT" value="126" />
           <entry key="SVG" value="1" />
         </counts>
@@ -152,13 +151,55 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Dashboard.jsx">
+        <entry file="file://$PROJECT_DIR$/src/components/TitlePage/TitlePage.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="65" column="11" selection-start-line="65" selection-start-column="11" selection-end-line="65" selection-end-column="11" />
+            <state relative-caret-position="330">
+              <caret line="22" column="21" lean-forward="true" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/TitlePage/TitlePlayer.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="44" column="55" selection-start-line="44" selection-start-column="55" selection-end-line="44" selection-end-column="55" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Dashboard.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-144">
+              <caret line="21" column="15" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="56" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Player/utils.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="82" column="28" selection-start-line="82" selection-start-column="28" selection-end-line="82" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="58">
+              <caret line="11" column="46" selection-start-line="11" selection-start-column="46" selection-end-line="11" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -166,41 +207,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Player/Player.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
-              <caret line="197" column="19" selection-start-line="197" selection-start-column="19" selection-end-line="197" selection-end-column="19" />
+            <state relative-caret-position="271">
+              <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="61" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.env">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Share/Share.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -208,8 +219,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ducks/record.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="101" column="21" selection-start-line="101" selection-start-column="21" selection-end-line="101" selection-end-column="21" />
+            <state relative-caret-position="2332">
+              <caret line="158" column="16" lean-forward="true" selection-start-line="158" selection-start-column="16" selection-end-line="158" selection-end-column="16" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -218,40 +229,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flow-typed/npm/redux_v4.x.x.js">
+        <entry file="file://$PROJECT_DIR$/src/components/News/News.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="31">
-              <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.flowconfig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ducks/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+            <state relative-caret-position="250">
+              <caret line="21" column="19" lean-forward="true" selection-start-line="21" selection-start-column="19" selection-end-line="27" selection-end-column="22" />
               <folding>
-                <element signature="e#0#40#0" expanded="true" />
+                <element signature="e#0#31#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package-lock.json">
+        <entry file="file://$PROJECT_DIR$/src/components/TitlePage/TitlePage.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+            <state relative-caret-position="308">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/News/News.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="281">
+              <caret line="22" selection-start-line="22" selection-end-line="24" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -260,12 +262,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>howls</find>
-      <find>_muted</find>
-      <find>_loop</find>
-      <find>_duration</find>
-      <find>duration</find>
-      <find>_sprite</find>
       <find>seek</find>
       <find>volume:</find>
       <find>mute:</find>
@@ -273,7 +269,6 @@
       <find>seek:</find>
       <find>console.log</find>
       <find>playNextLoops</find>
-      <find>r</find>
       <find>shareLink</find>
       <find>location</find>
       <find>getRecordFromUrl</find>
@@ -290,6 +285,13 @@
       <find>location.origin</find>
       <find>reducer</find>
       <find>setG</find>
+      <find>40px</find>
+      <find>progress</find>
+      <find>locati</find>
+      <find>r</find>
+      <find>getGener</find>
+      <find>addLoops</find>
+      <find>playButton</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;</replace>
@@ -327,21 +329,24 @@
         <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/TODO.md" />
         <option value="$PROJECT_DIR$/src/components/Share/Share.css" />
-        <option value="$PROJECT_DIR$/src/components/Dashboard.css" />
         <option value="$PROJECT_DIR$/src/index.css" />
-        <option value="$PROJECT_DIR$/src/components/TitlePage/TitlePage.css" />
         <option value="$PROJECT_DIR$/src/ducks/playback.js" />
-        <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/components/Player/Player.jsx" />
-        <option value="$PROJECT_DIR$/src/components/Dashboard.jsx" />
-        <option value="$PROJECT_DIR$/src/components/TitlePage/TitlePage.jsx" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/src/components/Share/Share.jsx" />
-        <option value="$PROJECT_DIR$/src/ducks/record.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/.flowconfig" />
         <option value="$PROJECT_DIR$/src/ducks/index.js" />
+        <option value="$PROJECT_DIR$/src/components/Dashboard.jsx" />
+        <option value="$PROJECT_DIR$/src/components/Dashboard.css" />
+        <option value="$PROJECT_DIR$/src/components/TitlePage/TItlePlayer.jsx" />
+        <option value="$PROJECT_DIR$/src/components/TitlePage/TitlePage.jsx" />
+        <option value="$PROJECT_DIR$/src/components/Player/utils.js" />
+        <option value="$PROJECT_DIR$/src/ducks/record.js" />
+        <option value="$PROJECT_DIR$/src/index.js" />
+        <option value="$PROJECT_DIR$/src/components/TitlePage/TitlePage.css" />
+        <option value="$PROJECT_DIR$/src/components/TitlePage/TitlePlayer.jsx" />
       </list>
     </option>
   </component>
@@ -399,23 +404,7 @@
             <path>
               <item name="mz-rap-game" type="b2602c69:ProjectViewProjectNode" />
               <item name="mz-rap-game" type="462c0819:PsiDirectoryNode" />
-              <item name="flow" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mz-rap-game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mz-rap-game" type="462c0819:PsiDirectoryNode" />
-              <item name="flow-typed" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mz-rap-game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mz-rap-game" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mz-rap-game" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mz-rap-game" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ducks" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -424,7 +413,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="Shar&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/Share/Share.jsx&#10;PAGEURL&#9;null&#9;null&#10;Sh&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/Share/Share.jsx&#10;re&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/ducks/record.js&#10;da&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/Dashboard.css&#10;D&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/Dashboard.css&#10;Ti&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/TitlePage/TitlePage.jsx&#10;title&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/TitlePage/TitlePage.jsx&#10;an&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/analytics.js&#10;u&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/Player/utils.js" />
+    <property name="SearchEverywhereHistoryKey" value="rec&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/ducks/record.js&#10;T&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/TitlePage/TitlePage.jsx&#10;title&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/TitlePage/TitlePage.jsx&#10;share&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/Share/Share.jsx&#10;Shar&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/Share/Share.jsx&#10;PAGEURL&#9;null&#9;null&#10;Sh&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/Share/Share.jsx&#10;re&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/ducks/record.js&#10;da&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/Dashboard.css&#10;D&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/Dashboard.css&#10;Ti&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/TitlePage/TitlePage.jsx&#10;an&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/analytics.js&#10;u&#9;FILE&#9;file:///Users/majula/mz-rap-game/src/components/Player/utils.js" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -500,7 +489,7 @@
       <workItem from="1541265664553" duration="23537000" />
       <workItem from="1541444235295" duration="10544000" />
       <workItem from="1541494595377" duration="154000" />
-      <workItem from="1541494892486" duration="24918000" />
+      <workItem from="1541494892486" duration="36460000" />
     </task>
     <task id="LOCAL-00001" summary="fix github pages build">
       <created>1541266545989</created>
@@ -520,7 +509,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110343000" />
+    <option name="totallyTimeSpent" value="121885000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -533,8 +522,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="821" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7246377" visible="true" weight="0.17899929" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.7246377" visible="true" weight="0.17899929" />
       <window_info id="Structure" order="1" sideWeight="0.50214595" side_tool="true" weight="0.14869626" />
       <window_info id="npm" order="2" sideWeight="0.2753623" side_tool="true" visible="true" weight="0.17899929" />
       <window_info id="Favorites" order="3" sideWeight="0.5030675" side_tool="true" weight="0.15010571" />
@@ -546,10 +536,10 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4855532" weight="0.4206799" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4848485" weight="0.4206799" />
       <window_info anchor="bottom" id="Messages" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5144468" side_tool="true" visible="true" weight="0.31586403" />
-      <window_info active="true" anchor="bottom" x="10" y="313" width="1419" height="240" id="Terminal" order="11" sideWeight="0.4855532" visible="true" weight="0.31586403" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5151515" side_tool="true" visible="true" weight="0.31586403" />
+      <window_info anchor="bottom" x="10" y="313" width="1419" height="240" id="Terminal" order="11" sideWeight="0.4848485" visible="true" weight="0.31586403" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -567,9 +557,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="implement new design" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/fonts/GraphikLC/Graphik-Bold-Cy-Web.svg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/.env" />
     <entry file="file://$PROJECT_DIR$/dist/index.js" />
     <entry file="file://$PROJECT_DIR$/dist/vendor.js" />
@@ -609,24 +596,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/News/News.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Progress/ProgressBar.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="4" column="18" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Progress/ProgressCircle.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -714,13 +687,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Dashboard.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="55" selection-start-line="55" selection-end-line="59" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/global.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -728,13 +694,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/TitlePage/TitlePage.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="76" column="25" selection-start-line="76" selection-start-column="25" selection-end-line="76" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -752,13 +711,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Player/utils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="115" column="16" selection-start-line="115" selection-start-column="16" selection-end-line="115" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/types.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -773,24 +725,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/News/News.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="22" column="34" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="79">
           <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="24" lean-forward="true" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -801,16 +739,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/TitlePage/TitlePage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="64" selection-start-line="11" selection-start-column="64" selection-end-line="11" selection-end-column="64" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -818,50 +746,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Dashboard.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="65" column="11" selection-start-line="65" selection-start-column="11" selection-end-line="65" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Share/Share.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flow-typed/npm/redux_v4.x.x.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="31">
           <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Player/Player.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="197" column="19" selection-start-line="197" selection-start-column="19" selection-end-line="197" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ducks/record.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="101" column="21" selection-start-line="101" selection-start-column="21" selection-end-line="101" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -889,9 +777,121 @@
     <entry file="file://$PROJECT_DIR$/src/ducks/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Share/Share.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="49">
+          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Progress/ProgressCircle.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Dashboard.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/News/News.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="21" column="19" lean-forward="true" selection-start-line="21" selection-start-column="19" selection-end-line="27" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/News/News.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="22" selection-start-line="22" selection-end-line="24" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Player/utils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="82" column="28" selection-start-line="82" selection-start-column="28" selection-end-line="82" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ducks/record.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2332">
+          <caret line="158" column="16" lean-forward="true" selection-start-line="158" selection-start-column="16" selection-end-line="158" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Dashboard.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-144">
+          <caret line="21" column="15" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="58">
+          <caret line="11" column="46" selection-start-line="11" selection-start-column="46" selection-end-line="11" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Player/Player.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="61" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/TitlePage/TitlePage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="21" lean-forward="true" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/TitlePage/TitlePage.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/TitlePage/TitlePlayer.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="44" column="55" selection-start-line="44" selection-start-column="55" selection-end-line="44" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>

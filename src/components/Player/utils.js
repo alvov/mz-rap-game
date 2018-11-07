@@ -115,5 +115,5 @@ export function randomInRange(min: number, max: number): number {
 
 export function getRecordFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get("r");
+    return urlParams.get("rec");
 }

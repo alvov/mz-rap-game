@@ -734,6 +734,7 @@ class DashboardComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Component"]
     const {
       isStart
     } = this.state;
+    const defaultLink = `${location.origin}${location.pathname}`;
 
     if (!isStart) {
       return react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_TitlePage_TitlePage__WEBPACK_IMPORTED_MODULE_8__["TitlePage"], {
@@ -754,9 +755,9 @@ class DashboardComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Component"]
     }), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
       className: _Dashboard_css__WEBPACK_IMPORTED_MODULE_12__["shareContainer"]
     }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Share_Share__WEBPACK_IMPORTED_MODULE_9__["Share"], {
-      link: recordLink,
+      link: recordLink || defaultLink,
       theme: "inline",
-      hasRecord: hasRecord
+      hasRecord: hasRecord && !!recordLink
     })));
   }
 
@@ -1633,7 +1634,7 @@ function randomInRange(min, max) {
 }
 function getRecordFromUrl() {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get("r");
+  return urlParams.get("rec");
 }
 
 /***/ }),
@@ -1756,7 +1757,7 @@ function Share(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("a", {
     href: `http://vk.com/share.php?url=${link}`
   }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_icons__WEBPACK_IMPORTED_MODULE_2__["Vk"], null)), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("a", {
-    href: `https://twitter.com/intent/tweet?text==${link}`
+    href: `https://twitter.com/intent/tweet?text=${link}`
   }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_icons__WEBPACK_IMPORTED_MODULE_2__["Tw"], null)), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("a", {
     href: `https://www.facebook.com/dialog/share?app_id=1727953450799543&display=popup&href=${link}`
   }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_icons__WEBPACK_IMPORTED_MODULE_2__["Fb"], null)), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("a", {
@@ -1985,7 +1986,7 @@ const SoundManager = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-module.exports = {"titlePage":"titlePage--CYPUO","background":"background--jFetn","body":"body--cdy6P","title":"title--3X7t-","description":"description--zFqla","startGame":"startGame--1AWjW"};
+module.exports = {"titlePage":"titlePage--CYPUO","progress":"progress--31uKS","background":"background--jFetn","body":"body--cdy6P","title":"title--3X7t-","description":"description--zFqla","startGame":"startGame--1AWjW"};
 
 /***/ }),
 
@@ -2004,6 +2005,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TitlePage_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TitlePage.css */ "./src/components/TitlePage/TitlePage.css");
 /* harmony import */ var _TitlePage_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_TitlePage_css__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Share_Share__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Share/Share */ "./src/components/Share/Share.jsx");
+/* harmony import */ var _TitlePlayer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TitlePlayer */ "./src/components/TitlePage/TitlePlayer.jsx");
+
 
 
 
@@ -2025,10 +2028,146 @@ function TitlePage(props) {
   }, "\u041F\u0440\u043E\u0441\u043D\u0443\u0432\u0448\u0438\u0441\u044C \u043E\u0434\u043D\u0430\u0436\u0434\u044B \u0443\u0442\u0440\u043E\u043C \u043F\u043E\u0441\u043B\u0435 \u0431\u0435\u0441\u043F\u043E\u043A\u043E\u0439\u043D\u043E\u0433\u043E \u0441\u043D\u0430, \u0432\u044B \u0440\u0435\u0448\u0438\u043B\u0438 \u0441\u0442\u0430\u0442\u044C \u043C\u0443\u043D\u0438\u0446\u0438\u043F\u0430\u043B\u044C\u043D\u044B\u043C \u0434\u0435\u043F\u0443\u0442\u0430\u0442\u043E\u043C \u0432 \u041C\u043E\u0441\u043A\u0432\u0435. \u0412\u044B\u0431\u043E\u0440\u044B \u0431\u0443\u0434\u0443\u0442 \u0432 \u0441\u0435\u043D\u0442\u044F\u0431\u0440\u0435, \u043F\u0440\u043E\u0432\u0435\u0440\u0438\u0442\u044C \u0432\u0430\u0448\u0443 \u0433\u043E\u0442\u043E\u0432\u043D\u043E\u0441\u0442\u044C \u043A \u043D\u0438\u043C \u0443\u0436\u0435 \u0441\u0435\u0439\u0447\u0430\u0441 \u043F\u043E\u043C\u043E\u0436\u0435\u0442 \u0438\u0433\u0440\u0430 \xAB\u041C\u0435\u0434\u0438\u0430\u0437\u043E\u043D\u044B\xBB \u0438 \u0428\u0442\u0430\u0431\u0430 \u043D\u0435\u0437\u0430\u0432\u0438\u0441\u0438\u043C\u043E\u0439 \u043C\u0443\u043D\u0438\u0446\u0438\u043F\u0430\u043B\u044C\u043D\u043E\u0439 \u043A\u0430\u043C\u043F\u0430\u043D\u0438\u0438."), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("button", {
     onClick: startGame,
     className: _TitlePage_css__WEBPACK_IMPORTED_MODULE_1__["startGame"]
-  }, "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0441\u0432\u043E\u0439 \u0442\u0440\u0435\u043A")), react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Share_Share__WEBPACK_IMPORTED_MODULE_2__["Share"], {
+  }, "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0441\u0432\u043E\u0439 \u0442\u0440\u0435\u043A"), react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_TitlePlayer__WEBPACK_IMPORTED_MODULE_3__["TitlePlayer"], null)), react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Share_Share__WEBPACK_IMPORTED_MODULE_2__["Share"], {
     link: link
   }));
 }
+
+/***/ }),
+
+/***/ "./src/components/TitlePage/TitlePlayer.jsx":
+/*!**************************************************!*\
+  !*** ./src/components/TitlePage/TitlePlayer.jsx ***!
+  \**************************************************/
+/*! exports provided: TitlePlayerComponents, TitlePlayer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TitlePlayerComponents", function() { return TitlePlayerComponents; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TitlePlayer", function() { return TitlePlayer; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _ducks_record__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ducks/record */ "./src/ducks/record.js");
+/* harmony import */ var _ducks_loops__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../ducks/loops */ "./src/ducks/loops.js");
+/* harmony import */ var _TitlePage_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TitlePage.css */ "./src/components/TitlePage/TitlePage.css");
+/* harmony import */ var _TitlePage_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_TitlePage_css__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _Progress_ProgressCircle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Progress/ProgressCircle */ "./src/components/Progress/ProgressCircle.jsx");
+/* harmony import */ var _Player_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Player/utils */ "./src/components/Player/utils.js");
+/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../consts */ "./src/consts.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+
+class TitlePlayerComponents extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "handleRecord", () => {
+      this.props.stopAllLoops();
+
+      if (this.props.isPlayingRecord) {
+        this.props.setIsPlayingRecord(false);
+      } else {
+        this.props.setIsPlayingRecord(true);
+        this.setNextLoops(0);
+      }
+    });
+  }
+
+  componentDidMount() {
+    const recordParam = Object(_Player_utils__WEBPACK_IMPORTED_MODULE_6__["getRecordFromUrl"])();
+    if (typeof recordParam !== 'string') return;
+    this.props.getGeneratedRecord({
+      guid: recordParam
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.record !== this.props.record) {
+      const {
+        record
+      } = nextProps;
+      if (!record) return null;
+      record.loops.forEach(recordedLoops => {
+        this.props.addLoops(recordedLoops);
+      });
+      record.shots.forEach(recordedNews => {
+        this.props.addNews(recordedNews);
+      });
+    }
+  }
+
+  setNextLoops(cursor) {
+    const {
+      recordLoops
+    } = this.props;
+    const newLoopStates = []; // schedule stop
+
+    if (recordLoops[cursor - 1]) {
+      for (const prevLoopId of recordLoops[cursor - 1]) {
+        if (!recordLoops[cursor] || !recordLoops[cursor].includes(prevLoopId)) {
+          newLoopStates.push({
+            id: prevLoopId,
+            state: _consts__WEBPACK_IMPORTED_MODULE_7__["LoopState"].NextOff
+          });
+        }
+      }
+    } // schedule play
+
+
+    if (recordLoops[cursor]) {
+      for (const loopId of recordLoops[cursor]) {
+        if (!recordLoops[cursor - 1] || !recordLoops[cursor - 1].includes(loopId)) {
+          newLoopStates.push({
+            id: loopId,
+            state: _consts__WEBPACK_IMPORTED_MODULE_7__["LoopState"].NextOn
+          });
+        }
+      }
+    }
+
+    this.props.setLoopState(newLoopStates);
+  }
+
+  render() {
+    if (!this.props.record) return null;
+    return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
+      onClick: this.handleRecord,
+      className: _TitlePage_css__WEBPACK_IMPORTED_MODULE_4__["progress"]
+    }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Progress_ProgressCircle__WEBPACK_IMPORTED_MODULE_5__["Progress"], {
+      size: "120px",
+      strokeWidth: 2,
+      stroke: "#e8615b",
+      bgStroke: "transparent",
+      percent: 0.5
+    }));
+  }
+
+}
+
+const mapStateToProps = state => ({
+  record: Object(_ducks_record__WEBPACK_IMPORTED_MODULE_2__["selectGeneratedRecord"])(state),
+  isPlayingRecord: Object(_ducks_record__WEBPACK_IMPORTED_MODULE_2__["selectIsPlayingRecord"])(state),
+  recordLoops: Object(_ducks_record__WEBPACK_IMPORTED_MODULE_2__["selectRecordLoops"])(state)
+});
+
+const mapDispatchToProps = {
+  getGeneratedRecord: _ducks_record__WEBPACK_IMPORTED_MODULE_2__["getGeneratedRecord"],
+  addLoops: _ducks_record__WEBPACK_IMPORTED_MODULE_2__["addLoops"],
+  addNews: _ducks_record__WEBPACK_IMPORTED_MODULE_2__["addNews"],
+  stopAllLoops: _ducks_loops__WEBPACK_IMPORTED_MODULE_3__["stopAllLoops"],
+  setIsPlayingRecord: _ducks_record__WEBPACK_IMPORTED_MODULE_2__["setIsPlayingRecord"],
+  setLoopState: _ducks_loops__WEBPACK_IMPORTED_MODULE_3__["setLoopState"]
+};
+const TitlePlayer = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(TitlePlayerComponents);
 
 /***/ }),
 
@@ -2598,7 +2737,7 @@ function selectState(rootState) {
 /*!*****************************!*\
   !*** ./src/ducks/record.js ***!
   \*****************************/
-/*! exports provided: SET_IS_RECORDING, SET_IS_PLAYING_RECORD, SET_IS_GENERATE_LINK, ADD_LOOPS, ADD_NEWS, setIsRecording, setIsPlayingRecord, addLoops, addNews, setGenerateLink, recordReducer, selectState, selectIsRecording, selectIsPlayingRecord, selectStartTimestamp, selectRecordLoops, selectRecordNews, selectRecordLink, selectHasRecord */
+/*! exports provided: SET_IS_RECORDING, SET_IS_PLAYING_RECORD, SET_IS_GENERATE_LINK, GET_IS_GENERATED_RECORD, ADD_LOOPS, ADD_NEWS, setIsRecording, setIsPlayingRecord, addLoops, addNews, setGenerateLink, getGeneratedRecord, recordReducer, selectState, selectIsRecording, selectIsPlayingRecord, selectStartTimestamp, selectRecordLoops, selectRecordNews, selectRecordLink, selectHasRecord, selectGeneratedRecord */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2606,6 +2745,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_IS_RECORDING", function() { return SET_IS_RECORDING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_IS_PLAYING_RECORD", function() { return SET_IS_PLAYING_RECORD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_IS_GENERATE_LINK", function() { return SET_IS_GENERATE_LINK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_IS_GENERATED_RECORD", function() { return GET_IS_GENERATED_RECORD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_LOOPS", function() { return ADD_LOOPS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_NEWS", function() { return ADD_NEWS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setIsRecording", function() { return setIsRecording; });
@@ -2613,6 +2753,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addLoops", function() { return addLoops; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNews", function() { return addNews; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setGenerateLink", function() { return setGenerateLink; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getGeneratedRecord", function() { return getGeneratedRecord; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recordReducer", function() { return recordReducer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectState", function() { return selectState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectIsRecording", function() { return selectIsRecording; });
@@ -2622,6 +2763,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectRecordNews", function() { return selectRecordNews; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectRecordLink", function() { return selectRecordLink; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectHasRecord", function() { return selectHasRecord; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectGeneratedRecord", function() { return selectGeneratedRecord; });
 /* harmony import */ var _analytics__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../analytics */ "./src/analytics.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -2631,6 +2773,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 const SET_IS_RECORDING = "record/SET_IS_RECORDING";
 const SET_IS_PLAYING_RECORD = "record/SET_IS_PLAYING_RECORD";
 const SET_IS_GENERATE_LINK = "record/SET_IS_GENERATE_LINK";
+const GET_IS_GENERATED_RECORD = "record/GET_IS_GENERATED_RECORD";
 const ADD_LOOPS = "record/ADD_LOOPS";
 const ADD_NEWS = "record/ADD_NEWS";
 const initialState = {
@@ -2639,7 +2782,11 @@ const initialState = {
   isPlayingRecord: false,
   loops: [],
   news: [],
-  recordLink: ''
+  recordLink: '',
+  generatedRecord: {
+    loops: [],
+    shots: []
+  }
 };
 function setIsRecording(value) {
   return {
@@ -2697,7 +2844,31 @@ const setGenerateLink = ({
       if (typeof guid !== 'string') return;
       dispatch({
         type: SET_IS_GENERATE_LINK,
-        payload: `${location.origin}${location.pathname}?r=${guid}`
+        payload: `${location.origin}${location.pathname}?rec=${guid}`
+      });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+const getGeneratedRecord = ({
+  guid
+}) => async dispatch => {
+  try {
+    if (guid) {
+      const url = `${location.origin}/api/rap_rec`;
+      const res = await fetch(url + `?rec=${guid}`, {
+        method: 'GET',
+        //
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const jsonRes = await res.json();
+      const data = jsonRes.data;
+      dispatch({
+        type: GET_IS_GENERATED_RECORD,
+        payload: data
       });
     }
   } catch (e) {
@@ -2732,6 +2903,13 @@ function recordReducer(state = initialState, action) {
       {
         return _objectSpread({}, state, {
           recordLink: action.payload
+        });
+      }
+
+    case GET_IS_GENERATED_RECORD:
+      {
+        return _objectSpread({}, state, {
+          generatedRecord: action.payload
         });
       }
 
@@ -2778,6 +2956,9 @@ function selectRecordLink(state) {
 function selectHasRecord(state) {
   return !selectIsRecording(state) && selectRecordLoops(state).length !== 0;
 }
+function selectGeneratedRecord(state) {
+  return selectState(state).generatedRecord;
+}
 
 /***/ }),
 
@@ -2816,10 +2997,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./App */ "./src/App.jsx");
 /* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./data */ "./src/data.js");
 /* harmony import */ var _components_Player_utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Player/utils */ "./src/components/Player/utils.js");
-/* harmony import */ var _ducks_record__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./ducks/record */ "./src/ducks/record.js");
-/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./index.css */ "./src/index.css");
-/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_13__);
-
+/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./index.css */ "./src/index.css");
+/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_12__);
 
 
 
@@ -2841,28 +3020,12 @@ _data__WEBPACK_IMPORTED_MODULE_10__["loops"].forEach(({
 
 store.dispatch(Object(_ducks_categories__WEBPACK_IMPORTED_MODULE_7__["setCategories"])(_data__WEBPACK_IMPORTED_MODULE_10__["categories"]));
 store.dispatch(Object(_ducks_loops__WEBPACK_IMPORTED_MODULE_6__["setLoops"])(_data__WEBPACK_IMPORTED_MODULE_10__["loops"]));
-store.dispatch(Object(_ducks_news__WEBPACK_IMPORTED_MODULE_8__["setNews"])(_data__WEBPACK_IMPORTED_MODULE_10__["news"])); // check if there's a record in the url query parameter
-
-const recordHash = Object(_components_Player_utils__WEBPACK_IMPORTED_MODULE_11__["getRecordFromUrl"])();
-
-if (recordHash !== null) {
-  const playlist = Object(_components_Player_utils__WEBPACK_IMPORTED_MODULE_11__["generatePlayList"])(recordHash);
-
-  if (playlist) {
-    playlist.loops.forEach(recordedLoops => {
-      store.dispatch(Object(_ducks_record__WEBPACK_IMPORTED_MODULE_12__["addLoops"])(recordedLoops));
-    });
-    playlist.news.forEach(recordedNews => {
-      store.dispatch(Object(_ducks_record__WEBPACK_IMPORTED_MODULE_12__["addNews"])(recordedNews));
-    });
-  }
-}
-
+store.dispatch(Object(_ducks_news__WEBPACK_IMPORTED_MODULE_8__["setNews"])(_data__WEBPACK_IMPORTED_MODULE_10__["news"]));
 let rootNode = document.getElementById("rap_root");
 
 if (!rootNode) {
   rootNode = document.createElement("div");
-  rootNode.className = _index_css__WEBPACK_IMPORTED_MODULE_13__["rootContainer"];
+  rootNode.className = _index_css__WEBPACK_IMPORTED_MODULE_12__["rootContainer"];
   const body = document.body;
 
   if (body !== null) {

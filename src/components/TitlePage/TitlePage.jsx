@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as styles from "./TitlePage.css";
 import {Share} from '../Share/Share';
+import { TitlePlayer } from './TitlePlayer';
 
 type titleProps = {|
   +startGame: void => void
@@ -22,6 +23,7 @@ export function TitlePage(props: titleProps) {
           «Медиазоны»
           и Штаба независимой муниципальной кампании.</p>
         <button onClick={startGame} className={styles.startGame}>Создать свой трек</button>
+        <TitlePlayer />
       </div>
       <Share
         link={link}

@@ -4,6 +4,7 @@ import * as analytic from '../analytics';
 export const SET_IS_RECORDING = "record/SET_IS_RECORDING";
 export const SET_IS_PLAYING_RECORD = "record/SET_IS_PLAYING_RECORD";
 export const SET_IS_GENERATE_LINK = "record/SET_IS_GENERATE_LINK";
+export const GET_IS_GENERATED_RECORD = "record/GET_IS_GENERATED_RECORD";
 export const ADD_LOOPS = "record/ADD_LOOPS";
 export const ADD_NEWS = "record/ADD_NEWS";
 
@@ -13,13 +14,19 @@ export type RecordNews = {|
     +timestamp: number,
 |};
 
+export type GeneratedRecord = {|
+  +loops: [],
+  +shots: []
+|}
+
 export type RecordState = {|
     +startTimestamp: number | null,
     +isRecording: boolean,
     +isPlayingRecord: boolean,
     +loops: RecordLoops[],
     +news: RecordNews[],
-    +recordLink: string
+    +recordLink: string,
+    +generatedRecord: GeneratedRecord
 |};
 
 const initialState: RecordState = {
@@ -28,7 +35,11 @@ const initialState: RecordState = {
     isPlayingRecord: false,
     loops: [],
     news: [],
-    recordLink: ''
+    recordLink: '',
+    generatedRecord: {
+      loops: [],
+      shots: []
+    }
 };
 
 type SetIsRecordingAction = {|
@@ -114,7 +125,7 @@ export const setGenerateLink = ({loops, news}: SetGenerateLink) => async (dispat
 
       dispatch({
         type: SET_IS_GENERATE_LINK,
-        payload: `${location.origin}${location.pathname}?r=${guid}`
+        payload: `${location.origin}${location.pathname}?rec=${guid}`
       })
     }
   } catch(e) {
@@ -126,7 +137,11 @@ export type GetGenerateLink = {|
   +guid: string
 |}
 
-export const getGenerateLink = ({guid}: GetGenerateLink) => async (dispatch: ThunkDispatch): Promise<void> | void => {
+type GeneratedRecData = {|
+  +data: GeneratedRecord
+|}
+
+export const getGeneratedRecord = ({guid}: GetGenerateLink) => async (dispatch: ThunkDispatch): Promise<void> | void => {
   try {
     if (guid) {
       const url = `${location.origin}/api/rap_rec`;
@@ -138,15 +153,12 @@ export const getGenerateLink = ({guid}: GetGenerateLink) => async (dispatch: Thu
         }
       });
 
-      const data: Response = await res.json();
-
-      console.log(data);
-
-      if(typeof guid !== 'string') return;
+      const jsonRes: GeneratedRecData = await res.json();
+      const data = jsonRes.data;
 
       dispatch({
-        type: SET_IS_GENERATE_LINK,
-        payload: `${location.origin}${location.pathname}?r=${guid}`
+        type: GET_IS_GENERATED_RECORD,
+        payload: data
       })
     }
   } catch(e) {
@@ -186,6 +198,12 @@ export function recordReducer(state: RecordState = initialState, action: RecordA
           return {
             ...state,
             recordLink: action.payload
+          }
+        }
+        case GET_IS_GENERATED_RECORD: {
+          return {
+            ...state,
+            generatedRecord: action.payload
           }
         }
         case ADD_LOOPS: {
@@ -238,4 +256,8 @@ export function selectRecordLink(state: RootState): string {
 
 export function selectHasRecord(state: RootState): boolean {
     return !selectIsRecording(state) && selectRecordLoops(state).length !== 0;
+}
+
+export function selectGeneratedRecord(state: RootState): GeneratedRecord {
+  return selectState(state).generatedRecord;
 }

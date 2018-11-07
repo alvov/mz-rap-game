@@ -50,6 +50,8 @@ export class DashboardComponent extends React.Component<DashboardComponentProps,
     const {categories, hasRecord, recordLink} = this.props;
     const {isStart} = this.state;
 
+    const defaultLink: string = `${location.origin}${location.pathname}`;
+
     if(!isStart) {
       return (
         <TitlePage startGame={this.startGame}/>
@@ -70,9 +72,9 @@ export class DashboardComponent extends React.Component<DashboardComponentProps,
         <div className={styles.separator} />
         <div className={styles.shareContainer}>
           <Share
-            link={recordLink}
+            link={recordLink || defaultLink}
             theme="inline"
-            hasRecord={hasRecord}
+            hasRecord={hasRecord && !!recordLink}
           />
         </div>
       </div>

@@ -10,7 +10,6 @@ import { setNews } from "./ducks/news";
 import { App } from "./App";
 import { categories, loops, news } from "./data";
 import { generatePlayList, getRecordFromUrl, validateLoopId } from "./components/Player/utils";
-import { addLoops, addNews } from "./ducks/record";
 import * as styles from "./index.css";
 
 const store = createStore(
@@ -25,20 +24,6 @@ loops.forEach(({ id }) => validateLoopId(id));
 store.dispatch(setCategories(categories));
 store.dispatch(setLoops(loops));
 store.dispatch(setNews(news));
-
-// check if there's a record in the url query parameter
-const recordHash = getRecordFromUrl();
-if (recordHash !== null) {
-    const playlist = generatePlayList(recordHash);
-    if (playlist) {
-        playlist.loops.forEach(recordedLoops => {
-            store.dispatch(addLoops(recordedLoops));
-        });
-        playlist.news.forEach(recordedNews => {
-            store.dispatch(addNews(recordedNews));
-        });
-    }
-}
 
 let rootNode = document.getElementById("rap_root");
 
