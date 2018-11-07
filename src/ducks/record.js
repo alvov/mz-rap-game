@@ -7,6 +7,7 @@ export const SET_IS_GENERATE_LINK = "record/SET_IS_GENERATE_LINK";
 export const GET_IS_GENERATED_RECORD = "record/GET_IS_GENERATED_RECORD";
 export const ADD_LOOPS = "record/ADD_LOOPS";
 export const ADD_NEWS = "record/ADD_NEWS";
+export const CLEAR_RECORD = "loops/CLEAR_RECORD";
 
 export type RecordLoops = string[];
 export type RecordNews = {|
@@ -108,8 +109,6 @@ export const setGenerateLink = ({loops, news}: SetGenerateLink) => async (dispat
         shots: news
       };
 
-      console.log(url, dataJSON);
-
       const res: Response = await fetch(url, {
         method: 'POST', //
         body: JSON.stringify(dataJSON), // data can be `string` or {object}!
@@ -171,6 +170,16 @@ type RecordAction = SetIsRecordingAction |
     AddLoopsAction |
     AddNewsAction;
 
+type ClearRecordAction = {|
+  +type: typeof CLEAR_RECORD
+|}
+
+export function clearRecord(): ClearRecordAction {
+  return {
+    type: CLEAR_RECORD,
+  }
+}
+
 export function recordReducer(state: RecordState = initialState, action: RecordAction): RecordState {
     switch (action.type) {
         case SET_IS_RECORDING: {
@@ -220,6 +229,9 @@ export function recordReducer(state: RecordState = initialState, action: RecordA
                 ...state,
                 news: [...state.news, action.payload],
             };
+        }
+        case CLEAR_RECORD: {
+          return initialState;
         }
         default:
             return state;

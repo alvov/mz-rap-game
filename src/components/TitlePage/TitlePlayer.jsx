@@ -99,7 +99,7 @@ export class TitlePlayerComponents extends React.Component<TitlePlayerProps> {
           strokeWidth={2}
           stroke="#e8615b"
           bgStroke="transparent"
-          percent={0.5}
+          percent={0}
         />
       </div>
     );

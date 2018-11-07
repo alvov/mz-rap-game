@@ -690,7 +690,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _analytics__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../analytics */ "./src/analytics.js");
 /* harmony import */ var _Dashboard_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Dashboard.css */ "./src/components/Dashboard.css");
 /* harmony import */ var _Dashboard_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_Dashboard_css__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _ducks_loops__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../ducks/loops */ "./src/ducks/loops.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -713,6 +716,8 @@ class DashboardComponent extends react__WEBPACK_IMPORTED_MODULE_0__["Component"]
 
     _defineProperty(this, "startGame", () => {
       _analytics__WEBPACK_IMPORTED_MODULE_11__["GAGameStart"]();
+      this.props.stopAllLoops();
+      this.props.clearRecord();
       this.setState(() => ({
         isStart: true
       }));
@@ -829,7 +834,11 @@ const mapStateToProps = state => {
   };
 };
 
-const Dashboard = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(DashboardComponent);
+const mapDispatchToProps = {
+  stopAllLoops: _ducks_loops__WEBPACK_IMPORTED_MODULE_13__["stopAllLoops"],
+  clearRecord: _ducks_record__WEBPACK_IMPORTED_MODULE_10__["clearRecord"]
+};
+const Dashboard = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(DashboardComponent);
 
 /***/ }),
 
@@ -2147,7 +2156,7 @@ class TitlePlayerComponents extends react__WEBPACK_IMPORTED_MODULE_0__["Componen
       strokeWidth: 2,
       stroke: "#e8615b",
       bgStroke: "transparent",
-      percent: 0.5
+      percent: 0
     }));
   }
 
@@ -2737,7 +2746,7 @@ function selectState(rootState) {
 /*!*****************************!*\
   !*** ./src/ducks/record.js ***!
   \*****************************/
-/*! exports provided: SET_IS_RECORDING, SET_IS_PLAYING_RECORD, SET_IS_GENERATE_LINK, GET_IS_GENERATED_RECORD, ADD_LOOPS, ADD_NEWS, setIsRecording, setIsPlayingRecord, addLoops, addNews, setGenerateLink, getGeneratedRecord, recordReducer, selectState, selectIsRecording, selectIsPlayingRecord, selectStartTimestamp, selectRecordLoops, selectRecordNews, selectRecordLink, selectHasRecord, selectGeneratedRecord */
+/*! exports provided: SET_IS_RECORDING, SET_IS_PLAYING_RECORD, SET_IS_GENERATE_LINK, GET_IS_GENERATED_RECORD, ADD_LOOPS, ADD_NEWS, CLEAR_RECORD, setIsRecording, setIsPlayingRecord, addLoops, addNews, setGenerateLink, getGeneratedRecord, clearRecord, recordReducer, selectState, selectIsRecording, selectIsPlayingRecord, selectStartTimestamp, selectRecordLoops, selectRecordNews, selectRecordLink, selectHasRecord, selectGeneratedRecord */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2748,12 +2757,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_IS_GENERATED_RECORD", function() { return GET_IS_GENERATED_RECORD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_LOOPS", function() { return ADD_LOOPS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_NEWS", function() { return ADD_NEWS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_RECORD", function() { return CLEAR_RECORD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setIsRecording", function() { return setIsRecording; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setIsPlayingRecord", function() { return setIsPlayingRecord; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addLoops", function() { return addLoops; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNews", function() { return addNews; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setGenerateLink", function() { return setGenerateLink; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getGeneratedRecord", function() { return getGeneratedRecord; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearRecord", function() { return clearRecord; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recordReducer", function() { return recordReducer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectState", function() { return selectState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectIsRecording", function() { return selectIsRecording; });
@@ -2776,6 +2787,7 @@ const SET_IS_GENERATE_LINK = "record/SET_IS_GENERATE_LINK";
 const GET_IS_GENERATED_RECORD = "record/GET_IS_GENERATED_RECORD";
 const ADD_LOOPS = "record/ADD_LOOPS";
 const ADD_NEWS = "record/ADD_NEWS";
+const CLEAR_RECORD = "loops/CLEAR_RECORD";
 const initialState = {
   startTimestamp: null,
   isRecording: false,
@@ -2829,7 +2841,6 @@ const setGenerateLink = ({
         loops,
         shots: news
       };
-      console.log(url, dataJSON);
       const res = await fetch(url, {
         method: 'POST',
         //
@@ -2875,6 +2886,11 @@ const getGeneratedRecord = ({
     console.log(e);
   }
 };
+function clearRecord() {
+  return {
+    type: CLEAR_RECORD
+  };
+}
 function recordReducer(state = initialState, action) {
   switch (action.type) {
     case SET_IS_RECORDING:
@@ -2926,6 +2942,11 @@ function recordReducer(state = initialState, action) {
         return _objectSpread({}, state, {
           news: [...state.news, action.payload]
         });
+      }
+
+    case CLEAR_RECORD:
+      {
+        return initialState;
       }
 
     default:

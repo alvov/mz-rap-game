@@ -10,17 +10,30 @@ import type {Category} from "../types";
 import type {RootState} from "../ducks";
 import {TitlePage} from "./TitlePage/TitlePage";
 import {Share} from "./Share/Share";
-import {selectHasRecord, selectRecordLink} from "../ducks/record";
+import {
+  selectHasRecord,
+  selectRecordLink,
+} from "../ducks/record";
 import * as analytic from "../analytics";
 
 import * as styles from "./Dashboard.css";
+import { stopAllLoops } from "../ducks/loops";
+import { clearRecord } from "../ducks/record";
 
-type DashboardComponentProps = {|
+type DashboardComponentStateProps = {|
   +categories: $Call<typeof selectCategories, RootState>,
   +playback: $Call<typeof selectPlayback, RootState>,
   +hasRecord: $Call<typeof selectHasRecord, RootState>,
-  +recordLink: $Call<typeof selectRecordLink, RootState>
+  +recordLink: $Call<typeof selectRecordLink, RootState>,
 |}
+
+type DashboardComponentDispatchProps = {|
+  +stopAllLoops: typeof stopAllLoops,
+  +clearRecord: typeof clearRecord
+|}
+
+type DashboardComponentProps = DashboardComponentStateProps & DashboardComponentDispatchProps
+
 type DashboardComponentState = {|
   +playbackPercent: number,
   +isStart: boolean
@@ -41,6 +54,8 @@ export class DashboardComponent extends React.Component<DashboardComponentProps,
 
   startGame = () => {
     analytic.GAGameStart();
+    this.props.stopAllLoops();
+    this.props.clearRecord();
     this.setState(() => ({
       isStart: true
     }))
@@ -145,4 +160,9 @@ const mapStateToProps = (state: RootState) => {
   };
 };
 
-export const Dashboard = connect(mapStateToProps)(DashboardComponent);
+const mapDispatchToProps: DashboardComponentDispatchProps = {
+  stopAllLoops,
+  clearRecord
+};
+
+export const Dashboard = connect(mapStateToProps, mapDispatchToProps)(DashboardComponent);
