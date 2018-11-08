@@ -1,4 +1,4 @@
-const GAME_NAME = 'rap_game'
+const GAME_NAME = 'rap_game';
 
 const GAGameStart = () => {
   if (window.ga) {
@@ -11,7 +11,21 @@ const GAGameStart = () => {
   } else {
     console.error('No GA in WINDOW')
   }
-}
+};
+
+let startTimeStampSecond: number;
+const GAMountGame = () => {
+  if (window.ga) {
+    startTimeStampSecond = Date.now() / 1000;
+    let currentGameTime: number = 0;
+    setInterval(() => {
+      currentGameTime = parseInt(Date.now() / 1000 - startTimeStampSecond);
+      window.ga('send', 'event', GAME_NAME, 'game_duration', currentGameTime);
+    }, 5000)
+  } else {
+    console.error('No GA in WINDOW')
+  }
+};
 
 let isFirstStart: boolean = true;
 
@@ -25,7 +39,7 @@ const GAStartRecord = () => {
   } else {
     console.error('No GA in WINDOW')
   }
-}
+};
 
 let isFirstStop: boolean = true;
 
@@ -39,7 +53,7 @@ const GAStopRecord = () => {
   } else {
     console.error('No GA in WINDOW')
   }
-}
+};
 
 let isFirstInteractTrack: boolean = true;
 
@@ -53,7 +67,7 @@ const GAInteractTrack = (track: string) => {
   } else {
     console.error('No GA in WINDOW')
   }
-}
+};
 
 let isFirstInteractZag: boolean = true;
 
@@ -71,6 +85,7 @@ const GAInteractZag = (zag: string) => {
 
 export {
   GAGameStart,
+  GAMountGame,
   GAStartRecord,
   GAStopRecord,
   GAInteractTrack,

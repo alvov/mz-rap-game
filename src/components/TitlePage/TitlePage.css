@@ -86,14 +86,14 @@
   margin: 0 auto;
   outline: none;
   border-radius: 2px;
-  border: solid 1px rgba(255, 255, 255, 0.5);
   text-align: center;
   font: 500 13px 'Graphik LC';
   line-height: 1.54;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: #ffffff;
-  background: none;
+  border: 1px solid white;
+  color: black;
+  background: white;
   cursor: pointer;
 }
 
