@@ -1,6 +1,7 @@
 .newsContainer {
   padding-top: 40px;
   color: #fff;
+  width: 315px;
   font-size: 14px;
   line-height: 1.6;
   box-sizing: border-box;
@@ -20,9 +21,9 @@
 }
 
 @media (max-width: 767px) {
-  .newsContainer {
-    overflow: visible;
-    max-height: none;
-    min-height: 0;
+  .newsContainer,.newsContainer div{
+    overflow: visible !important;
+    max-height: none !important;
+    min-height: 0 !important;
   }
 }
