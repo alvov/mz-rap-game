@@ -1,7 +1,7 @@
 import * as React from "react";
 import {connect} from "react-redux";
 import {selectState as selectNews} from "../../ducks/news";
-import {Scrollbars} from 'react-custom-scrollbars';
+import Scrollbars from 'react-custom-scrollbars';
 import {Reader} from "../../reader/Reader";
 import {News} from "./News";
 import {
