@@ -21,47 +21,47 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./assets/mp3/bass-1.mp3":
-/*!*******************************!*\
-  !*** ./assets/mp3/bass-1.mp3 ***!
-  \*******************************/
+/***/ "./assets/mp3/b_bass1.mp3":
+/*!********************************!*\
+  !*** ./assets/mp3/b_bass1.mp3 ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/bass-1-3pWF2.mp3";
+module.exports = __webpack_require__.p + "assets/b_bass1-VGnDf.mp3";
 
 /***/ }),
 
-/***/ "./assets/mp3/bass-2.mp3":
-/*!*******************************!*\
-  !*** ./assets/mp3/bass-2.mp3 ***!
-  \*******************************/
+/***/ "./assets/mp3/b_bass2.mp3":
+/*!********************************!*\
+  !*** ./assets/mp3/b_bass2.mp3 ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/bass-2--R1s9.mp3";
+module.exports = __webpack_require__.p + "assets/b_bass2-L1N7p.mp3";
 
 /***/ }),
 
-/***/ "./assets/mp3/bass-3.mp3":
-/*!*******************************!*\
-  !*** ./assets/mp3/bass-3.mp3 ***!
-  \*******************************/
+/***/ "./assets/mp3/b_bass3.mp3":
+/*!********************************!*\
+  !*** ./assets/mp3/b_bass3.mp3 ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/bass-3-3lgCE.mp3";
+module.exports = __webpack_require__.p + "assets/b_bass3-39zMH.mp3";
 
 /***/ }),
 
-/***/ "./assets/mp3/bass-4.mp3":
-/*!*******************************!*\
-  !*** ./assets/mp3/bass-4.mp3 ***!
-  \*******************************/
+/***/ "./assets/mp3/b_bass4.mp3":
+/*!********************************!*\
+  !*** ./assets/mp3/b_bass4.mp3 ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/bass-4-3CVW7.mp3";
+module.exports = __webpack_require__.p + "assets/b_bass4-3GL--.mp3";
 
 /***/ }),
 
@@ -179,14 +179,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _hats_3_mp3__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_hats_3_mp3__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _hats_4_mp3__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./hats-4.mp3 */ "./assets/mp3/hats-4.mp3");
 /* harmony import */ var _hats_4_mp3__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_hats_4_mp3__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _bass_1_mp3__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./bass-1.mp3 */ "./assets/mp3/bass-1.mp3");
-/* harmony import */ var _bass_1_mp3__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_bass_1_mp3__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _bass_2_mp3__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./bass-2.mp3 */ "./assets/mp3/bass-2.mp3");
-/* harmony import */ var _bass_2_mp3__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_bass_2_mp3__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _bass_3_mp3__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./bass-3.mp3 */ "./assets/mp3/bass-3.mp3");
-/* harmony import */ var _bass_3_mp3__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_bass_3_mp3__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _bass_4_mp3__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./bass-4.mp3 */ "./assets/mp3/bass-4.mp3");
-/* harmony import */ var _bass_4_mp3__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_bass_4_mp3__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _b_bass1_mp3__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./b_bass1.mp3 */ "./assets/mp3/b_bass1.mp3");
+/* harmony import */ var _b_bass1_mp3__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_b_bass1_mp3__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _b_bass2_mp3__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./b_bass2.mp3 */ "./assets/mp3/b_bass2.mp3");
+/* harmony import */ var _b_bass2_mp3__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_b_bass2_mp3__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _b_bass3_mp3__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./b_bass3.mp3 */ "./assets/mp3/b_bass3.mp3");
+/* harmony import */ var _b_bass3_mp3__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_b_bass3_mp3__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _b_bass4_mp3__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./b_bass4.mp3 */ "./assets/mp3/b_bass4.mp3");
+/* harmony import */ var _b_bass4_mp3__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_b_bass4_mp3__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _tema_1_mp3__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./tema-1.mp3 */ "./assets/mp3/tema-1.mp3");
 /* harmony import */ var _tema_1_mp3__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_tema_1_mp3__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var _tema_2_mp3__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./tema-2.mp3 */ "./assets/mp3/tema-2.mp3");
@@ -220,10 +220,10 @@ const mp3 = {
   hats2: (_hats_2_mp3__WEBPACK_IMPORTED_MODULE_5___default()),
   hats3: (_hats_3_mp3__WEBPACK_IMPORTED_MODULE_6___default()),
   hats4: (_hats_4_mp3__WEBPACK_IMPORTED_MODULE_7___default()),
-  bass1: (_bass_1_mp3__WEBPACK_IMPORTED_MODULE_8___default()),
-  bass2: (_bass_2_mp3__WEBPACK_IMPORTED_MODULE_9___default()),
-  bass3: (_bass_3_mp3__WEBPACK_IMPORTED_MODULE_10___default()),
-  bass4: (_bass_4_mp3__WEBPACK_IMPORTED_MODULE_11___default()),
+  bass1: (_b_bass1_mp3__WEBPACK_IMPORTED_MODULE_8___default()),
+  bass2: (_b_bass2_mp3__WEBPACK_IMPORTED_MODULE_9___default()),
+  bass3: (_b_bass3_mp3__WEBPACK_IMPORTED_MODULE_10___default()),
+  bass4: (_b_bass4_mp3__WEBPACK_IMPORTED_MODULE_11___default()),
   tema1: (_tema_1_mp3__WEBPACK_IMPORTED_MODULE_12___default()),
   tema2: (_tema_2_mp3__WEBPACK_IMPORTED_MODULE_13___default()),
   tema3: (_tema_3_mp3__WEBPACK_IMPORTED_MODULE_14___default()),
@@ -276,47 +276,47 @@ module.exports = __webpack_require__.p + "assets/tema-4-2M7se.mp3";
 
 /***/ }),
 
-/***/ "./assets/ogg/bass-1.ogg":
-/*!*******************************!*\
-  !*** ./assets/ogg/bass-1.ogg ***!
-  \*******************************/
+/***/ "./assets/ogg/b_bass1.ogg":
+/*!********************************!*\
+  !*** ./assets/ogg/b_bass1.ogg ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/bass-1-2TigE.ogg";
+module.exports = __webpack_require__.p + "assets/b_bass1-DwYT6.ogg";
 
 /***/ }),
 
-/***/ "./assets/ogg/bass-2.ogg":
-/*!*******************************!*\
-  !*** ./assets/ogg/bass-2.ogg ***!
-  \*******************************/
+/***/ "./assets/ogg/b_bass2.ogg":
+/*!********************************!*\
+  !*** ./assets/ogg/b_bass2.ogg ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/bass-2-16R3G.ogg";
+module.exports = __webpack_require__.p + "assets/b_bass2-Gw326.ogg";
 
 /***/ }),
 
-/***/ "./assets/ogg/bass-3.ogg":
-/*!*******************************!*\
-  !*** ./assets/ogg/bass-3.ogg ***!
-  \*******************************/
+/***/ "./assets/ogg/b_bass3.ogg":
+/*!********************************!*\
+  !*** ./assets/ogg/b_bass3.ogg ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/bass-3-1X52T.ogg";
+module.exports = __webpack_require__.p + "assets/b_bass3-1CBCR.ogg";
 
 /***/ }),
 
-/***/ "./assets/ogg/bass-4.ogg":
-/*!*******************************!*\
-  !*** ./assets/ogg/bass-4.ogg ***!
-  \*******************************/
+/***/ "./assets/ogg/b_bass4.ogg":
+/*!********************************!*\
+  !*** ./assets/ogg/b_bass4.ogg ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "assets/bass-4-7ZFHL.ogg";
+module.exports = __webpack_require__.p + "assets/b_bass4-3QFQK.ogg";
 
 /***/ }),
 
@@ -434,14 +434,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _hats_3_ogg__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_hats_3_ogg__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _hats_4_ogg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./hats-4.ogg */ "./assets/ogg/hats-4.ogg");
 /* harmony import */ var _hats_4_ogg__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_hats_4_ogg__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _bass_1_ogg__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./bass-1.ogg */ "./assets/ogg/bass-1.ogg");
-/* harmony import */ var _bass_1_ogg__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_bass_1_ogg__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _bass_2_ogg__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./bass-2.ogg */ "./assets/ogg/bass-2.ogg");
-/* harmony import */ var _bass_2_ogg__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_bass_2_ogg__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _bass_3_ogg__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./bass-3.ogg */ "./assets/ogg/bass-3.ogg");
-/* harmony import */ var _bass_3_ogg__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_bass_3_ogg__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _bass_4_ogg__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./bass-4.ogg */ "./assets/ogg/bass-4.ogg");
-/* harmony import */ var _bass_4_ogg__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_bass_4_ogg__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _b_bass1_ogg__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./b_bass1.ogg */ "./assets/ogg/b_bass1.ogg");
+/* harmony import */ var _b_bass1_ogg__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_b_bass1_ogg__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _b_bass2_ogg__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./b_bass2.ogg */ "./assets/ogg/b_bass2.ogg");
+/* harmony import */ var _b_bass2_ogg__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_b_bass2_ogg__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _b_bass3_ogg__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./b_bass3.ogg */ "./assets/ogg/b_bass3.ogg");
+/* harmony import */ var _b_bass3_ogg__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_b_bass3_ogg__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _b_bass4_ogg__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./b_bass4.ogg */ "./assets/ogg/b_bass4.ogg");
+/* harmony import */ var _b_bass4_ogg__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_b_bass4_ogg__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _tema_1_ogg__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./tema-1.ogg */ "./assets/ogg/tema-1.ogg");
 /* harmony import */ var _tema_1_ogg__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_tema_1_ogg__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var _tema_2_ogg__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./tema-2.ogg */ "./assets/ogg/tema-2.ogg");
@@ -475,10 +475,10 @@ const ogg = {
   hats2: (_hats_2_ogg__WEBPACK_IMPORTED_MODULE_5___default()),
   hats3: (_hats_3_ogg__WEBPACK_IMPORTED_MODULE_6___default()),
   hats4: (_hats_4_ogg__WEBPACK_IMPORTED_MODULE_7___default()),
-  bass1: (_bass_1_ogg__WEBPACK_IMPORTED_MODULE_8___default()),
-  bass2: (_bass_2_ogg__WEBPACK_IMPORTED_MODULE_9___default()),
-  bass3: (_bass_3_ogg__WEBPACK_IMPORTED_MODULE_10___default()),
-  bass4: (_bass_4_ogg__WEBPACK_IMPORTED_MODULE_11___default()),
+  bass1: (_b_bass1_ogg__WEBPACK_IMPORTED_MODULE_8___default()),
+  bass2: (_b_bass2_ogg__WEBPACK_IMPORTED_MODULE_9___default()),
+  bass3: (_b_bass3_ogg__WEBPACK_IMPORTED_MODULE_10___default()),
+  bass4: (_b_bass4_ogg__WEBPACK_IMPORTED_MODULE_11___default()),
   tema1: (_tema_1_ogg__WEBPACK_IMPORTED_MODULE_12___default()),
   tema2: (_tema_2_ogg__WEBPACK_IMPORTED_MODULE_13___default()),
   tema3: (_tema_3_ogg__WEBPACK_IMPORTED_MODULE_14___default()),
@@ -2551,40 +2551,96 @@ const loops = [{
 }];
 const news = [{
   id: "0",
-  text: "Навальный вышел на свободу после 50 суток ареста"
+  link: "https://zona.media/news/2015/26/10/tazik",
+  text: "Челябинец утонул в тазу с бельем"
 }, {
   id: "1",
-  text: "В Москве подожгли храм и воскресную школу"
+  link: "https://zona.media/news/2015/16/07/kolesa",
+  text: "Сотрудника транспортной полиции Челябинска, который снимал колеса с чужого «Мерседеса», задержали рабочие-мигранты"
 }, {
   id: "2",
-  text: "В Красноярском крае пенсионерку обязали выплатить 160 тысяч рублей за продажу односельчанам самодельных «Маши и медведя»"
+  link: "https://zona.media/news/2017/05/31/kuzbass",
+  text: "Житель Кузбасса украл железнодорожный шлагбаум, чтобы сделать дома водопровод"
 }, {
   id: "3",
-  text: "В новосибирской школе девятиклассник напал с ножом на сверстника"
+  link: "https://zona.media/news/2014/03/09/v-amurskoy-oblasti-osuzhden-pokhititel-elektronnogo-brasleta-u-osuzhdennogo-",
+  text: "В Амурской области суд вынес условный приговор похитителю электронного браслета у осужденного"
 }, {
   id: "4",
-  text: "Вице-президент Mail.ru предложил создать орган, проверяющий шутки на экстремизм"
+  link: "https://zona.media/news/2014/12/11/only-lovers-left-alive",
+  text: "Жительницы закрытого города Вилючинска угрожали взорвать здание полиции, требуя освободить своих сожителей"
 }, {
   id: "5",
-  text: "В Забайкалье следователя заподозрили в хищении вещдоков по делу о хищении вещдоков"
+  link: "https://zona.media/news/2014/28/11/hitriuga",
+  text: "Алтайский участковый сначала попросил знакомого собрать для него конопли, а потом задержал его"
 }, {
   id: "6",
-  text: "В Москве двое полицейских задержаны за стрельбу из травматического пистолета по прохожему"
+  link: "https://zona.media/news/2015/29/01/iznasiloval-za-krazhu",
+  text: "Тюменский полицейский изнасиловал отказавшуюся признаваться в магазинной краже женщину"
 }, {
   id: "7",
-  text: "Троих жителей Чебоксар заподозрили в нападении на полицейских после драки в караоке"
+  link: "https://zona.media/news/2015/03/02/vydumka-gibdd",
+  text: "Алтайские полицейские составляли протоколы о превышении скорости на жителей, не имеющих ни машины, ни прав"
 }, {
   id: "8",
-  text: "В Брянской области пресвитера адвентистов оштрафовали после жалобы православной местной жительницы"
+  link: "https://zona.media/news/2015/26/02/omsk_forma",
+  text: "Омский полицейский осужден за продажу формы на рынке"
 }, {
   id: "9",
-  text: "В Краснодаре после конфликта лесоруба и местной жительницы, выступающей против вырубки леса, один судья осудил обоих"
+  link: "https://zona.media/news/2015/14/10/veloblogger-s-toporom",
+  text: "В Красноярске неизвестные напали с топором на блогера-велосипедиста, разоблачающего автомобилистов"
 }, {
   id: "10",
-  text: "Волгоградского следователя, пообещавшего разбить голову пожилой потерпевшей, заподозрили в превышении полномочий"
+  link: "https://zona.media/news/2016/23/03/shaverma",
+  text: "В Петербурге недовольный качеством шаурмы мужчина напал с ножом на повара"
 }, {
   id: "11",
-  text: "В Подмосковье пятерых человек арестовали по обвинению в похищении предпринимателей"
+  link: "https://zona.media/news/2018/05/17/zub",
+  text: "В Петербурге житель Ленобласти сломал зуб о шаурму и в отместку попытался ограбить кафе"
+}, {
+  id: "12",
+  link: "https://zona.media/news/2014/05/09/v-nizhegorodskoy-oblasti-arestovan-politseyskiy-izbivshiy-obrativshegosya-s-zayavleniem-o-propazhe-k",
+  text: "В Нижегородской области арестован полицейский, избивший обратившегося с заявлением о пропаже кота мужчину"
+}, {
+  id: "13",
+  link: "https://zona.media/news/2017/12/01/ond",
+  text: "Житель города Дно, планировавший убийство обидчика, по ошибке застрелил случайного прохожего, который приехал на похороны матери"
+}, {
+  id: "14",
+  link: "https://zona.media/news/2017/11/22/kuzb",
+  text: "В Кемеровской области похоронный агент украл тело из морга ради 7 тысяч рублей"
+}, {
+  id: "15",
+  link: "https://zona.media/news/2015/21/09/mest-gribnika",
+  text: "Житель Архангельской области убил женщину, которая собирала грибы на его поляне"
+}, {
+  id: "16",
+  link: "https://zona.media/news/2017/10/01/chervi",
+  text: "Иркутский губернатор подарил детям из малообеспеченных семей конфеты с белыми червями"
+}, {
+  id: "17",
+  link: "https://zona.media/news/2016/05/09/pizza",
+  text: "Осужденный из оренбургской колонии получил пять лет за заказ суши и пиццы на имя следователей и прокуроров"
+}, {
+  id: "18",
+  link: "https://zona.media/news/2016/10/04/psikhanul",
+  text: "Омича осудили за убийство знакомого, избиение подростка, попытку тройного убийства, разбой и изнасилование, совершенные в один день"
+}, {
+  id: "19",
+  link: "https://zona.media/news/2017/08/08/most",
+  text: "Уральца, прикрепившего к себе подушку для имитации «взрывчатки», осудили за ложную угрозу взорвать мост"
+}, {
+  id: "20",
+  link: "https://zona.media/news/2016/11/10/babushka",
+  text: "Под Ростовом у семьи украли контейнер с телом бабушки, скончавшейся по пути на море"
+}, {
+  id: "21",
+  link: "https://zona.media/news/2015/05/08/cherdaki-politsii",
+  text: "На чердаке райотдела полиции в Краснодарском крае 40 лет лежал труп человека"
+}, {
+  id: "22",
+  link: "https://zona.media/news/2015/08/10/ugnali-skoruyu-ukrali-seyf",
+  text: "Архангельские подростки угнали «скорую помощь», чтобы вывезти украденный сейф"
 }];
 
 /***/ }),

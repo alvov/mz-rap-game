@@ -33,6 +33,7 @@ export type Loop = {|
 
 export type News = {|
     id: string,
+    link: string,
     text: string,
 |};
 
