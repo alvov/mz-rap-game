@@ -18,41 +18,55 @@ import tema4 from "../assets/mp3/tema-4.mp3";
 export type LoopStateEnum = "off" | "loading" | "nextOn" | "nextOff" | "active";
 
 export type Category = {|
-    id: string,
-    name: string,
-    color: string,
+  id: string,
+  name: string,
+  color: string,
 |};
 
 export type Loop = {|
-    id: string,
-    categoryId: string,
-    groupId: string,
-    src: LoopKeyEnum,
-    state: LoopStateEnum,
+  id: string,
+  state: LoopStateEnum,
+  categoryId: string,
+  groupId: string,
+  src: LoopKeyEnum,
+|};
+
+export type Shot = {|
+  id: string,
+  state: LoopStateEnum,
+  duration: number,
+  src: LoopKeyEnum,
+  categoryId?: string,
 |};
 
 export type News = {|
-    id: string,
-    link: string,
-    text: string,
+  id: string,
+  state: LoopStateEnum,
+  duration: number,
+  link: string,
+  text: string,
 |};
 
 export type LoopKeyEnum =
-    "beat1" |
-    "beat2" |
-    "beat3" |
-    "beat4" |
-    "hats1" |
-    "hats2" |
-    "hats3" |
-    "hats4" |
-    "bass1" |
-    "bass2" |
-    "bass3" |
-    "bass4" |
-    "tema1" |
-    "tema2" |
-    "tema3" |
-    "tema4";
+  "beat1" |
+  "beat2" |
+  "beat3" |
+  "beat4" |
+  "hats1" |
+  "hats2" |
+  "hats3" |
+  "hats4" |
+  "bass1" |
+  "bass2" |
+  "bass3" |
+  "bass4" |
+  "tema1" |
+  "tema2" |
+  "tema3" |
+  "tema4" |
+  "fx1" |
+  "fx2" |
+  "fx3" |
+  "fx4";
 
 export type ShareThemeEnum = "default" | "inline";

@@ -10,7 +10,7 @@ export function Progress(props: ProgressProps) {
     const { percent } = props;
     return (
         <div className={cn(styles.barContainer, {
-            [styles.active]: percent > 0 && percent < 0.9,
+            [styles.active]: percent > 0 && percent < 1,
         })}>
             <div
                 className={styles.bar}

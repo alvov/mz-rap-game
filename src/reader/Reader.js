@@ -1,100 +1,93 @@
-import { randomInRange } from "../components/Player/utils";
+import {getNewsDurationMs, randomInRange} from "../utils/utils";
 
 type VoiceMap = {|
-    +name: string,
-    +lang: string,
+  +name: string,
+  +lang: string,
 |};
 
 type OnReady = (voiceMap: VoiceMap[]) => void;
-type OnProgress = (id: string, progress: number) => void;
-type OnEnd = () => void;
+type OnEnd = (id: string | null) => void;
 
 type ReaderProps = {|
-    +onProgress: OnProgress,
-    +onEnd: OnEnd,
-    +onReady: OnReady,
+  +onEnd: OnEnd,
+  +onReady: OnReady,
 |}
 
 export class Reader {
-    isReady: boolean;
-    newsProgressInterval: IntervalID | null;
-    onProgress: OnProgress;
-    onEnd: OnEnd;
-    synth: SpeechSynthesis;
-    voices: SpeechSynthesisVoice[];
-    constructor({ onReady, onProgress, onEnd }: ReaderProps) {
-        this.isReady = false;
-        this.newsProgressInterval = null;
-        this.onProgress = onProgress;
-        this.onEnd = onEnd;
-        this.synth = window.speechSynthesis;
-        this.voices = this.getRussianVoices();
-        if (!this.voices.length) {
-            this.synth.addEventListener("voiceschanged", () => {
-                // this check is needed because "voiceschanged" is fired several times
-                if (!this.isReady) {
-                    this.voices = this.getRussianVoices();
-                    this.isReady = true;
-                    onReady(this.getVoicesMap());
-                }
-            });
-        } else {
-            this.isReady = true;
-            onReady(this.getVoicesMap());
-        }
-    }
+  isReady: boolean;
+  newsReadingTimer: TimeoutID | null = null;
+  onEnd: OnEnd;
+  synth: SpeechSynthesis;
+  voices: SpeechSynthesisVoice[];
+  currentId: string | null = null;
 
-    read(text: string, id: string) {
+  constructor({onReady, onEnd}: ReaderProps) {
+    this.isReady = false;
+    this.onEnd = onEnd;
+    this.synth = window.speechSynthesis;
+    this.voices = this.getRussianVoices();
+    if (!this.voices.length) {
+      this.synth.addEventListener("voiceschanged", () => {
+        // this check is needed because "voiceschanged" is fired several times
         if (!this.isReady) {
-            console.error("Reader is not ready yet");
-            return;
+          this.voices = this.getRussianVoices();
+          this.isReady = true;
+          onReady(this.getVoicesMap());
         }
-        const voiceName = this.voices[Math.round(randomInRange(0, this.voices.length - 1))].name;
-        const pitch = randomInRange(0.7, 1.1);
-        const rate = randomInRange(0.9, 1);
+      });
+    } else {
+      this.isReady = true;
+      onReady(this.getVoicesMap());
+    }
+  }
 
-        const utterance: SpeechSynthesisUtterance = new window.SpeechSynthesisUtterance(text);
-        utterance.voice = this.voices.find(voice => voice.name === voiceName) || this.voices[0];
-        utterance.pitch = pitch;
-        utterance.rate = rate;
-
-        this.stop();
-        this.synth.speak(utterance);
-
-        const approximateDurationMS = text.length * 40;
-        const intervalDuration = 100;
-        let progressIterationIndex = 0;
-        this.newsProgressInterval = setInterval(() => {
-            progressIterationIndex += 1;
-            const progress = Math.min(1, progressIterationIndex * intervalDuration / approximateDurationMS);
-            if (progress === 1) {
-                this.endProgress();
-            } else {
-                this.onProgress(id, progress);
-            }
-        }, intervalDuration);
+  read(id: string, text: string) {
+    if (!this.isReady) {
+      console.error("Reader is not ready yet");
+      return;
     }
 
-    stop() {
-        this.synth.cancel();
-        this.endProgress();
-    }
+    const voiceName = this.voices[Math.round(randomInRange(0, this.voices.length - 1))].name;
+    const pitch = randomInRange(0.7, 1.1);
+    const rate = randomInRange(0.9, 1);
 
-    endProgress() {
-        if (this.newsProgressInterval !== null) {
-            clearInterval(this.newsProgressInterval);
-        }
-        this.onEnd();
-    }
+    const utterance: SpeechSynthesisUtterance = new window.SpeechSynthesisUtterance(text);
+    utterance.voice = this.voices.find(voice => voice.name === voiceName) || this.voices[0];
+    utterance.pitch = pitch;
+    utterance.rate = rate;
 
-    getRussianVoices(): SpeechSynthesisVoice[] {
-        return this.synth.getVoices().filter(voice => voice.lang.startsWith("ru") && voice.localService);
-    }
+    this.stop();
 
-    getVoicesMap(): VoiceMap[] {
-        return this.voices.map(voice => ({
-            name: voice.name,
-            lang: voice.lang,
-        }));
+    this.synth.speak(utterance);
+
+    this.currentId = id;
+
+    this.newsReadingTimer = setTimeout(() => {
+      this.onEnd(this.currentId);
+      this.currentId = null;
+    }, getNewsDurationMs(text));
+  }
+
+  stop() {
+    this.synth.cancel();
+    if (this.newsReadingTimer !== null) {
+      clearTimeout(this.newsReadingTimer);
     }
+    this.currentId = null;
+  }
+
+  getRussianVoices(): SpeechSynthesisVoice[] {
+    return this.synth.getVoices().filter(voice => voice.lang.startsWith("ru") && voice.localService);
+  }
+
+  getVoicesMap(): VoiceMap[] {
+    return this.voices.map(voice => ({
+      name: voice.name,
+      lang: voice.lang,
+    }));
+  }
+
+  getDuration(text: string) {
+    return text.length * 50;
+  }
 }

@@ -34,6 +34,9 @@
   font: 11px Graphik LC, sans-serif;
   letter-spacing: 0.13em;
   text-transform: uppercase;
+}
+
+.clickable--2OfB3 {
   cursor: pointer;
 }
 
@@ -43,6 +46,10 @@
   opacity: 0.55;
   transition: 0.2s opacity;
   border-radius: inherit;
+}
+
+.shot--1ETIu .background--3SZdO {
+  padding-bottom: 50%;
 }
 
 .indicator--2PWg2 {
@@ -72,6 +79,15 @@
   left: 0;
   width: 100%;
   text-align: center;
+}
+
+.shot--1ETIu .progress--3cqlO {
+  width: 40px;
+  height: 4px;
+  top: 30%;
+  left: calc(50% - 20px);
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .name--2PFDj {
@@ -131,17 +147,17 @@
   }
 }
 
-.category--kKB6F {
+.category--1soGM {
   padding: 0 0 10px;
 }
 
-.label--5tnx5 {
+.label--34Uiv {
   font-size: 1.4em;
   margin: 0 0 10px 0;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
 }
 
-.list--1wuFM {
+.list--XmyQa {
   display: flex;
   justify-content: space-between;
 }
@@ -149,10 +165,13 @@
 .news--pQJ6h {
   position: relative;
   margin-bottom: 35px;
-  cursor: pointer;
   transition: color .2s;
   display: flex;
   align-items: center;
+}
+
+.clickable--HFcdI {
+  cursor: pointer;
 }
 
 .progress--31uJ0 {
@@ -168,7 +187,7 @@
   transition: 0.2s box-shadow;
 }
 
-.news--pQJ6h:hover .progress--31uJ0 {
+.news--pQJ6h.clickable--HFcdI:hover .progress--31uJ0 {
   box-shadow: inset 0 0 0 1px #fff;
 }
 
@@ -312,7 +331,7 @@
   height: 100vh;
   min-height: 850px;
   background: #111111;
-  padding: 0px 20px 40px;
+  padding: 0 20px 40px;
   box-sizing: border-box;
 }
 
@@ -324,8 +343,7 @@
   height: 120px;
   box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.7);
   border-radius: 50%;
-  margin: 0 auto;
-  margin-top: 70px;
+  margin: 70px auto 0;
   box-sizing: border-box;
   transition: 0.2s box-shadow;
   cursor: pointer;
@@ -346,6 +364,12 @@
   border-left: 30px solid white;
   border-right-width: 0;
   background: none;
+}
+
+.progress--31uKS.isPlaying--2wJob::before {
+  border-color: #fff;
+  border-width: 16px;
+  transform: translate(-50%, -50%);
 }
 
 .background--jFetn {

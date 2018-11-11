@@ -1,194 +1,177 @@
 import * as React from "react";
-import { connect } from "react-redux";
+import cn from "classnames";
+import {connect} from "react-redux";
 import {
   getGeneratedRecord,
   selectGeneratedRecord,
-  addLoops,
-  addNews,
   selectIsPlayingRecord,
-  setIsPlayingRecord,
-  selectRecordLoops,
-  selectRecordNews
+  setIsPlayingRecord, setRecordFromGenerated,
 } from "../../ducks/record";
-import { stopAllLoops, setLoopState } from "../../ducks/loops";
-import type { RootState } from "../../ducks";
-import type { GeneratedRecord } from '../../ducks/record'
+import {selectState as selectNews} from '../../ducks/news';
+import {selectState as selectShots} from '../../ducks/shots';
+import type {RootState} from "../../ducks";
+import type {GeneratedRecord} from '../../ducks/record';
+import {Progress} from "../Progress/ProgressCircle";
+import {getNewsDurationMs, getRecordFromUrl} from "../../utils/utils";
+import {LOOP_DURATION_SEC} from "../../consts";
 
 import * as styles from "./TitlePage.css";
-import {Progress} from "../Progress/ProgressCircle";
-import {getRecordFromUrl} from "../Player/utils";
-import {LoopState} from "../../consts";
-import {Reader} from "../../reader/Reader";
-import {selectState as selectNews} from "../../ducks/news";
 
 type TitlePlayerStateProps = {|
-  +news: $Call<typeof selectNews, RootState>,
-  +record: GeneratedRecord,
+  +record: GeneratedRecord | null,
   +isPlayingRecord: $Call<typeof selectIsPlayingRecord, RootState>,
-  +recordLoops: $Call<typeof selectRecordLoops, RootState>,
-  +recordNews: $Call<typeof selectRecordNews, RootState>,
+  +news: $Call<typeof selectNews, RootState>,
+  +shots: $Call<typeof selectShots, RootState>,
 |}
 
 type TitlePlayerDispatchProps = {|
   +getGeneratedRecord: typeof getGeneratedRecord,
-  +addLoops: typeof addLoops,
-  +addNews: typeof addNews,
-  +stopAllLoops: typeof stopAllLoops,
   +setIsPlayingRecord: typeof setIsPlayingRecord,
-  +setLoopState: typeof setLoopState
-|}
-
-type NewsContainerComponentState = {|
-  +currentNews: {
-    id: string,
-    progress: number,
-  } | null
+  +setRecordFromGenerated: typeof setRecordFromGenerated,
 |}
 
 type TitlePlayerProps = TitlePlayerStateProps & TitlePlayerDispatchProps;
 
-export class TitlePlayerComponents extends React.Component<TitlePlayerProps, NewsContainerComponentState> {
-  readTimeoutsQueue: TimeoutID[];
-  newsReader: Reader;
+type TitlePlayerState = {|
+  +playbackPercent: number,
+|}
+
+export class TitlePlayerComponents extends React.Component<TitlePlayerProps, TitlePlayerState> {
+  percentUpdateTimer: IntervalID | null = null;
+  startTimestamp: number | null = null;
+
   constructor(props: TitlePlayerProps) {
     super(props);
 
     this.state = {
-      currentNews: null,
+      playbackPercent: 0,
     };
-
-    this.readTimeoutsQueue = [];
-
-    this.newsReader = new Reader({
-      onReady: () => undefined,
-      onProgress: this.onProgress,
-      onEnd: this.onEnd,
-    });
   }
 
-  onProgress = (id: string, progress: number) => {
-    this.setState({
-      currentNews: {
-        id,
-        progress,
-      },
-    });
-  };
-
-  onEnd = () => {
-    this.setState({
-      currentNews: null,
-    });
-  };
-
   componentDidMount() {
-    const recordParam: ?string = getRecordFromUrl();
-    if(typeof recordParam !== 'string') return;
+    const recordParam = getRecordFromUrl();
+    if (typeof recordParam !== 'string') return;
     this.props.getGeneratedRecord({guid: recordParam});
   }
 
-  componentWillReceiveProps(nextProps: TitlePlayerProps) {
-    if(nextProps.record !== this.props.record) {
-      const { record } = nextProps;
-      if(!record) return null;
-      record.loops.forEach(recordedLoops => {
-        this.props.addLoops(recordedLoops)
-      });
-      record.shots.forEach(recordedNews => {
-        this.props.addNews(recordedNews)
-      });
-    }
-  }
-
   handleRecord = () => {
-    this.props.stopAllLoops();
     if (this.props.isPlayingRecord) {
       this.props.setIsPlayingRecord(false);
     } else {
       this.props.setIsPlayingRecord(true);
-      this.setNextLoops(0);
     }
   };
 
   componentDidUpdate(prevProps: TitlePlayerProps) {
+    if (prevProps.record !== this.props.record) {
+      const { record } = this.props;
+      if (!record) return null;
+
+      this.props.setRecordFromGenerated();
+    }
+
     if (prevProps.isPlayingRecord !== this.props.isPlayingRecord) {
       if (this.props.isPlayingRecord) {
-        this.readTimeoutsQueue = this.props.recordNews.reduce((timeouts, recordNews) => {
-          const news = this.props.news.find(({ id }) => recordNews.id === id);
-          if (news) {
-            timeouts.push(setTimeout(() => {
-              this.newsReader.read(news.text, news.id);
-            }, recordNews.timestamp));
-          }
-          return timeouts;
-        }, []);
+        this.percentUpdateTimer = setInterval(() => {
+          this.setPercent();
+        }, 200);
+        this.startTimestamp = Date.now();
       } else {
-        this.newsReader.stop();
-        for (const timeout of this.readTimeoutsQueue) {
-          clearTimeout(timeout);
+        if (this.percentUpdateTimer !== null) {
+          clearInterval(this.percentUpdateTimer);
         }
-        this.readTimeoutsQueue = [];
+        this.setPercent(0);
+        this.startTimestamp = null;
       }
     }
   }
 
-  setNextLoops(cursor: number) {
-    const { recordLoops } = this.props;
-    const newLoopStates = [];
-    // schedule stop
-    if (recordLoops[cursor - 1]) {
-      for (const prevLoopId of recordLoops[cursor - 1]) {
-        if (!recordLoops[cursor] || !recordLoops[cursor].includes(prevLoopId)) {
-          newLoopStates.push({ id: prevLoopId, state: LoopState.NextOff });
-        }
-      }
+  componentWillUnmount() {
+    if (this.percentUpdateTimer !== null) {
+      clearInterval(this.percentUpdateTimer);
     }
-    // schedule play
-    if (recordLoops[cursor]) {
-      for (const loopId of recordLoops[cursor]) {
-        if (!recordLoops[cursor - 1] || !recordLoops[cursor - 1].includes(loopId)) {
-          newLoopStates.push({ id: loopId, state: LoopState.NextOn });
-        }
-      }
-    }
-    this.props.setLoopState(newLoopStates);
+  }
+
+  shouldComponentUpdate(nextProps: TitlePlayerProps, nextState: TitlePlayerState) {
+    return nextProps.record !== this.props.record ||
+      nextProps.isPlayingRecord !== this.props.isPlayingRecord ||
+      nextState.playbackPercent !== this.state.playbackPercent;
   }
 
   render() {
-    const { record } = this.props;
-    if(!record.loops.length && !record.shots.length) return null;
+    const { record, isPlayingRecord } = this.props;
+    if (!record) return null;
+    const { playbackPercent } = this.state;
     return (
       <div
         onClick={this.handleRecord}
-        className={styles.progress}
+        className={cn(styles.progress, {
+          [styles.isPlaying]: isPlayingRecord,
+        })}
       >
         <Progress
           size="120px"
-          strokeWidth={2}
+          strokeWidth={4}
           stroke="#e8615b"
           bgStroke="transparent"
-          percent={0}
+          percent={playbackPercent}
         />
       </div>
     );
+  }
+
+  setPercent(percent?: number) {
+    if (percent !== undefined) {
+      this.setState({
+        playbackPercent: percent,
+      });
+    } else {
+      const playbackPercent = Math.min(
+        (Date.now() - (this.startTimestamp !== null ? this.startTimestamp : 0)) / this.getApproximateDurationMs(),
+        1,
+      );
+      this.setState({playbackPercent});
+    }
+  }
+
+  getApproximateDurationMs() {
+    const { record, news, shots } = this.props;
+    if (!record) {
+      return 0;
+    }
+    const { loops: recordLoops, shots: recordShots, loopsStartTimestamp } = record;
+    const loopsDuration = loopsStartTimestamp + recordLoops.length * LOOP_DURATION_SEC / 1000;
+    const lastShot = recordShots.reduce((maxStartShot, shot) => {
+      if (shot.start > maxStartShot.start) {
+        maxStartShot = shot;
+      }
+      return maxStartShot;
+    });
+    let shotsDuration = lastShot.start;
+    if (lastShot) {
+      const newsShot = news.find(({ id }) => lastShot.id === id);
+      const shot = shots.find(({ id }) => lastShot.id === id);
+      if (newsShot) {
+        shotsDuration += getNewsDurationMs(newsShot.text);
+      } else if (shot) {
+        shotsDuration += shot.duration;
+      }
+    }
+    return Math.max(loopsDuration, shotsDuration);
   }
 }
 
 const mapStateToProps = (state: RootState): TitlePlayerStateProps => ({
   record: selectGeneratedRecord(state),
   isPlayingRecord: selectIsPlayingRecord(state),
-  recordLoops: selectRecordLoops(state),
-  recordNews: selectRecordNews(state),
   news: selectNews(state),
+  shots: selectShots(state),
 });
 
 const mapDispatchToProps: TitlePlayerDispatchProps = {
   getGeneratedRecord,
-  addLoops,
-  addNews,
-  stopAllLoops,
   setIsPlayingRecord,
-  setLoopState
+  setRecordFromGenerated,
 };
 
 export const TitlePlayer = connect(mapStateToProps, mapDispatchToProps)(TitlePlayerComponents);

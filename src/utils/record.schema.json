@@ -27,15 +27,25 @@
             "description": "Unique id of a shot",
             "type": "string"
           },
-          "timestamp": {
+          "start": {
             "description": "Number of ms from the start of the song when this shot should start playing",
+            "type": "number",
+            "minimum": 0
+          },
+          "end": {
+            "description": "Number of ms from when the shot started playing to when it was stopped",
             "type": "number",
             "minimum": 0
           }
         },
-        "required": ["id", "timestamp"]
+        "required": ["id", "start"]
       }
+    },
+    "loopsStartTimestamp": {
+      "description": "Number of ms from the start of the song when the loops must kick in",
+      "type": "number",
+      "minimum": 0
     }
   },
-  "required": ["loops", "shots"]
+  "required": ["loops", "shots", "loopsStartTimestamp"]
 }

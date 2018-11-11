@@ -15,6 +15,10 @@ import tema1 from "./tema-1.mp3";
 import tema2 from "./tema-2.mp3";
 import tema3 from "./tema-3.mp3";
 import tema4 from "./tema-4.mp3";
+import fx1 from "./fx-1.mp3";
+import fx2 from "./fx-2.mp3";
+import fx3 from "./fx-3.mp3";
+import fx4 from "./fx-4.mp3";
 
 export const mp3: { [LoopKeyEnum]: string } = {
     beat1,
@@ -33,4 +37,8 @@ export const mp3: { [LoopKeyEnum]: string } = {
     tema2,
     tema3,
     tema4,
+    fx1,
+    fx2,
+    fx3,
+    fx4,
 };

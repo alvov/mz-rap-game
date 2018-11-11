@@ -1,7 +1,7 @@
 import * as React from "react";
 import {connect} from "react-redux";
 import {selectState as selectCategories} from "../ducks/categories";
-import {LoopCategory} from "./LoopsCategory/LoopCategory";
+import {SoundCategory} from "./SoundCategory/SoundCategory";
 import {NewsContainer} from "./News/NewsContainer";
 import {Player} from "./Player/Player";
 import {selectState as selectPlayback} from "../ducks/playback";
@@ -14,11 +14,13 @@ import {
   selectHasRecord,
   selectRecordLink,
 } from "../ducks/record";
+import {stopAllLoops} from "../ducks/loops";
+import {clearRecord} from "../ducks/record";
+import {stopAllShots} from "../ducks/shots";
+import {stopAllNews} from "../ducks/news";
 import * as analytic from "../analytics";
 
 import * as styles from "./Dashboard.css";
-import { stopAllLoops } from "../ducks/loops";
-import { clearRecord } from "../ducks/record";
 
 type DashboardComponentStateProps = {|
   +categories: $Call<typeof selectCategories, RootState>,
@@ -29,6 +31,8 @@ type DashboardComponentStateProps = {|
 
 type DashboardComponentDispatchProps = {|
   +stopAllLoops: typeof stopAllLoops,
+  +stopAllShots: typeof stopAllShots,
+  +stopAllNews: typeof stopAllNews,
   +clearRecord: typeof clearRecord
 |}
 
@@ -55,6 +59,8 @@ export class DashboardComponent extends React.Component<DashboardComponentProps,
   startGame = () => {
     analytic.GAGameStart();
     this.props.stopAllLoops();
+    this.props.stopAllShots();
+    this.props.stopAllNews();
     this.props.clearRecord();
     this.setState(() => ({
       isStart: true
@@ -76,7 +82,7 @@ export class DashboardComponent extends React.Component<DashboardComponentProps,
     return (
       <div className={styles.dashboard}>
         <div className={styles.loopsContainer}>
-          {categories.map(category => this.renderLoopCategory(category))}
+          {categories.map(category => this.renderSoundCategory(category))}
         </div>
         <div className={styles.playerContainer}>
           <Player />
@@ -96,11 +102,11 @@ export class DashboardComponent extends React.Component<DashboardComponentProps,
     );
   }
 
-  renderLoopCategory(category: Category) {
+  renderSoundCategory(category: Category) {
     const {id, name, color} = category;
     const {playbackPercent} = this.state;
     return (
-      <LoopCategory
+      <SoundCategory
         key={id}
         id={id}
         title={name}
@@ -162,6 +168,8 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps: DashboardComponentDispatchProps = {
   stopAllLoops,
+  stopAllShots,
+  stopAllNews,
   clearRecord
 };
 

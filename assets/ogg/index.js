@@ -15,6 +15,10 @@ import tema1 from "./tema-1.ogg";
 import tema2 from "./tema-2.ogg";
 import tema3 from "./tema-3.ogg";
 import tema4 from "./tema-4.ogg";
+import fx1 from "./fx-1.ogg";
+import fx2 from "./fx-2.ogg";
+import fx3 from "./fx-3.ogg";
+import fx4 from "./fx-4.ogg";
 
 export const ogg: { [LoopKeyEnum]: string } = {
     beat1,
@@ -33,4 +37,8 @@ export const ogg: { [LoopKeyEnum]: string } = {
     tema2,
     tema3,
     tema4,
+    fx1,
+    fx2,
+    fx3,
+    fx4,
 };

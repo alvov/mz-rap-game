@@ -1,185 +1,385 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import { Howl, Howler } from "howler";
-import { selectState as selectLoops, setLoops, setLoopState } from "../../ducks/loops";
+import {connect} from "react-redux";
+import {Howl, Howler} from "howler";
 import {
-    addLoops as addLoopsToRecord,
-    selectIsRecording,
-    setIsPlayingRecord,
+  selectState as selectLoops,
+  setLoops,
+  setLoopState, stopAllLoops,
+} from "../../ducks/loops";
+import {
+  selectState as selectShots,
+  setShotDuration,
+  setShotState, stopAllShots,
+} from "../../ducks/shots";
+import {
+  selectState as selectNews,
+  setNewsDuration,
+  setNewsState, stopAllNews,
+} from "../../ducks/news";
+import {
+  addLoops as addLoopsToRecord,
+  addShot as addShotToRecord,
+  selectIsPlayingRecord,
+  selectIsRecording,
+  selectLoopsStartTimestamp,
+  selectRecordLoops,
+  selectRecordShots,
+  setIsPlayingRecord,
+  setIsRecording,
 } from "../../ducks/record";
-import { selectState as selectPlayback, setCursor } from "../../ducks/playback";
-import { LOOP_DURATION_SEC, LoopState } from "../../consts";
-import { mp3, ogg } from "../../../assets";
-import type { RootState } from "../../ducks";
+import {selectState as selectPlayback, setCursor} from "../../ducks/playback";
+import {mp3, ogg} from "../../../assets";
+import {Reader} from "../../reader/Reader";
+import {LOOP_DURATION_SEC, LoopState, VOLUME} from "../../consts";
+import type {RootState} from "../../ducks";
+import {getNewsDurationMs} from "../../utils/utils";
 
 const checkLoopEndTimeMs = 40;
 const scheduleAheadTimeSec = 0.01;
 
 type SoundManagerComponentStateProps = {|
-    +loops: $Call<typeof selectLoops, RootState>,
-    +isRecording: $Call<typeof selectIsRecording, RootState>,
-    +playback: $Call<typeof selectPlayback, RootState>,
+  +loops: $Call<typeof selectLoops, RootState>,
+  +shots: $Call<typeof selectShots, RootState>,
+  +news: $Call<typeof selectNews, RootState>,
+  +isRecording: $Call<typeof selectIsRecording, RootState>,
+  +isPlayingRecord: $Call<typeof selectIsPlayingRecord, RootState>,
+  +recordLoops: $Call<typeof selectRecordLoops, RootState>,
+  +recordShots: $Call<typeof selectRecordShots, RootState>,
+  +loopsStartTimestamp: $Call<typeof selectLoopsStartTimestamp, RootState>,
+  +playback: $Call<typeof selectPlayback, RootState>,
 |}
 
 type SoundManagerComponentDispatchProps = {|
-    +setLoops: typeof setLoops,
-    +setLoopState: typeof setLoopState,
-    +setCursor: typeof setCursor,
-    +addLoopsToRecord: typeof addLoopsToRecord,
-    +setIsPlayingRecord: typeof setIsPlayingRecord,
+  +setLoops: typeof setLoops,
+  +setLoopState: typeof setLoopState,
+  +setShotState: typeof setShotState,
+  +setShotDuration: typeof setShotDuration,
+  +setNewsDuration: typeof setNewsDuration,
+  +setNewsState: typeof setNewsState,
+  +setCursor: typeof setCursor,
+  +addLoopsToRecord: typeof addLoopsToRecord,
+  +addShotToRecord: typeof addShotToRecord,
+  +setIsRecording: typeof setIsRecording,
+  +setIsPlayingRecord: typeof setIsPlayingRecord,
+  +stopAllLoops: typeof stopAllLoops,
+  +stopAllShots: typeof stopAllShots,
+  +stopAllNews: typeof stopAllNews,
 |}
 
 type SoundManagerComponentProps = SoundManagerComponentStateProps & SoundManagerComponentDispatchProps;
 
 export class SoundManagerComponent extends React.Component<SoundManagerComponentProps> {
-    ctxCurrentTime: number | null;
-    isPlaying: boolean;
-    +howls: { [string]: Class<Howl> };
-    checkInterval: IntervalID | void;
-    constructor(props: SoundManagerComponentProps) {
-        super(props);
+  ctxCurrentTime: number | null = null;
+  areLoopsPlaying: boolean = false;
+  +howls: { [string]: Class<Howl> } = {};
+  newsReader: Reader;
+  checkInterval: IntervalID | void;
+  recordLoopsPlaybackTimeout: TimeoutID | null = null;
+  recordShotsTimeoutsQueue: TimeoutID[] = [];
 
-        this.ctxCurrentTime = null;
-        this.isPlaying = false;
+  constructor(props: SoundManagerComponentProps) {
+    super(props);
 
-        this.howls = {};
-        for (const loop of this.props.loops) {
-            this.howls[loop.id] = new Howl({
-                src: [ogg[loop.src], mp3[loop.src]],
-                preload: true,
-                volume: 0.5,
-                onload: () => {
-                    this.props.setLoopState([{ id: loop.id, state: LoopState.Off }]);
-                },
-            });
-        }
+    for (const loop of this.props.loops) {
+      this.howls[loop.id] = new Howl({
+        src: [ogg[loop.src], mp3[loop.src]],
+        preload: true,
+        volume: VOLUME,
+        onload: () => {
+          this.props.setLoopState([{id: loop.id, state: LoopState.Off}]);
+        },
+      });
     }
 
-    shouldComponentUpdate(nextProps: SoundManagerComponentProps) {
-        return nextProps.loops !== this.props.loops;
+    for (const shot of this.props.shots) {
+      this.howls[shot.id] = new Howl({
+        src: [ogg[shot.src], mp3[shot.src]],
+        preload: true,
+        volume: VOLUME,
+        onload: () => {
+          this.props.setShotState({id: shot.id, state: LoopState.Off});
+          this.props.setShotDuration({id: shot.id, duration: this.howls[shot.id].duration()});
+        },
+        onend: () => {
+          this.props.setShotState({id: shot.id, state: LoopState.Off});
+        }
+      });
     }
 
-    componentWillUnmount() {
-        clearInterval(this.checkInterval);
-        for (const loopId of Object.keys(this.howls)) {
-            this.howls[loopId].unload();
+    this.newsReader = new Reader({
+      onReady: (voices) => undefined,
+      onEnd: this.onNewsEnd,
+    });
+    for (const news of this.props.news) {
+      const duration = getNewsDurationMs(news.text);
+      this.props.setNewsDuration({ id: news.id, duration });
+    }
+  }
+
+  shouldComponentUpdate(nextProps: SoundManagerComponentProps) {
+    return nextProps.loops !== this.props.loops ||
+      nextProps.shots !== this.props.shots ||
+      nextProps.news !== this.props.news ||
+      nextProps.isPlayingRecord !== this.props.isPlayingRecord ||
+      nextProps.playback.cursor !== this.props.playback.cursor;
+  }
+
+  componentWillUnmount() {
+    this.stopAll();
+    for (const loopId of Object.keys(this.howls)) {
+      this.howls[loopId].unload();
+    }
+  }
+
+  render() {
+    return null;
+  }
+
+  componentDidUpdate(prevProps: SoundManagerComponentProps) {
+    if (this.props.loops !== prevProps.loops) {
+      if (this.areLoopsPlaying) {
+        const hasActiveLoops = this.props.loops.some(loop =>
+          loop.state === LoopState.Active ||
+          loop.state === LoopState.NextOn ||
+          loop.state === LoopState.NextOff
+        );
+        if (!hasActiveLoops) {
+          this.stopLoops();
+
+          // stop recording when all loops were switched off
+          this.props.setIsRecording(false);
+
+          // stop playback when all loops have stopped
+          this.props.setIsPlayingRecord(false);
         }
+      } else {
+        const hasActiveLoops = this.props.loops.some(loop => loop.state === LoopState.NextOn);
+        if (hasActiveLoops) {
+          this.play();
+        }
+      }
     }
 
-    render() {
-        return null;
+    if (this.props.shots !== prevProps.shots) {
+      for (const shot of this.props.shots) {
+        const howl = this.howls[shot.id];
+        if (shot.state === LoopState.Active && !howl.playing()) {
+          howl.play();
+
+          if (this.props.isRecording) {
+            this.props.addShotToRecord({ id: shot.id, start: Date.now() });
+          }
+        } else if (shot.state === LoopState.Off && howl.playing()) {
+          howl.stop();
+        }
+      }
     }
 
-    componentDidUpdate(prevProps: SoundManagerComponentProps) {
-        if (this.props.loops !== prevProps.loops) {
-            if (this.isPlaying) {
-                const hasActiveLoops = this.props.loops.some(loop =>
-                    loop.state === LoopState.Active ||
-                    loop.state === LoopState.NextOn ||
-                    loop.state === LoopState.NextOff
-                );
-                if (!hasActiveLoops) {
-                    this.stop();
-                }
-            } else {
-                const hasActiveLoops = this.props.loops.some(loop => loop.state === LoopState.NextOn);
-                if (hasActiveLoops) {
-                    this.play();
-                }
-            }
+    if (this.props.news !== prevProps.news) {
+      const activeNews = this.props.news.find(news => news.state === LoopState.Active);
+      if (activeNews) {
+        this.newsReader.read(activeNews.id, activeNews.text);
+
+        if (this.props.isRecording) {
+          this.props.addShotToRecord({id: activeNews.id, start: Date.now()});
         }
+      }
     }
 
-    play() {
-        if (this.isPlaying) {
-            return;
+    if (this.props.isPlayingRecord !== prevProps.isPlayingRecord) {
+
+      this.stopAll();
+
+      if (this.props.isPlayingRecord) {
+        if (this.props.loopsStartTimestamp === null) {
+          this.setNextRecordLoops(0);
+        } else {
+          this.recordLoopsPlaybackTimeout = setTimeout(() => {
+            this.setNextRecordLoops(0);
+          }, this.props.loopsStartTimestamp);
         }
-        this.isPlaying = true;
-        this.ctxCurrentTime = Howler.ctx.currentTime;
-        this.checkInterval = setInterval(this.checkLoopEnd, checkLoopEndTimeMs);
-        this.playNextLoops();
+
+        this.recordShotsTimeoutsQueue = this.props.recordShots.reduce((timeouts, recordShot) => {
+          const isShot = this.props.shots.some(({id}) => recordShot.id === id);
+          const isNews = this.props.news.some(({id}) => recordShot.id === id);
+          if (isShot || isNews) {
+            timeouts.push(setTimeout(() => {
+              const payload = {
+                id: recordShot.id,
+                state: LoopState.Active,
+              };
+              if (isShot) {
+                this.props.setShotState(payload);
+              } else {
+                this.props.setNewsState(payload);
+              }
+            }, recordShot.start));
+          }
+          return timeouts;
+        }, []);
+      }
+    } else if (this.props.isPlayingRecord) {
+      if (
+        prevProps.playback.cursor !== this.props.playback.cursor &&
+        this.props.playback.cursor !== null
+      ) {
+        this.setNextRecordLoops(this.props.playback.cursor + 1);
+      }
+    }
+  }
+
+  play() {
+    if (this.areLoopsPlaying) {
+      return;
+    }
+    this.areLoopsPlaying = true;
+    this.ctxCurrentTime = Howler.ctx.currentTime;
+    this.checkInterval = setInterval(this.checkLoopEnd, checkLoopEndTimeMs);
+    this.playNextLoops();
+  }
+
+  stopAll() {
+    if (this.recordLoopsPlaybackTimeout !== null) {
+      clearTimeout(this.recordLoopsPlaybackTimeout);
+    }
+    for (const timeout of this.recordShotsTimeoutsQueue) {
+      clearTimeout(timeout);
+    }
+    this.recordShotsTimeoutsQueue = [];
+
+    for (const loopId of Object.keys(this.howls)) {
+      this.howls[loopId].stop();
     }
 
-    stop() {
-        if (!this.isPlaying) {
-            return;
+    this.props.stopAllLoops();
+    this.props.stopAllShots();
+    this.props.stopAllNews();
+  }
+
+  stopLoops() {
+    if (!this.areLoopsPlaying) {
+      return;
+    }
+    clearInterval(this.checkInterval);
+    for (const loop of this.props.loops) {
+      if (this.howls[loop.id]) {
+        this.howls[loop.id].stop();
+      }
+    }
+    this.props.setCursor(null);
+    this.areLoopsPlaying = false;
+  }
+
+  playNextLoops() {
+    const {loops, isRecording, playback} = this.props;
+    const loopsForPlay = [];
+    const loopsForRecord = [];
+    const newLoopStates = [];
+    for (const loop of loops) {
+      // loops which must play next
+      if (loop.state === LoopState.Active || loop.state === LoopState.NextOn) {
+        loopsForPlay.push(loop.id);
+        if (loop.state === LoopState.NextOn) {
+          newLoopStates.push({id: loop.id, state: LoopState.Active});
         }
-        clearInterval(this.checkInterval);
-        for (const loopId of Object.keys(this.howls)) {
-            this.howls[loopId].stop();
-        }
-        this.isPlaying = false;
-        this.props.setCursor(null);
-        this.props.setIsPlayingRecord(false);
+        loopsForRecord.push(loop.id);
+        // loops which must stop now
+      } else if (loop.state === LoopState.NextOff) {
+        newLoopStates.push({id: loop.id, state: LoopState.Off});
+      }
     }
 
-    playNextLoops() {
-        const { loops, isRecording, playback } = this.props;
-        const loopsForPlay = [];
-        const loopsForRecord = [];
-        const newLoopStates = [];
-        for (const loop of loops) {
-            // loops which must play next
-            if (loop.state === LoopState.Active || loop.state === LoopState.NextOn) {
-                loopsForPlay.push(loop.id);
-                if (loop.state === LoopState.NextOn) {
-                    newLoopStates.push({ id: loop.id, state: LoopState.Active });
-                }
-                loopsForRecord.push(loop.id);
-            // loops which must stop now
-            } else if (loop.state === LoopState.NextOff) {
-                newLoopStates.push({ id: loop.id, state: LoopState.Off });
-            }
-        }
+    this.ctxCurrentTime = Howler.ctx.currentTime;
 
-        this.ctxCurrentTime = Howler.ctx.currentTime;
-
-        for (const loopId of loopsForPlay) {
-            this.howls[loopId].play();
-        }
-
-        if (isRecording) {
-            this.props.addLoopsToRecord(loopsForRecord);
-        }
-
-        if (newLoopStates.length) {
-            this.props.setLoopState(newLoopStates);
-        }
-
-        // cursor may have already updated because of the previous call to `setLoopState`
-        if (this.isPlaying) {
-            const newCursor = playback.cursor !== null ?
-                playback.cursor + 1 :
-                0;
-            if (newCursor === Number.MAX_SAFE_INTEGER) {
-                this.stop();
-            } else {
-                this.props.setCursor(newCursor);
-            }
-        }
+    for (const loopId of loopsForPlay) {
+      this.howls[loopId].play();
     }
 
-    checkLoopEnd: () => void = () => {
-        if (this.ctxCurrentTime + LOOP_DURATION_SEC < Howler.ctx.currentTime + scheduleAheadTimeSec) {
-            this.playNextLoops();
+    if (isRecording) {
+      this.props.addLoopsToRecord(loopsForRecord);
+    }
+
+    if (newLoopStates.length) {
+      this.props.setLoopState(newLoopStates);
+    }
+
+    // cursor may have already updated because of the previous call to `setLoopState`
+    if (this.areLoopsPlaying) {
+      const newCursor = playback.cursor !== null ?
+        playback.cursor + 1 :
+        0;
+      if (newCursor === Number.MAX_SAFE_INTEGER) {
+        this.stopLoops();
+      } else {
+        this.props.setCursor(newCursor);
+      }
+    }
+  }
+
+  setNextRecordLoops(cursor: number) {
+    const {recordLoops} = this.props;
+    const newLoopStates = [];
+    // schedule stop
+    if (recordLoops[cursor - 1]) {
+      for (const prevLoopId of recordLoops[cursor - 1]) {
+        if (!recordLoops[cursor] || !recordLoops[cursor].includes(prevLoopId)) {
+          newLoopStates.push({id: prevLoopId, state: LoopState.NextOff});
         }
-    };
+      }
+    }
+    // schedule play
+    if (recordLoops[cursor]) {
+      for (const loopId of recordLoops[cursor]) {
+        if (!recordLoops[cursor - 1] || !recordLoops[cursor - 1].includes(loopId)) {
+          newLoopStates.push({id: loopId, state: LoopState.NextOn});
+        }
+      }
+    }
+    this.props.setLoopState(newLoopStates);
+  }
+
+  checkLoopEnd = () => {
+    if (this.ctxCurrentTime + LOOP_DURATION_SEC < Howler.ctx.currentTime + scheduleAheadTimeSec) {
+      this.playNextLoops();
+    }
+  };
+
+  onNewsEnd = (id: string | null) => {
+    if (id !== null) {
+      this.props.setNewsState({id, state: LoopState.Off});
+    }
+  };
 }
 
 const mapStateToProps = (state: RootState): SoundManagerComponentStateProps => {
-    return {
-        loops: selectLoops(state),
-        isRecording: selectIsRecording(state),
-        playback: selectPlayback(state),
-    };
+  return {
+    loops: selectLoops(state),
+    shots: selectShots(state),
+    news: selectNews(state),
+    isRecording: selectIsRecording(state),
+    isPlayingRecord: selectIsPlayingRecord(state),
+    recordLoops: selectRecordLoops(state),
+    recordShots: selectRecordShots(state),
+    loopsStartTimestamp: selectLoopsStartTimestamp(state),
+    playback: selectPlayback(state),
+  };
 };
 
 const mapDispatchToProps: SoundManagerComponentDispatchProps = {
-    setLoops,
-    setLoopState,
-    setCursor,
-    addLoopsToRecord,
-    setIsPlayingRecord,
+  setLoops,
+  setLoopState,
+  setShotState,
+  setShotDuration,
+  setNewsDuration,
+  setNewsState,
+  setCursor,
+  addLoopsToRecord,
+  addShotToRecord,
+  setIsRecording,
+  setIsPlayingRecord,
+  stopAllLoops,
+  stopAllShots,
+  stopAllNews,
 };
 
 export const SoundManager = connect(mapStateToProps, mapDispatchToProps)(SoundManagerComponent);

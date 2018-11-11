@@ -1,36 +1,38 @@
 import * as React from "react";
 import cn from "classnames";
-import {Progress} from "../Progress/ProgressCircle";
-import {LoopState} from "../../consts";
 import type {LoopStateEnum} from "../../types";
+import {LoopState} from "../../consts";
+import {Progress} from "../Progress/ProgressBar";
+import * as analytic from "../../analytics";
+import * as styles from "./Loop.css";
 
-import * as styles from "./News.css";
-
-type NewsProps = {|
+type ShotProps = {|
   +id: string,
-  +text: string,
   +state: LoopStateEnum,
+  +name: string,
   +duration: number,
-  +onClick?: (string) => void,
+  +onClick?: (string) => void
 |}
 
-type NewsState = {|
+type ShotState = {|
   +playbackPercent: number,
 |}
 
-export class News extends React.Component<NewsProps, NewsState> {
-  percentUpdateTimer: IntervalID | null = null;
-  startTimestamp: number | null = null;
+export class Shot extends React.Component<ShotProps, ShotState> {
+  percentUpdateTimer: IntervalID | null;
+  startTimestamp: number | null;
 
-  constructor(props: NewsProps) {
+  constructor(props: ShotProps) {
     super(props);
 
+    this.percentUpdateTimer = null;
+    this.startTimestamp = null;
     this.state = {
       playbackPercent: 0,
     };
   }
 
-  componentDidUpdate(prevProps: NewsProps) {
+  componentDidUpdate(prevProps: ShotProps) {
     if (prevProps.state !== this.props.state) {
       if (this.props.state === LoopState.Active) {
         this.percentUpdateTimer = setInterval(() => {
@@ -54,34 +56,27 @@ export class News extends React.Component<NewsProps, NewsState> {
   }
 
   render() {
-    const {text, onClick} = this.props;
+    const {name, state, onClick} = this.props;
     const {playbackPercent} = this.state;
     return (
-      <div
-        className={cn(styles.news, {
+      <button
+        className={cn(styles.loop, styles.shot, {
+          [styles.loading]: state === LoopState.Loading,
+          [styles.active]: state === LoopState.Active,
           [styles.clickable]: typeof onClick === "function",
         })}
         onClick={this.onClick}
       >
+        <div className={styles.background}/>
         <div className={styles.progress}>
-          <Progress
-            size="40px"
-            strokeWidth={4}
-            stroke="#e8615b"
-            bgStroke="transparent"
-            percent={playbackPercent}
-          />
+          <Progress percent={playbackPercent}/>
         </div>
-        {text}
-      </div>
+        <div className={styles.name}>
+          {name}
+        </div>
+      </button>
     );
   }
-
-  onClick = () => {
-    if (this.props.onClick) {
-      this.props.onClick(this.props.id);
-    }
-  };
 
   setPercent(percent?: number) {
     if (percent !== undefined) {
@@ -90,10 +85,17 @@ export class News extends React.Component<NewsProps, NewsState> {
       });
     } else {
       const playbackPercent = Math.min(
-        (Date.now() - (this.startTimestamp !== null ? this.startTimestamp : 0)) / this.props.duration,
+        (Date.now() - (this.startTimestamp !== null ? this.startTimestamp : 0)) / this.props.duration / 1000,
         1,
       );
       this.setState({playbackPercent});
+    }
+  }
+
+  onClick = () => {
+    analytic.GAInteractTrack(this.props.id);
+    if (this.props.onClick) {
+      this.props.onClick(this.props.id);
     }
   }
 }

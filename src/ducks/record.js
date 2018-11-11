@@ -1,136 +1,147 @@
-import type { RootState } from "./index";
-import type { ThunkDispatch } from 'redux-thunk';
+import type {RootState} from "./index";
+import type {ThunkDispatch} from 'redux-thunk';
 import * as analytic from '../analytics';
+import {getShareLink} from "../utils/utils";
+import {API_URL} from "../consts";
+
 export const SET_IS_RECORDING = "record/SET_IS_RECORDING";
 export const SET_IS_PLAYING_RECORD = "record/SET_IS_PLAYING_RECORD";
-export const SET_IS_GENERATE_LINK = "record/SET_IS_GENERATE_LINK";
-export const GET_IS_GENERATED_RECORD = "record/GET_IS_GENERATED_RECORD";
+export const SET_GENERATED_LINK = "record/SET_GENERATED_LINK";
+export const SET_GENERATED_RECORD = "record/SET_GENERATED_RECORD";
 export const ADD_LOOPS = "record/ADD_LOOPS";
-export const ADD_NEWS = "record/ADD_NEWS";
-export const CLEAR_RECORD = "loops/CLEAR_RECORD";
+export const ADD_SHOT = "record/ADD_SHOT";
+export const SET_RECORD_FROM_GENERATED = "record/SET_RECORD_FROM_GENERATED";
+export const CLEAR_RECORD = "record/CLEAR_RECORD";
 
 export type RecordLoops = string[];
-export type RecordNews = {|
-    +id: string,
-    +timestamp: number,
+export type RecordShot = {|
+  +id: string,
+  +start: number,
+  +end?: number,
 |};
 
 export type GeneratedRecord = {|
-  +loops: [],
-  +shots: []
+  +loops: RecordLoops[],
+  +shots: RecordShot[],
+  +loopsStartTimestamp: number | null,
 |}
 
 export type RecordState = {|
-    +startTimestamp: number | null,
-    +isRecording: boolean,
-    +isPlayingRecord: boolean,
-    +loops: RecordLoops[],
-    +news: RecordNews[],
-    +recordLink: string,
-    +generatedRecord: GeneratedRecord
+  +startTimestamp: number | null,
+  +isRecording: boolean,
+  +isPlayingRecord: boolean,
+  +loops: RecordLoops[],
+  +shots: RecordShot[],
+  +loopsStartTimestamp: number | null,
+  +recordLink: string,
+  +generatedRecord: GeneratedRecord | null,
 |};
 
 const initialState: RecordState = {
-    startTimestamp: null,
-    isRecording: false,
-    isPlayingRecord: false,
-    loops: [],
-    news: [],
-    recordLink: '',
-    generatedRecord: {
-      loops: [],
-      shots: []
-    }
+  startTimestamp: null,
+  loopsStartTimestamp: null,
+  isRecording: false,
+  isPlayingRecord: false,
+  loops: [],
+  shots: [],
+  recordLink: '',
+  generatedRecord: null,
 };
 
 type SetIsRecordingAction = {|
-    +type: typeof SET_IS_RECORDING,
-    +payload: boolean;
+  +type: typeof SET_IS_RECORDING,
+  +payload: boolean;
 |}
 
 export function setIsRecording(value: boolean): SetIsRecordingAction {
-    return {
-        type: SET_IS_RECORDING,
-        payload: value,
-    }
+  return {
+    type: SET_IS_RECORDING,
+    payload: value,
+  }
 }
 
 type SetIsPlayingAction = {|
-    +type: typeof SET_IS_PLAYING_RECORD,
-    +payload: boolean;
+  +type: typeof SET_IS_PLAYING_RECORD,
+  +payload: boolean;
 |}
 
 export function setIsPlayingRecord(value: boolean): SetIsPlayingAction {
-    return {
-        type: SET_IS_PLAYING_RECORD,
-        payload: value,
-    }
+  return {
+    type: SET_IS_PLAYING_RECORD,
+    payload: value,
+  }
 }
 
 type AddLoopsAction = {|
-    +type: typeof ADD_LOOPS,
-    +payload: RecordLoops;
+  +type: typeof ADD_LOOPS,
+  +payload: RecordLoops;
 |}
 
 export function addLoops(loops: RecordLoops): AddLoopsAction {
-    return {
-        type: ADD_LOOPS,
-        payload: loops,
-    }
+  return {
+    type: ADD_LOOPS,
+    payload: loops,
+  }
 }
 
-type AddNewsAction = {|
-    +type: typeof ADD_NEWS,
-    +payload: RecordNews;
+type AddShotAction = {|
+  +type: typeof ADD_SHOT,
+  +payload: RecordShot;
 |}
 
-export function addNews({ id, timestamp }: RecordNews): AddNewsAction {
-    return {
-        type: ADD_NEWS,
-        payload: { id, timestamp },
-    }
+export function addShot({id, start, end}: RecordShot): AddShotAction {
+  return {
+    type: ADD_SHOT,
+    payload: {id, start, end},
+  }
 }
 
 export type SetGenerateLink = {|
   +loops: Array<RecordLoops>,
-  +news: Array<RecordNews>
+  +loopsStartTimestamp: number,
+  +shots: Array<RecordShot>
 |}
 
 type RapRecData = {|
   +guid: string
 |}
 
-export const setGenerateLink = ({loops, news}: SetGenerateLink) => async (dispatch: ThunkDispatch): Promise<void> | void => {
+export const setGenerateLink = () => async (dispatch: ThunkDispatch, getState: () => RootState): Promise<void> | void => {
   try {
-    if (loops.length) {
-      const url = `${location.origin}/api/rap_rec`;
-      const dataJSON = {
-        loops,
-        shots: news
-      };
-
-      const res: Response = await fetch(url, {
-        method: 'POST', //
-        body: JSON.stringify(dataJSON), // data can be `string` or {object}!
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-
-      if(!res.ok) return;
-
-      const data: RapRecData = await res.json();
-      const guid = data.guid;
-
-      if(typeof guid !== 'string') return;
-
-      dispatch({
-        type: SET_IS_GENERATE_LINK,
-        payload: `${location.origin}${location.pathname}?rec=${guid}&_share=1`
-      })
+    const state = getState();
+    const loops = selectRecordLoops(state);
+    const loopsStartTimestamp = selectLoopsStartTimestamp(state);
+    const shots = selectRecordShots(state);
+    if (loops.length === 0 && shots.length === 0) {
+      return;
     }
-  } catch(e) {
-    console.log(e)
+    const dataJSON: SetGenerateLink = {
+      loops,
+      loopsStartTimestamp: loopsStartTimestamp === null ? 0 : loopsStartTimestamp,
+      shots,
+    };
+
+    const res: Response = await fetch(API_URL, {
+      method: 'POST', //
+      body: JSON.stringify(dataJSON), // data can be `string` or {object}!
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!res.ok) return;
+
+    const data: RapRecData = await res.json();
+    const guid = data.guid;
+
+    if (typeof guid !== 'string') return;
+
+    dispatch({
+      type: SET_GENERATED_LINK,
+      payload: getShareLink(guid),
+    })
+  } catch (e) {
+    console.error("Error with recording a song: ", e);
   }
 };
 
@@ -144,35 +155,26 @@ type GeneratedRecData = {|
 
 export const getGeneratedRecord = ({guid}: GetGenerateLink) => async (dispatch: ThunkDispatch): Promise<void> | void => {
   try {
-    if (guid) {
-      const url = `${location.origin}/api/rap_rec`;
+    const res: Response = await fetch(API_URL + `?rec=${guid}`, {
+      method: 'GET', //
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
 
-      const res: Response = await fetch(url + `?rec=${guid}`, {
-        method: 'GET', //
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
+    if (!res.ok) return;
 
-      if(!res.ok) return;
+    const jsonRes: GeneratedRecData = await res.json();
+    const data = jsonRes.data;
 
-      const jsonRes: GeneratedRecData = await res.json();
-      const data = jsonRes.data;
-
-      dispatch({
-        type: GET_IS_GENERATED_RECORD,
-        payload: data
-      })
-    }
-  } catch(e) {
-    console.log(e)
+    dispatch({
+      type: SET_GENERATED_RECORD,
+      payload: data
+    });
+  } catch (e) {
+    console.error("Error with loading recorded song: ", e);
   }
 };
-
-type RecordAction = SetIsRecordingAction |
-    SetIsPlayingAction |
-    AddLoopsAction |
-    AddNewsAction;
 
 type ClearRecordAction = {|
   +type: typeof CLEAR_RECORD
@@ -184,86 +186,123 @@ export function clearRecord(): ClearRecordAction {
   }
 }
 
+type SetRecordFromGeneratedAction = {|
+  +type: typeof SET_RECORD_FROM_GENERATED
+|}
+
+export function setRecordFromGenerated(): SetRecordFromGeneratedAction {
+  return {
+    type: SET_RECORD_FROM_GENERATED,
+  }
+}
+
+type RecordAction = SetIsRecordingAction |
+  SetIsPlayingAction |
+  AddLoopsAction |
+  AddShotAction |
+  SetRecordFromGeneratedAction;
+
 export function recordReducer(state: RecordState = initialState, action: RecordAction): RecordState {
-    switch (action.type) {
-        case SET_IS_RECORDING: {
-            if (action.payload) {
-                analytic.GAStartRecord();
-                return {
-                    ...initialState,
-                    isRecording: true,
-                };
-            } else {
-                analytic.GAStopRecord();
-                return {
-                    ...state,
-                    isRecording: false,
-                };
-            }
-        }
-        case SET_IS_PLAYING_RECORD: {
-            return {
-                ...state,
-                isPlayingRecord: action.payload,
-            };
-        }
-        case SET_IS_GENERATE_LINK: {
-          return {
-            ...state,
-            recordLink: action.payload
-          }
-        }
-        case GET_IS_GENERATED_RECORD: {
-          return {
-            ...state,
-            generatedRecord: action.payload
-          }
-        }
-        case ADD_LOOPS: {
-            return {
-                ...state,
-                startTimestamp: state.startTimestamp === null ?
-                    Date.now() :
-                    state.startTimestamp,
-                loops: [...state.loops, action.payload],
-            };
-        }
-        case ADD_NEWS: {
-            return {
-                ...state,
-                news: [...state.news, action.payload],
-            };
-        }
-        case CLEAR_RECORD: {
-          return initialState;
-        }
-        default:
-            return state;
+  switch (action.type) {
+    case SET_IS_RECORDING: {
+      if (action.payload) {
+        analytic.GAStartRecord();
+        return {
+          ...initialState,
+          isRecording: true,
+        };
+      } else {
+        analytic.GAStopRecord();
+        return {
+          ...state,
+          startTimestamp: null,
+          isRecording: false,
+        };
+      }
     }
+    case SET_IS_PLAYING_RECORD: {
+      return {
+        ...state,
+        isPlayingRecord: action.payload,
+      };
+    }
+    case SET_GENERATED_LINK: {
+      return {
+        ...state,
+        recordLink: action.payload
+      }
+    }
+    case SET_GENERATED_RECORD: {
+      return {
+        ...state,
+        generatedRecord: action.payload
+      }
+    }
+    case ADD_LOOPS: {
+      const startTimestamp = state.startTimestamp === null
+        ? Date.now()
+        : state.startTimestamp;
+      const loopsStartTimestamp = state.loopsStartTimestamp === null
+        ? Date.now() - startTimestamp
+        : state.loopsStartTimestamp;
+      const loops = [...state.loops, action.payload];
+      return {
+        ...state,
+        loops,
+        startTimestamp,
+        loopsStartTimestamp,
+      };
+    }
+    case ADD_SHOT: {
+      const startTimestamp = state.startTimestamp === null
+        ? Date.now()
+        : state.startTimestamp;
+      const shot = {
+        ...action.payload,
+        start: action.payload.start - startTimestamp,
+      };
+      return {
+        ...state,
+        shots: [...state.shots, shot],
+        startTimestamp,
+      };
+    }
+    case SET_RECORD_FROM_GENERATED: {
+      return {
+        ...state,
+        ...state.generatedRecord,
+      };
+    }
+    case CLEAR_RECORD: {
+      return initialState;
+    }
+    default:
+      return state;
+  }
 }
 
 export function selectState(rootState: RootState): RecordState {
-    return rootState.record;
+  return rootState.record;
 }
 
 export function selectIsRecording(state: RootState): boolean {
-    return selectState(state).isRecording;
+  return selectState(state).isRecording;
 }
 
 export function selectIsPlayingRecord(state: RootState): boolean {
-    return selectState(state).isPlayingRecord;
+  return selectState(state).isPlayingRecord;
 }
 
-export function selectStartTimestamp(state: RootState): number | null {
-    return selectState(state).startTimestamp;
+export function selectLoopsStartTimestamp(state: RootState): number | null {
+  return selectState(state).loopsStartTimestamp;
 }
 
 export function selectRecordLoops(state: RootState): RecordLoops[] {
-    return selectState(state).loops;
+  return selectState(state).loops;
 }
 
-export function selectRecordNews(state: RootState): RecordNews[] {
-    return selectState(state).news;
+export function selectRecordShots(state: RootState): RecordShot[] {
+  return selectState(state).shots;
 }
 
 export function selectRecordLink(state: RootState): string {
@@ -271,9 +310,12 @@ export function selectRecordLink(state: RootState): string {
 }
 
 export function selectHasRecord(state: RootState): boolean {
-    return !selectIsRecording(state) && selectRecordLoops(state).length !== 0;
+  return !selectIsRecording(state) && (
+    selectRecordLoops(state).length !== 0 ||
+    selectRecordShots(state).length !== 0
+  );
 }
 
-export function selectGeneratedRecord(state: RootState): GeneratedRecord {
+export function selectGeneratedRecord(state: RootState): GeneratedRecord | null {
   return selectState(state).generatedRecord;
 }

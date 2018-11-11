@@ -7,9 +7,9 @@ import { combinedReducers } from "./ducks";
 import { setLoops } from "./ducks/loops";
 import { setCategories } from "./ducks/categories";
 import { setNews } from "./ducks/news";
+import { setShots } from "./ducks/shots";
 import { App } from "./App";
-import { categories, loops, news } from "./data";
-import { generatePlayList, getRecordFromUrl, validateLoopId } from "./components/Player/utils";
+import { categories, loops, news, shots } from "./data";
 import * as styles from "./index.css";
 
 const store = createStore(
@@ -17,13 +17,11 @@ const store = createStore(
   applyMiddleware(ReduxThunk)
 );
 
-// valid ids are required to be able to create a share link
-loops.forEach(({ id }) => validateLoopId(id));
-
 // set initial store
 store.dispatch(setCategories(categories));
 store.dispatch(setLoops(loops));
 store.dispatch(setNews(news));
+store.dispatch(setShots(shots));
 
 let rootNode = document.getElementById("rap_root");
 
