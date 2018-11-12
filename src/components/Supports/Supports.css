@@ -1,0 +1,21 @@
+.supports {
+  position: relative;
+  padding: 10px 20px 10px 70px;
+  margin: 0 auto;
+  border: 4px dashed #fff;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 1.6;
+}
+
+.supports::before {
+  content: "⚠️";
+  position: absolute;
+  top: calc(50% - 0.8em);
+  left: calc(35px - 0.5em);
+  font-size: 30px;
+}
+
+.link {
+  color: #fff;
+}

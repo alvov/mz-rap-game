@@ -5,7 +5,12 @@ import { GAMountGame } from './analytics';
 
 export class App extends React.Component<{}> {
     componentDidMount() {
-      GAMountGame()
+      GAMountGame();
+      console.log(`
+{\\__/}
+( • .•)
+/ >🎤<
+      `);
     }
     render() {
         return (

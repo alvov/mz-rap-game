@@ -233,7 +233,7 @@ export class SoundManagerComponent extends React.Component<SoundManagerComponent
       return;
     }
     this.areLoopsPlaying = true;
-    this.ctxCurrentTime = Howler.ctx.currentTime;
+    this.ctxCurrentTime = this.getCurrentTime();
     this.checkInterval = setInterval(this.checkLoopEnd, checkLoopEndTimeMs);
     this.playNextLoops();
   }
@@ -289,7 +289,7 @@ export class SoundManagerComponent extends React.Component<SoundManagerComponent
       }
     }
 
-    this.ctxCurrentTime = Howler.ctx.currentTime;
+    this.ctxCurrentTime = this.getCurrentTime();
 
     for (const loopId of loopsForPlay) {
       this.howls[loopId].play();
@@ -338,8 +338,12 @@ export class SoundManagerComponent extends React.Component<SoundManagerComponent
     this.props.setLoopState(newLoopStates);
   }
 
+  getCurrentTime() {
+    return Howler.ctx ? Howler.ctx.currentTime : Date.now() / 1000;
+  }
+
   checkLoopEnd = () => {
-    if (this.ctxCurrentTime + LOOP_DURATION_SEC < Howler.ctx.currentTime + scheduleAheadTimeSec) {
+    if (this.ctxCurrentTime + LOOP_DURATION_SEC < this.getCurrentTime() + scheduleAheadTimeSec) {
       this.playNextLoops();
     }
   };

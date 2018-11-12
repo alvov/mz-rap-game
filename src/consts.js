@@ -16,3 +16,9 @@ export const VOLUME = 0.3;
 export const BPM = 90;
 export const BEATS_IN_LOOP = 8;
 export const LOOP_DURATION_SEC = BEATS_IN_LOOP / (BPM / 60);
+
+export const SpeechSynthesisUtterance: SpeechSynthesisUtterance = window.webkitSpeechSynthesisUtterance ||
+  window.mozSpeechSynthesisUtterance ||
+  window.msSpeechSynthesisUtterance ||
+  window.oSpeechSynthesisUtterance ||
+  window.SpeechSynthesisUtterance;

@@ -396,8 +396,7 @@
 }
 
 .description--zFqla {
-  margin-top: 28px;
-  margin-bottom: 37px;
+  margin: 28px auto 37px;
   font: 15px 'Graphik LC';
   line-height: 1.47;
   color: #ffffff;
@@ -427,6 +426,8 @@
 @media (max-width: 990px) {
   .titlePage--CYPUO {
     padding-top: 65px;
+    min-height: 0;
+    height: auto;
   }
   .body--cdy6P {
     margin-bottom: 66px;
@@ -506,6 +507,28 @@
   }
 }
 
+.supports--39WNx {
+  position: relative;
+  padding: 10px 20px 10px 70px;
+  margin: 0 auto;
+  border: 4px dashed #fff;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 1.6;
+}
+
+.supports--39WNx::before {
+  content: "\26A0\FE0F";
+  position: absolute;
+  top: calc(50% - 0.8em);
+  left: calc(35px - 0.5em);
+  font-size: 30px;
+}
+
+.link--2_fAa {
+  color: #fff;
+}
+
 .dashboard--12uZ6 {
   display: flex;
   flex-direction: column;
@@ -573,6 +596,7 @@
 .rootContainer--1fTVW {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   width: 100%;
   min-height: 100%;
   background: black;

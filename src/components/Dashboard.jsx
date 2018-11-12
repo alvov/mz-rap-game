@@ -10,6 +10,7 @@ import type {Category} from "../types";
 import type {RootState} from "../ducks";
 import {TitlePage} from "./TitlePage/TitlePage";
 import {Share} from "./Share/Share";
+import {Supports} from "./Supports/Supports";
 import {
   selectHasRecord,
   selectRecordLink,
@@ -80,25 +81,28 @@ export class DashboardComponent extends React.Component<DashboardComponentProps,
     }
 
     return (
-      <div className={styles.dashboard}>
-        <div className={styles.loopsContainer}>
-          {categories.map(category => this.renderSoundCategory(category))}
+      <>
+        <Supports />
+        <div className={styles.dashboard}>
+          <div className={styles.loopsContainer}>
+            {categories.map(category => this.renderSoundCategory(category))}
+          </div>
+          <div className={styles.playerContainer}>
+            <Player />
+          </div>
+          <div className={styles.newsContainer}>
+            <NewsContainer />
+          </div>
+          <div className={styles.separator} />
+          <div className={styles.shareContainer}>
+            <Share
+              link={recordLink || defaultLink}
+              theme="inline"
+              hasRecord={hasRecord && !!recordLink}
+            />
+          </div>
         </div>
-        <div className={styles.playerContainer}>
-          <Player />
-        </div>
-        <div className={styles.newsContainer}>
-          <NewsContainer />
-        </div>
-        <div className={styles.separator} />
-        <div className={styles.shareContainer}>
-          <Share
-            link={recordLink || defaultLink}
-            theme="inline"
-            hasRecord={hasRecord && !!recordLink}
-          />
-        </div>
-      </div>
+      </>
     );
   }
 

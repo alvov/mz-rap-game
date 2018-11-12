@@ -1,7 +1,8 @@
 import * as React from "react";
 import * as styles from "./TitlePage.css";
 import {Share} from '../Share/Share';
-import { TitlePlayer } from './TitlePlayer';
+import {TitlePlayer} from './TitlePlayer';
+import {Supports} from "../Supports/Supports";
 
 type titleProps = {|
   +startGame: void => void
@@ -16,6 +17,7 @@ export function TitlePage(props: titleProps) {
     <div className={styles.titlePage}>
       <div className={styles.background}/>
       <div className={styles.body}>
+        <Supports />
         <h2 className={styles.title}>Рэпчик от Медиазоны</h2>
         <p className={styles.description}>Проснувшись однажды утром после беспокойного сна, вы решили стать
           муниципальным

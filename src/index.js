@@ -1,3 +1,6 @@
+import "url-search-params-polyfill";
+import "@babel/polyfill";
+
 import * as React from "react";
 import ReduxThunk from 'redux-thunk'
 import { render } from "react-dom";
