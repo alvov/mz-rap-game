@@ -14369,7 +14369,7 @@ module.exports = hoistNonReactStatics;
       var self = this || Howler;
 
       // Keeps track of the suspend/resume state of the AudioContext.
-      self.state = self.ctx ? self.ctx.state || 'running' : 'running';
+      self.state = self.ctx ? self.ctx.state || 'suspended' : 'suspended';
 
       // Automatically begin the 30-second suspend process
       self._autoSuspend();
@@ -14464,7 +14464,7 @@ module.exports = hoistNonReactStatics;
       var self = this || Howler;
 
       // Only run this on mobile devices if audio isn't already eanbled.
-      var isMobile = /iPhone|iPad|iPod|Android|BlackBerry|BB10|Silk|Mobi|Chrome/i.test(self._navigator && self._navigator.userAgent);
+      var isMobile = /iPhone|iPad|iPod|Android|BlackBerry|BB10|Silk|Mobi|Chrome|Safari/i.test(self._navigator && self._navigator.userAgent);
       if (self._mobileEnabled || !self.ctx || !isMobile) {
         return;
       }
@@ -14896,18 +14896,23 @@ module.exports = hoistNonReactStatics;
       var seek = Math.max(0, sound._seek > 0 ? sound._seek : self._sprite[sprite][0] / 1000);
       var duration = Math.max(0, ((self._sprite[sprite][0] + self._sprite[sprite][1]) / 1000) - seek);
       var timeout = (duration * 1000) / Math.abs(sound._rate);
-
-      // Update the parameters of the sound
-      sound._paused = false;
-      sound._ended = false;
+      var start = self._sprite[sprite][0] / 1000;
+      var stop = (self._sprite[sprite][0] + self._sprite[sprite][1]) / 1000;
+      var loop = !!(sound._loop || self._sprite[sprite][2]);
       sound._sprite = sprite;
-      sound._seek = seek;
-      sound._start = self._sprite[sprite][0] / 1000;
-      sound._stop = (self._sprite[sprite][0] + self._sprite[sprite][1]) / 1000;
-      sound._loop = !!(sound._loop || self._sprite[sprite][2]);
+
+      // Update the parameters of the sound.
+      var setParams = function() {
+        sound._paused = false;
+        sound._ended = false;
+        sound._seek = seek;
+        sound._start = start;
+        sound._stop = stop;
+        sound._loop = loop;
+      };
 
       // End the sound instantly if seek is at the end.
-      if (sound._seek >= sound._stop) {
+      if (seek >= stop) {
         self._ended(sound);
         return;
       }
@@ -14917,6 +14922,7 @@ module.exports = hoistNonReactStatics;
       if (self._webAudio) {
         // Fire this when the sound is ready to play to begin Web Audio playback.
         var playWebAudio = function() {
+          setParams();
           self._refreshBuffer(sound);
 
           // Setup the playback params.
@@ -14971,6 +14977,7 @@ module.exports = hoistNonReactStatics;
               // Releases the lock and executes queued actions.
               play
                 .then(function() {
+                  setParams();
                   self._playLock = false;
                   if (!internal) {
                     self._emit('play', sound._id);
@@ -14982,6 +14989,7 @@ module.exports = hoistNonReactStatics;
                     'on mobile devices and Chrome where playback was not within a user interaction.');
                 });
             } else if (!internal) {
+              setParams();
               self._emit('play', sound._id);
             }
 
@@ -15335,6 +15343,11 @@ module.exports = hoistNonReactStatics;
 
         return self;
       }
+
+      // Make sure the to/from/len values are numbers.
+      from = parseFloat(from);
+      to = parseFloat(to);
+      len = parseFloat(len);
 
       // Set the volume to the start position.
       self.volume(from, id);
@@ -16462,6 +16475,11 @@ module.exports = hoistNonReactStatics;
    * Setup the audio context when available, or switch to HTML5 Audio mode.
    */
   var setupAudioContext = function() {
+    // If we have already detected that Web Audio isn't supported, don't run this step again.
+    if (!Howler.usingWebAudio) {
+      return;
+    }
+
     // Check if we are using Web Audio and setup the AudioContext if we are.
     try {
       if (typeof AudioContext !== 'undefined') {
@@ -16845,7 +16863,7 @@ module.exports = hoistNonReactStatics;
               sound._panner.positionY.setValueAtTime(y, Howler.ctx.currentTime);
               sound._panner.positionZ.setValueAtTime(z, Howler.ctx.currentTime);
             } else {
-              sound._panner.setOrientation(x, y, z);
+              sound._panner.setPosition(x, y, z);
             }
           }
 

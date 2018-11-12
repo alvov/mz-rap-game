@@ -7,6 +7,7 @@
     "lint": "flow check && flow stop",
     "build-for-mz": "npm run lint && webpack && npm run flow-stop",
     "build-for-github": "PUBLIC_URL=./ TARGET=github npm run build-for-mz",
+    "build-howler": "cd node_modules/howler && npm i && npm run build",
     "start": "TARGET=github webpack-dev-server --hot --host 0.0.0.0",
     "flow-stop": "flow stop"
   },
@@ -34,7 +35,7 @@
     "classnames": "^2.2.6",
     "dotenv-webpack": "^1.5.7",
     "fetch-mock": "^7.2.5",
-    "howler": "^2.0.15",
+    "howler": "git+https://github.com/goldfire/howler.js.git",
     "react": "^16.5.1",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.5.1",

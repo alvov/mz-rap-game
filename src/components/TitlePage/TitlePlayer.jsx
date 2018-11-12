@@ -140,7 +140,8 @@ export class TitlePlayerComponents extends React.Component<TitlePlayerProps, Tit
       return 0;
     }
     const { loops: recordLoops, shots: recordShots, loopsStartTimestamp } = record;
-    const loopsDuration = loopsStartTimestamp + recordLoops.length * LOOP_DURATION_SEC / 1000;
+    const loopsCount = recordLoops.filter(recordLoop => recordLoop.length !== 0).length;
+    const loopsDuration = loopsStartTimestamp + loopsCount * LOOP_DURATION_SEC * 1000;
     const lastShot = recordShots.reduce((maxStartShot, shot) => {
       if (shot.start > maxStartShot.start) {
         maxStartShot = shot;

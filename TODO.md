@@ -65,6 +65,8 @@
 - [x] Blinking animation on mobile
 - [x] Replace native scrollbar with react scrollbar
 - [x] Desktop player margins 20px
+- [x] Safari 12 play recorded song starting from news
+- [ ] IE11 play
 
 ## Question
 - [ ] Ability to pause news?

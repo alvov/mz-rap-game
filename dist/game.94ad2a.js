@@ -2523,7 +2523,8 @@ class TitlePlayerComponents extends react__WEBPACK_IMPORTED_MODULE_0__["Componen
       shots: recordShots,
       loopsStartTimestamp
     } = record;
-    const loopsDuration = loopsStartTimestamp + recordLoops.length * _consts__WEBPACK_IMPORTED_MODULE_8__["LOOP_DURATION_SEC"] / 1000;
+    const loopsCount = recordLoops.filter(recordLoop => recordLoop.length !== 0).length;
+    const loopsDuration = loopsStartTimestamp + loopsCount * _consts__WEBPACK_IMPORTED_MODULE_8__["LOOP_DURATION_SEC"] * 1000;
     const lastShot = recordShots.reduce((maxStartShot, shot) => {
       if (shot.start > maxStartShot.start) {
         maxStartShot = shot;
@@ -3464,7 +3465,7 @@ const setGenerateLink = () => async (dispatch, getState) => {
       payload: Object(_utils_utils__WEBPACK_IMPORTED_MODULE_1__["getShareLink"])(guid)
     });
   } catch (e) {
-    console.log(e);
+    console.error("Error with recording a song: ", e);
   }
 };
 const getGeneratedRecord = ({
