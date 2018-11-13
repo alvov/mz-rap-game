@@ -1,5 +1,5 @@
 export const getShareLink = (guid: string): string => {
-  return `${location.origin}${location.pathname}?rec=${guid}&_share=1`;
+  return `${location.origin}${location.pathname}?&_share=1&rec=${guid}`;
 };
 
 export const randomInRange = (min: number, max: number): number => {
