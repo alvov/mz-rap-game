@@ -51,6 +51,7 @@ export type Shot = {|
   state: LoopStateEnum,
   duration: number,
   src: LoopKeyEnum,
+  cache?: string,
   volume?: number,
   categoryId?: string,
   // $FlowFixMe

@@ -1390,7 +1390,7 @@ function (_React$Component) {
   _createClass(App, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      console.log("\n{\\__/}\n( \u2022 .\u2022)\n/ >\uD83C\uDFA4<\n      https://www.youtube.com/watch?v=kSQll4-Vk5I");
+      console.log("\n{\\__/}\n( \u2022 .\u2022)\n/ >\uD83C\uDFA4<\n\nhttps://www.youtube.com/watch?v=kSQll4-Vk5I\n    ");
     }
   }, {
     key: "render",
@@ -3161,40 +3161,25 @@ function (_React$Component) {
       }
 
       if (this.props.shots !== prevProps.shots) {
-        var _iteratorNormalCompletion3 = true;
-        var _didIteratorError3 = false;
-        var _iteratorError3 = undefined;
+        for (var i = 0; i < this.props.shots.length; i++) {
+          var shot = this.props.shots[i];
+          var howl = this.howls[shot.id];
 
-        try {
-          for (var _iterator3 = this.props.shots[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-            var shot = _step3.value;
-            var howl = this.howls[shot.id];
-
-            if (shot.state === _consts__WEBPACK_IMPORTED_MODULE_9__["LoopState"].Active && !howl.playing()) {
-              howl.play();
-
-              if (this.props.isRecording) {
-                this.props.addShotToRecord({
-                  id: shot.id,
-                  start: Date.now()
-                });
-              }
-            } else if (shot.state === _consts__WEBPACK_IMPORTED_MODULE_9__["LoopState"].Off && howl.playing()) {
+          if (shot.state === _consts__WEBPACK_IMPORTED_MODULE_9__["LoopState"].Active && shot.cache !== prevProps.shots[i].cache) {
+            if (howl.playing()) {
               howl.stop();
             }
-          }
-        } catch (err) {
-          _didIteratorError3 = true;
-          _iteratorError3 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
-              _iterator3.return();
+
+            howl.play();
+
+            if (this.props.isRecording) {
+              this.props.addShotToRecord({
+                id: shot.id,
+                start: Date.now()
+              });
             }
-          } finally {
-            if (_didIteratorError3) {
-              throw _iteratorError3;
-            }
+          } else if (shot.state === _consts__WEBPACK_IMPORTED_MODULE_9__["LoopState"].Off && howl.playing()) {
+            howl.stop();
           }
         }
       } // if (this.props.news !== prevProps.news) {
@@ -3277,26 +3262,26 @@ function (_React$Component) {
         clearTimeout(this.recordLoopsPlaybackTimeout);
       }
 
-      var _iteratorNormalCompletion4 = true;
-      var _didIteratorError4 = false;
-      var _iteratorError4 = undefined;
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
 
       try {
-        for (var _iterator4 = this.recordShotsTimeoutsQueue[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-          var timeout = _step4.value;
+        for (var _iterator3 = this.recordShotsTimeoutsQueue[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          var timeout = _step3.value;
           clearTimeout(timeout);
         }
       } catch (err) {
-        _didIteratorError4 = true;
-        _iteratorError4 = err;
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion4 && _iterator4.return != null) {
-            _iterator4.return();
+          if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
+            _iterator3.return();
           }
         } finally {
-          if (_didIteratorError4) {
-            throw _iteratorError4;
+          if (_didIteratorError3) {
+            throw _iteratorError3;
           }
         }
       }
@@ -3322,29 +3307,29 @@ function (_React$Component) {
       }
 
       clearInterval(this.checkInterval);
-      var _iteratorNormalCompletion5 = true;
-      var _didIteratorError5 = false;
-      var _iteratorError5 = undefined;
+      var _iteratorNormalCompletion4 = true;
+      var _didIteratorError4 = false;
+      var _iteratorError4 = undefined;
 
       try {
-        for (var _iterator5 = this.props.loops[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-          var loop = _step5.value;
+        for (var _iterator4 = this.props.loops[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+          var loop = _step4.value;
 
           if (this.howls[loop.id]) {
             this.howls[loop.id].stop();
           }
         }
       } catch (err) {
-        _didIteratorError5 = true;
-        _iteratorError5 = err;
+        _didIteratorError4 = true;
+        _iteratorError4 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion5 && _iterator5.return != null) {
-            _iterator5.return();
+          if (!_iteratorNormalCompletion4 && _iterator4.return != null) {
+            _iterator4.return();
           }
         } finally {
-          if (_didIteratorError5) {
-            throw _iteratorError5;
+          if (_didIteratorError4) {
+            throw _iteratorError4;
           }
         }
       }
@@ -3362,13 +3347,13 @@ function (_React$Component) {
       var loopsForPlay = [];
       var loopsForRecord = [];
       var newLoopStates = [];
-      var _iteratorNormalCompletion6 = true;
-      var _didIteratorError6 = false;
-      var _iteratorError6 = undefined;
+      var _iteratorNormalCompletion5 = true;
+      var _didIteratorError5 = false;
+      var _iteratorError5 = undefined;
 
       try {
-        for (var _iterator6 = loops[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-          var loop = _step6.value;
+        for (var _iterator5 = loops[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+          var loop = _step5.value;
 
           // loops which must play next
           if (loop.state === _consts__WEBPACK_IMPORTED_MODULE_9__["LoopState"].Active || loop.state === _consts__WEBPACK_IMPORTED_MODULE_9__["LoopState"].NextOn) {
@@ -3390,16 +3375,16 @@ function (_React$Component) {
           }
         }
       } catch (err) {
-        _didIteratorError6 = true;
-        _iteratorError6 = err;
+        _didIteratorError5 = true;
+        _iteratorError5 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion6 && _iterator6.return != null) {
-            _iterator6.return();
+          if (!_iteratorNormalCompletion5 && _iterator5.return != null) {
+            _iterator5.return();
           }
         } finally {
-          if (_didIteratorError6) {
-            throw _iteratorError6;
+          if (_didIteratorError5) {
+            throw _iteratorError5;
           }
         }
       }
@@ -3437,18 +3422,51 @@ function (_React$Component) {
       var newLoopStates = []; // schedule stop
 
       if (recordLoops[cursor - 1]) {
-        var _iteratorNormalCompletion7 = true;
-        var _didIteratorError7 = false;
-        var _iteratorError7 = undefined;
+        var _iteratorNormalCompletion6 = true;
+        var _didIteratorError6 = false;
+        var _iteratorError6 = undefined;
 
         try {
-          for (var _iterator7 = recordLoops[cursor - 1][Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-            var prevLoopId = _step7.value;
+          for (var _iterator6 = recordLoops[cursor - 1][Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+            var prevLoopId = _step6.value;
 
             if (!recordLoops[cursor] || !recordLoops[cursor].includes(prevLoopId)) {
               newLoopStates.push({
                 id: prevLoopId,
                 state: _consts__WEBPACK_IMPORTED_MODULE_9__["LoopState"].NextOff
+              });
+            }
+          }
+        } catch (err) {
+          _didIteratorError6 = true;
+          _iteratorError6 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion6 && _iterator6.return != null) {
+              _iterator6.return();
+            }
+          } finally {
+            if (_didIteratorError6) {
+              throw _iteratorError6;
+            }
+          }
+        }
+      } // schedule play
+
+
+      if (recordLoops[cursor]) {
+        var _iteratorNormalCompletion7 = true;
+        var _didIteratorError7 = false;
+        var _iteratorError7 = undefined;
+
+        try {
+          for (var _iterator7 = recordLoops[cursor][Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+            var loopId = _step7.value;
+
+            if (!recordLoops[cursor - 1] || !recordLoops[cursor - 1].includes(loopId)) {
+              newLoopStates.push({
+                id: loopId,
+                state: _consts__WEBPACK_IMPORTED_MODULE_9__["LoopState"].NextOn
               });
             }
           }
@@ -3463,39 +3481,6 @@ function (_React$Component) {
           } finally {
             if (_didIteratorError7) {
               throw _iteratorError7;
-            }
-          }
-        }
-      } // schedule play
-
-
-      if (recordLoops[cursor]) {
-        var _iteratorNormalCompletion8 = true;
-        var _didIteratorError8 = false;
-        var _iteratorError8 = undefined;
-
-        try {
-          for (var _iterator8 = recordLoops[cursor][Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
-            var loopId = _step8.value;
-
-            if (!recordLoops[cursor - 1] || !recordLoops[cursor - 1].includes(loopId)) {
-              newLoopStates.push({
-                id: loopId,
-                state: _consts__WEBPACK_IMPORTED_MODULE_9__["LoopState"].NextOn
-              });
-            }
-          }
-        } catch (err) {
-          _didIteratorError8 = true;
-          _iteratorError8 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion8 && _iterator8.return != null) {
-              _iterator8.return();
-            }
-          } finally {
-            if (_didIteratorError8) {
-              throw _iteratorError8;
             }
           }
         }
@@ -4333,7 +4318,7 @@ var shots = [{
     categoryId: "news",
     state: _consts__WEBPACK_IMPORTED_MODULE_0__["LoopState"].Loading,
     duration: 0,
-    volume: 0.6,
+    volume: 0.5,
     meta: {
       link: link,
       text: text
@@ -5214,11 +5199,30 @@ function shotsReducer() {
 
     case SET_SHOT_STATE:
       {
-        var payload = action.payload;
+        var payload = action.payload; // hack to stop playing one news when another becomes active
+
+        var stopOtherNews = false;
+
+        if (payload.state === _consts__WEBPACK_IMPORTED_MODULE_0__["LoopState"].Active) {
+          var currentShot = state.find(function (s) {
+            return s.id === payload.id;
+          });
+
+          if (currentShot !== undefined && currentShot.categoryId === "news") {
+            stopOtherNews = true;
+          }
+        }
+
         return state.reduce(function (result, shot) {
           if (shot.id === payload.id) {
             result.push(_objectSpread({}, shot, {
-              state: payload.state
+              state: payload.state,
+              // invalidate shot cache
+              cache: "".concat(Math.random())
+            }));
+          } else if (stopOtherNews && shot.categoryId === "news") {
+            result.push(_objectSpread({}, shot, {
+              state: _consts__WEBPACK_IMPORTED_MODULE_0__["LoopState"].Off
             }));
           } else {
             result.push(shot);

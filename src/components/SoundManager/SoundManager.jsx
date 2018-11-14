@@ -161,9 +161,13 @@ export class SoundManagerComponent extends React.Component<SoundManagerComponent
     }
 
     if (this.props.shots !== prevProps.shots) {
-      for (const shot of this.props.shots) {
+      for (let i = 0; i < this.props.shots.length; i++) {
+        const shot = this.props.shots[i];
         const howl = this.howls[shot.id];
-        if (shot.state === LoopState.Active && !howl.playing()) {
+        if (shot.state === LoopState.Active && shot.cache !== prevProps.shots[i].cache) {
+          if (howl.playing()) {
+            howl.stop();
+          }
           howl.play();
 
           if (this.props.isRecording) {

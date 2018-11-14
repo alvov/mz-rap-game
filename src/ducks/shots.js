@@ -78,11 +78,27 @@ export function shotsReducer(state: ShotsState = initialState, action: ShotsActi
       ];
     case SET_SHOT_STATE: {
       const payload = action.payload;
+      // hack to stop playing one news when another becomes active
+      let stopOtherNews = false;
+      if (payload.state === LoopState.Active) {
+        const currentShot = state.find(s => s.id === payload.id);
+        if (currentShot !== undefined && currentShot.categoryId === "news") {
+          stopOtherNews = true;
+        }
+      }
+
       return state.reduce((result, shot) => {
         if (shot.id === payload.id) {
           result.push({
             ...shot,
             state: payload.state,
+            // invalidate shot cache
+            cache: `${Math.random()}`,
+          });
+        } else if (stopOtherNews && shot.categoryId === "news") {
+          result.push({
+            ...shot,
+            state: LoopState.Off,
           });
         } else {
           result.push(shot);

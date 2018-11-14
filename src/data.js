@@ -345,7 +345,7 @@ export const shots: Shot[] = [
       categoryId: "news",
       state: LoopState.Loading,
       duration: 0,
-      volume: 0.6,
+      volume: 0.5,
       meta: {
         link,
         text,
