@@ -144,37 +144,6 @@ export const loops: Loop[] = [
   },
 ];
 
-export const shots: Shot[] = [
-  {
-    id: "fx1",
-    src: "fx1",
-    categoryId: "fx",
-    state: LoopState.Loading,
-    duration: 0,
-  },
-  {
-    id: "fx2",
-    src: "fx2",
-    categoryId: "fx",
-    state: LoopState.Loading,
-    duration: 0,
-  },
-  {
-    id: "fx3",
-    src: "fx3",
-    categoryId: "fx",
-    state: LoopState.Loading,
-    duration: 0,
-  },
-  {
-    id: "fx4",
-    src: "fx4",
-    categoryId: "fx",
-    state: LoopState.Loading,
-    duration: 0,
-  },
-];
-
 export const news: News[] = [
   {
     id: "0",
@@ -337,4 +306,49 @@ export const news: News[] = [
     state: LoopState.Off,
     duration: 0,
   },
+];
+
+export const shots: Shot[] = [
+  {
+    id: "fx1",
+    src: "fx1",
+    categoryId: "fx",
+    state: LoopState.Loading,
+    duration: 0,
+  },
+  {
+    id: "fx2",
+    src: "fx2",
+    categoryId: "fx",
+    state: LoopState.Loading,
+    duration: 0,
+  },
+  {
+    id: "fx3",
+    src: "fx3",
+    categoryId: "fx",
+    state: LoopState.Loading,
+    duration: 0,
+  },
+  {
+    id: "fx4",
+    src: "fx4",
+    categoryId: "fx",
+    state: LoopState.Loading,
+    duration: 0,
+  },
+  ...news.map(({link, text}, index) => {
+    return {
+      id: `news${index + 1}`,
+      // $FlowFixMe
+      src: `news${index + 1}`,
+      categoryId: "news",
+      state: LoopState.Loading,
+      duration: 0,
+      meta: {
+        link,
+        text,
+      },
+    };
+  }),
 ];

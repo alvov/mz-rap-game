@@ -2,4 +2,3 @@ node_modules
 *.map
 .idea
 /tmp
-dist

@@ -239,8 +239,7 @@
 }
 
 .button--uYpn- {
-  display: flex;
-  justify-content: center;
+  display: inline-block;
   align-items: center;
   border-radius: 2px;
   padding: 0 30px;
@@ -328,10 +327,10 @@
   align-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
-  min-height: 850px;
+  height: 100%;
+  min-height: 100vh;
   background: #111111;
-  padding: 0 20px 40px;
+  padding: 55px 20px 40px;
   box-sizing: border-box;
 }
 
@@ -383,6 +382,8 @@
 }
 
 .body--cdy6P {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 66px;
   z-index: 2;
 }
@@ -393,27 +394,27 @@
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
   line-height: 1.09;
   color: #ffffff;
+  max-width: 750px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .description--zFqla {
-  margin-top: 28px;
-  margin-bottom: 37px;
+  margin: 28px auto 37px;
   font: 15px 'Graphik LC';
   line-height: 1.47;
   color: #ffffff;
-  max-width: 445px;
+  max-width: 600px;
   text-align: center;
 }
 
 .startGame--1AWjW {
-  display: flex;
-  justify-content: center;
+  display: inline-block;
   width: 230px;
   height: 45px;
   margin: 0 auto;
   outline: none;
   border-radius: 2px;
-  text-align: center;
   font: 500 13px 'Graphik LC';
   line-height: 1.54;
   letter-spacing: 1px;
@@ -422,20 +423,25 @@
   color: black;
   background: white;
   cursor: pointer;
+  text-align: center;
 }
 
 @media (max-width: 990px) {
   .titlePage--CYPUO {
-    padding-top: 65px;
+    padding-top: 100px;
   }
   .body--cdy6P {
     margin-bottom: 66px;
   }
+  .title--3X7t- {
+    margin-top: auto;
+  }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 600px) {
   .titlePage--CYPUO {
-    padding-top: 40px;
+    justify-content: flex-start;
+    height: auto;
   }
   .body--cdy6P {
     margin-bottom: 40px;
@@ -443,9 +449,6 @@
 }
 
 @media (max-width: 320px) {
-  .titlePage--CYPUO {
-    padding-top: 10px;
-  }
   .body--cdy6P {
     margin-bottom: 30px;
   }
@@ -506,12 +509,91 @@
   }
 }
 
+.supports--39WNx {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 94px;
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+  border: solid 1px #979797;
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+.supportsText--1HJy7 {
+  font: 900 15px "Graphik LC";
+  text-align: center;
+  line-height: 1.47;
+}
+
+.link--2_fAa {
+  color: #fff;
+}
+
+.ldsEllipsis--34URY {
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  width: 64px;
+  height: 45px;
+}
+.ldsEllipsis--34URY div {
+  position: absolute;
+  top: 20px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #fff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.ldsEllipsis--34URY div:nth-child(1) {
+  left: 6px;
+  animation: lds-ellipsis1--3wKho 0.6s infinite;
+}
+.ldsEllipsis--34URY div:nth-child(2) {
+  left: 6px;
+  animation: lds-ellipsis2--7wNFq 0.6s infinite;
+}
+.ldsEllipsis--34URY div:nth-child(3) {
+  left: 26px;
+  animation: lds-ellipsis2--7wNFq 0.6s infinite;
+}
+.ldsEllipsis--34URY div:nth-child(4) {
+  left: 45px;
+  animation: lds-ellipsis3--2rtO2 0.6s infinite;
+}
+@keyframes lds-ellipsis1--3wKho {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3--2rtO2 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2--7wNFq {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(19px, 0);
+  }
+}
 .dashboard--12uZ6 {
   display: flex;
   flex-direction: column;
   max-width: 900px;
   padding: 20px;
-  margin: 40px auto;
+  margin: 50px auto;
   background-color: black;
 }
 
@@ -522,6 +604,28 @@
 .separator--U8aXK {
   border-bottom: 1px solid #3b3b3b;
   margin: 0 0 40px;
+}
+
+@media (max-width: 768px) {
+  .shareContainerRecord--qEKT2 {
+    position: fixed;
+    left: 0;
+    right: 0;
+    padding: 10px 20px;
+    margin: 0;
+    bottom: 0;
+    background-color: black;
+    animation: slide-down--3RRLJ 500ms;
+    z-index: 1;
+  }
+  @keyframes slide-down--3RRLJ {
+    100% {
+      bottom: 0;
+    }
+    0% {
+      bottom: -60px;
+    }
+  }
 }
 
 @media (min-width: 768px) {
@@ -573,6 +677,7 @@
 .rootContainer--1fTVW {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   width: 100%;
   min-height: 100%;
   background: black;

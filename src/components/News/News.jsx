@@ -90,7 +90,7 @@ export class News extends React.Component<NewsProps, NewsState> {
       });
     } else {
       const playbackPercent = Math.min(
-        (Date.now() - (this.startTimestamp !== null ? this.startTimestamp : 0)) / this.props.duration,
+        (Date.now() - (this.startTimestamp !== null ? this.startTimestamp : 0)) / this.props.duration / 1000,
         1,
       );
       this.setState({playbackPercent});

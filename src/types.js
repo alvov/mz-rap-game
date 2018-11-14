@@ -14,6 +14,21 @@ import tema1 from "../assets/mp3/tema-1.mp3";
 import tema2 from "../assets/mp3/tema-2.mp3";
 import tema3 from "../assets/mp3/tema-3.mp3";
 import tema4 from "../assets/mp3/tema-4.mp3";
+import news6 from "../assets/mp3/news-6.mp3";
+import news7 from "../assets/mp3/news-7.mp3";
+import news8 from "../assets/mp3/news-8.mp3";
+import news9 from "../assets/mp3/news-9.mp3";
+import news10 from "../assets/mp3/news-10.mp3";
+import news11 from "../assets/mp3/news-11.mp3";
+import news12 from "../assets/mp3/news-12.mp3";
+import news13 from "../assets/mp3/news-13.mp3";
+import news14 from "../assets/mp3/news-14.mp3";
+import news15 from "../assets/mp3/news-15.mp3";
+import news16 from "../assets/mp3/news-16.mp3";
+import news17 from "../assets/mp3/news-17.mp3";
+import news18 from "../assets/mp3/news-18.mp3";
+import news19 from "../assets/mp3/news-19.mp3";
+import news20 from "../assets/mp3/news-20.mp3";
 
 export type LoopStateEnum = "off" | "loading" | "nextOn" | "nextOff" | "active";
 
@@ -37,6 +52,8 @@ export type Shot = {|
   duration: number,
   src: LoopKeyEnum,
   categoryId?: string,
+  // $FlowFixMe
+  meta?: any,
 |};
 
 export type News = {|
@@ -67,6 +84,29 @@ export type LoopKeyEnum =
   "fx1" |
   "fx2" |
   "fx3" |
-  "fx4";
+  "fx4" |
+  "news1" |
+  "news2" |
+  "news3" |
+  "news4" |
+  "news5" |
+  "news6" |
+  "news7" |
+  "news8" |
+  "news9" |
+  "news10" |
+  "news11" |
+  "news12" |
+  "news13" |
+  "news14" |
+  "news15" |
+  "news16" |
+  "news17" |
+  "news18" |
+  "news19" |
+  "news20" |
+  "news21" |
+  "news22" |
+  "news23";
 
 export type ShareThemeEnum = "default" | "inline";
