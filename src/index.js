@@ -12,7 +12,7 @@ import { setCategories } from "./ducks/categories";
 import { setNews } from "./ducks/news";
 import { setShots } from "./ducks/shots";
 import { App } from "./App";
-import { categories, loops, news, shots } from "./data";
+import { categories, loops, shots } from "./data";
 import * as styles from "./index.css";
 
 const store = createStore(
@@ -23,7 +23,7 @@ const store = createStore(
 // set initial store
 store.dispatch(setCategories(categories));
 store.dispatch(setLoops(loops));
-store.dispatch(setNews(news));
+store.dispatch(setNews([]));
 store.dispatch(setShots(shots));
 
 let rootNode = document.getElementById("rap_root");

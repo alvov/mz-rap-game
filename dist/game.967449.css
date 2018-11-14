@@ -509,29 +509,6 @@
   }
 }
 
-.supports--39WNx {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 94px;
-  position: relative;
-  max-width: 500px;
-  margin: 0 auto;
-  border: solid 1px #979797;
-  color: #ffffff;
-  line-height: 1.6;
-}
-
-.supportsText--1HJy7 {
-  font: 900 15px "Graphik LC";
-  text-align: center;
-  line-height: 1.47;
-}
-
-.link--2_fAa {
-  color: #fff;
-}
-
 .ldsEllipsis--34URY {
   display: block;
   margin: 0 auto;

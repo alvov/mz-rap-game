@@ -29,10 +29,10 @@ import {
 } from "../../ducks/record";
 import {selectState as selectPlayback, setCursor} from "../../ducks/playback";
 import {mp3, ogg} from "../../../assets";
-import {Reader} from "../../reader/Reader";
+// import {Reader} from "../../reader/Reader";
 import {LOOP_DURATION_SEC, LoopState, VOLUME} from "../../consts";
 import type {RootState} from "../../ducks";
-import {getNewsDurationMs} from "../../utils/utils";
+// import {getNewsDurationMs} from "../../utils/utils";
 
 const checkLoopEndTimeMs = 40;
 const scheduleAheadTimeSec = 0.01;
@@ -72,7 +72,7 @@ export class SoundManagerComponent extends React.Component<SoundManagerComponent
   ctxCurrentTime: number | null = null;
   areLoopsPlaying: boolean = false;
   +howls: { [string]: Class<Howl> } = {};
-  newsReader: Reader;
+  // newsReader: Reader;
   checkInterval: IntervalID | void;
   recordLoopsPlaybackTimeout: TimeoutID | null = null;
   recordShotsTimeoutsQueue: TimeoutID[] = [];
@@ -95,7 +95,7 @@ export class SoundManagerComponent extends React.Component<SoundManagerComponent
       this.howls[shot.id] = new Howl({
         src: [ogg[shot.src], mp3[shot.src]],
         preload: true,
-        volume: VOLUME,
+        volume: shot.volume === undefined ? VOLUME : shot.volume,
         onload: () => {
           this.props.setShotState({id: shot.id, state: LoopState.Off});
           this.props.setShotDuration({id: shot.id, duration: this.howls[shot.id].duration()});
@@ -106,20 +106,20 @@ export class SoundManagerComponent extends React.Component<SoundManagerComponent
       });
     }
 
-    this.newsReader = new Reader({
-      onReady: (voices) => undefined,
-      onEnd: this.onNewsEnd,
-    });
-    for (const news of this.props.news) {
-      const duration = getNewsDurationMs(news.text);
-      this.props.setNewsDuration({ id: news.id, duration });
-    }
+    // this.newsReader = new Reader({
+    //   onReady: (voices) => undefined,
+    //   onEnd: this.onNewsEnd,
+    // });
+    // for (const news of this.props.news) {
+    //   const duration = getNewsDurationMs(news.text);
+    //   this.props.setNewsDuration({ id: news.id, duration });
+    // }
   }
 
   shouldComponentUpdate(nextProps: SoundManagerComponentProps) {
     return nextProps.loops !== this.props.loops ||
       nextProps.shots !== this.props.shots ||
-      nextProps.news !== this.props.news ||
+      // nextProps.news !== this.props.news ||
       nextProps.isPlayingRecord !== this.props.isPlayingRecord ||
       nextProps.playback.cursor !== this.props.playback.cursor;
   }
@@ -175,16 +175,16 @@ export class SoundManagerComponent extends React.Component<SoundManagerComponent
       }
     }
 
-    if (this.props.news !== prevProps.news) {
-      const activeNews = this.props.news.find(news => news.state === LoopState.Active);
-      if (activeNews) {
-        this.newsReader.read(activeNews.id, activeNews.text);
-
-        if (this.props.isRecording) {
-          this.props.addShotToRecord({id: activeNews.id, start: Date.now()});
-        }
-      }
-    }
+    // if (this.props.news !== prevProps.news) {
+    //   const activeNews = this.props.news.find(news => news.state === LoopState.Active);
+    //   if (activeNews) {
+    //     this.newsReader.read(activeNews.id, activeNews.text);
+    //
+    //     if (this.props.isRecording) {
+    //       this.props.addShotToRecord({id: activeNews.id, start: Date.now()});
+    //     }
+    //   }
+    // }
 
     if (this.props.isPlayingRecord !== prevProps.isPlayingRecord) {
 
@@ -350,11 +350,11 @@ export class SoundManagerComponent extends React.Component<SoundManagerComponent
     }
   };
 
-  onNewsEnd = (id: string | null) => {
-    if (id !== null) {
-      this.props.setNewsState({id, state: LoopState.Off});
-    }
-  };
+  // onNewsEnd = (id: string | null) => {
+  //   if (id !== null) {
+  //     this.props.setNewsState({id, state: LoopState.Off});
+  //   }
+  // };
 }
 
 const mapStateToProps = (state: RootState): SoundManagerComponentStateProps => {

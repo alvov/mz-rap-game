@@ -2,8 +2,8 @@ import * as React from "react";
 import * as styles from "./TitlePage.css";
 import {Share} from '../Share/Share';
 import {TitlePlayer} from './TitlePlayer';
-import {Supports} from "../Supports/Supports";
-import {testSpeechSynthesis, testSpeechSynthesisUtterance} from "../../utils/utils";
+// import {Supports} from "../Supports/Supports";
+// import {testSpeechSynthesis, testSpeechSynthesisUtterance} from "../../utils/utils";
 
 type titleProps = {|
   +startGame: void => void
@@ -12,7 +12,7 @@ type titleProps = {|
 export function TitlePage(props: titleProps) {
   const { startGame } = props;
 
-  const supportsSpeech = testSpeechSynthesis() && testSpeechSynthesisUtterance();
+  // const supportsSpeech = testSpeechSynthesis() && testSpeechSynthesisUtterance();
 
   const link: string = `${location.origin}${location.pathname}`;
 
@@ -36,12 +36,13 @@ export function TitlePage(props: titleProps) {
       <div className={styles.body}>
         <h2 className={styles.title}>{title}</h2>
         <div className={styles.description} dangerouslySetInnerHTML={{__html: description}} />
-        { supportsSpeech ? (
+        <button onClick={startGame} className={styles.startGame}>Создать свой трек</button>
+        {/* supportsSpeech ? (
             <button onClick={startGame} className={styles.startGame}>Создать свой трек</button>
           ) : (
             <Supports />
           )
-        }
+        */}
         <TitlePlayer />
       </div>
       <Share
