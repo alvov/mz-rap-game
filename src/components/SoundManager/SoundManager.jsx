@@ -203,6 +203,8 @@ export class SoundManagerComponent extends React.Component<SoundManagerComponent
           const isShot = this.props.shots.some(({id}) => recordShot.id === id);
           const isNews = this.props.news.some(({id}) => recordShot.id === id);
           if (isShot || isNews) {
+            // Hotfix for the case when recordShot.start === -1
+            const recordShotStart = Math.max(recordShot.start, 0);
             timeouts.push(setTimeout(() => {
               const payload = {
                 id: recordShot.id,
@@ -213,7 +215,7 @@ export class SoundManagerComponent extends React.Component<SoundManagerComponent
               } else {
                 this.props.setNewsState(payload);
               }
-            }, recordShot.start));
+            }, recordShotStart));
           }
           return timeouts;
         }, []);

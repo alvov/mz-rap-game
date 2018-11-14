@@ -270,11 +270,12 @@ export function recordReducer(state: RecordState = initialState, action: RecordA
     }
     case ADD_SHOT: {
       const startTimestamp = state.startTimestamp === null
-        ? Date.now()
+        ? action.payload.start
         : state.startTimestamp;
       const shot = {
         ...action.payload,
-        start: action.payload.start - startTimestamp,
+        // Hotfix for avoiding negative start times
+        start: Math.max(action.payload.start - startTimestamp, 0),
       };
       return {
         ...state,

@@ -2277,7 +2277,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
- // import {selectState as selectNews, setNewsState} from "../../ducks/news";
 
 
 
@@ -2320,8 +2319,7 @@ function (_React$Component) {
         newState = _consts__WEBPACK_IMPORTED_MODULE_7__["LoopState"].Active;
       } else if (selectedNews.state === _consts__WEBPACK_IMPORTED_MODULE_7__["LoopState"].Active) {
         newState = _consts__WEBPACK_IMPORTED_MODULE_7__["LoopState"].Off;
-      } // this.props.setNewsState({ id, state: newState });
-
+      }
 
       _this.props.setShotState({
         id: id,
@@ -2366,14 +2364,12 @@ function (_React$Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    // news: selectNews(state),
     news: Object(_ducks_shots__WEBPACK_IMPORTED_MODULE_4__["selectShotsByCategory"])(state, "news"),
     isPlayingRecord: Object(_ducks_record__WEBPACK_IMPORTED_MODULE_5__["selectIsPlayingRecord"])(state)
   };
 };
 
 var mapDispatchToProps = {
-  // setNewsState,
   setShotState: _ducks_shots__WEBPACK_IMPORTED_MODULE_4__["setShotState"]
 };
 var NewsContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(NewsContainerComponent);
@@ -3282,6 +3278,8 @@ function (_React$Component) {
             });
 
             if (isShot || isNews) {
+              // Hotfix for the case when recordShot.start === -1
+              var recordShotStart = Math.max(recordShot.start, 0);
               timeouts.push(setTimeout(function () {
                 var payload = {
                   id: recordShot.id,
@@ -3293,7 +3291,7 @@ function (_React$Component) {
                 } else {
                   _this2.props.setNewsState(payload);
                 }
-              }, recordShot.start));
+              }, recordShotStart));
             }
 
             return timeouts;
@@ -5205,10 +5203,11 @@ function recordReducer() {
 
     case ADD_SHOT:
       {
-        var _startTimestamp = state.startTimestamp === null ? Date.now() : state.startTimestamp;
+        var _startTimestamp = state.startTimestamp === null ? action.payload.start : state.startTimestamp;
 
         var shot = _objectSpread({}, action.payload, {
-          start: action.payload.start - _startTimestamp
+          // Hotfix for avoiding negative start times
+          start: Math.max(action.payload.start - _startTimestamp, 0)
         });
 
         return _objectSpread({}, state, {
