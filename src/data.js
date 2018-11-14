@@ -339,7 +339,7 @@ export const shots: Shot[] = [
   },
   ...news.map(({link, text}, index) => {
     return {
-      id: `news${index + 1}`,
+      id: `${index}`,
       // $FlowFixMe
       src: `news${index + 1}`,
       categoryId: "news",

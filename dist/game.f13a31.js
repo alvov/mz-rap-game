@@ -4327,7 +4327,7 @@ var shots = [{
   var link = _ref.link,
       text = _ref.text;
   return {
-    id: "news".concat(index + 1),
+    id: "".concat(index),
     // $FlowFixMe
     src: "news".concat(index + 1),
     categoryId: "news",
