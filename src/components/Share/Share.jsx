@@ -13,14 +13,14 @@ import * as styles from './Share.css';
 type ShareProps = {|
   +link: string,
   +theme?: ShareThemeEnum,
-  +hasRecord?: boolean,
+  +isRecordLink?: boolean,
 |}
 
 export function Share(props: ShareProps) {
   const {
     link,
     theme,
-    hasRecord,
+    isRecordLink,
   } = props;
 
   const encodeLink = encodeURIComponent(link);
@@ -28,11 +28,10 @@ export function Share(props: ShareProps) {
   return (
     <div className={cn(styles.share, {
       [styles.inline]: theme === "inline",
-      [styles.hasRecord]: hasRecord,
     })}>
       <p className={styles.title}>
         поделиться
-        {hasRecord === true && ' результатом'}
+        {isRecordLink === true && ' треком'}
       </p>
       <div className={styles.shareIcons}>
         <a target="_blank" href={`http://vk.com/share.php?url=${encodeLink}`}><Vk/></a>

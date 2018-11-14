@@ -1,27 +1,28 @@
 const GAME_NAME = 'rap_game';
 
-const GAGameStart = () => {
-  if (window.ga) {
-    const isRepeatStartGame: boolean   = !!localStorage.getItem('isRepeatStartGame');
-    if(!isRepeatStartGame) {
-      window.ga('send', 'event', GAME_NAME, 'unique_start_game');
-    }
-    window.ga('send', 'event', GAME_NAME, 'start_game');
-    localStorage.setItem('isRepeatStartGame', '1');
-  } else {
-    console.error('No GA in WINDOW')
-  }
-};
-
 let startTimeStampSecond: number;
-const GAMountGame = () => {
+const GATimerStart = () => {
   if (window.ga) {
     startTimeStampSecond = Date.now() / 1000;
     let currentGameTime: number = 0;
     setInterval(() => {
       currentGameTime = parseInt(Date.now() / 1000 - startTimeStampSecond);
-      window.ga('send', 'event', GAME_NAME, 'game_duration', currentGameTime);
+      window.ga('send', 'event', GAME_NAME, 'game_duration', currentGameTime.toString());
     }, 5000)
+  } else {
+    console.error('No GA in WINDOW')
+  }
+};
+
+const GAGameStart = () => {
+  if (window.ga) {
+    const isRepeatStartGame: boolean   = !!localStorage.getItem('isRepeatStartGame');
+    GATimerStart();
+    if(!isRepeatStartGame) {
+      window.ga('send', 'event', GAME_NAME, 'unique_start_game');
+    }
+    window.ga('send', 'event', GAME_NAME, 'start_game');
+    localStorage.setItem('isRepeatStartGame', '1');
   } else {
     console.error('No GA in WINDOW')
   }
@@ -85,7 +86,6 @@ const GAInteractZag = (zag: string) => {
 
 export {
   GAGameStart,
-  GAMountGame,
   GAStartRecord,
   GAStopRecord,
   GAInteractTrack,

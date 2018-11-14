@@ -13,11 +13,14 @@ import {Share} from "./Share/Share";
 import {
   selectHasRecord,
   selectRecordLink,
+  selectRecordLinkIsLoading,
+  selectIsPlayingRecord
 } from "../ducks/record";
 import {stopAllLoops} from "../ducks/loops";
 import {clearRecord} from "../ducks/record";
 import {stopAllShots} from "../ducks/shots";
 import {stopAllNews} from "../ducks/news";
+import {Loading} from "./Loading/Loading";
 import * as analytic from "../analytics";
 
 import * as styles from "./Dashboard.css";
@@ -27,6 +30,8 @@ type DashboardComponentStateProps = {|
   +playback: $Call<typeof selectPlayback, RootState>,
   +hasRecord: $Call<typeof selectHasRecord, RootState>,
   +recordLink: $Call<typeof selectRecordLink, RootState>,
+  +recordLinkIsLoading: $Call<typeof selectRecordLinkIsLoading, RootState>,
+  +isPlayingRecord: $Call<typeof selectIsPlayingRecord, RootState>
 |}
 
 type DashboardComponentDispatchProps = {|
@@ -68,15 +73,20 @@ export class DashboardComponent extends React.Component<DashboardComponentProps,
   };
 
   render() {
-    const {categories, hasRecord, recordLink} = this.props;
+    const {categories, hasRecord, recordLink, recordLinkIsLoading} = this.props;
     const {isStart} = this.state;
 
     const defaultLink: string = `${location.origin}${location.pathname}`;
+    let shareContainerRecordClass = "";
 
-    if(!isStart) {
+    if (!isStart) {
       return (
         <TitlePage startGame={this.startGame}/>
       )
+    }
+
+    if (recordLink) {
+      shareContainerRecordClass = styles.shareContainerRecord;
     }
 
     return (
@@ -85,18 +95,23 @@ export class DashboardComponent extends React.Component<DashboardComponentProps,
           {categories.map(category => this.renderSoundCategory(category))}
         </div>
         <div className={styles.playerContainer}>
-          <Player />
+          <Player/>
         </div>
         <div className={styles.newsContainer}>
-          <NewsContainer />
+          <NewsContainer/>
         </div>
-        <div className={styles.separator} />
-        <div className={styles.shareContainer}>
-          <Share
-            link={recordLink || defaultLink}
-            theme="inline"
-            hasRecord={hasRecord && !!recordLink}
-          />
+        <div className={styles.separator}/>
+        <div className={`${styles.shareContainer} ${shareContainerRecordClass}`}>
+          {recordLinkIsLoading ? (
+              <Loading />
+            ) : (
+              <Share
+                link={recordLink || defaultLink}
+                theme="inline"
+                isRecordLink={!!recordLink}
+              />
+            )
+          }
         </div>
       </div>
     );
@@ -162,7 +177,9 @@ const mapStateToProps = (state: RootState) => {
     categories: selectCategories(state),
     playback: selectPlayback(state),
     hasRecord: selectHasRecord(state),
-    recordLink: selectRecordLink(state)
+    recordLink: selectRecordLink(state),
+    recordLinkIsLoading: selectRecordLinkIsLoading(state),
+    isPlayingRecord: selectIsPlayingRecord(state)
   };
 };
 

@@ -6,10 +6,10 @@
   align-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
-  min-height: 850px;
+  height: 100%;
+  min-height: 100vh;
   background: #111111;
-  padding: 0 20px 40px;
+  padding: 55px 20px 40px;
   box-sizing: border-box;
 }
 
@@ -61,6 +61,8 @@
 }
 
 .body {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 66px;
   z-index: 2;
 }
@@ -71,27 +73,27 @@
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
   line-height: 1.09;
   color: #ffffff;
+  max-width: 750px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .description {
-  margin-top: 28px;
-  margin-bottom: 37px;
+  margin: 28px auto 37px;
   font: 15px 'Graphik LC';
   line-height: 1.47;
   color: #ffffff;
-  max-width: 445px;
+  max-width: 600px;
   text-align: center;
 }
 
 .startGame {
-  display: flex;
-  justify-content: center;
+  display: inline-block;
   width: 230px;
   height: 45px;
   margin: 0 auto;
   outline: none;
   border-radius: 2px;
-  text-align: center;
   font: 500 13px 'Graphik LC';
   line-height: 1.54;
   letter-spacing: 1px;
@@ -100,20 +102,25 @@
   color: black;
   background: white;
   cursor: pointer;
+  text-align: center;
 }
 
 @media (max-width: 990px) {
   .titlePage {
-    padding-top: 65px;
+    padding-top: 100px;
   }
   .body {
     margin-bottom: 66px;
   }
+  .title {
+    margin-top: auto;
+  }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 600px) {
   .titlePage {
-    padding-top: 40px;
+    justify-content: flex-start;
+    height: auto;
   }
   .body {
     margin-bottom: 40px;
@@ -121,9 +128,6 @@
 }
 
 @media (max-width: 320px) {
-  .titlePage {
-    padding-top: 10px;
-  }
   .body {
     margin-bottom: 30px;
   }

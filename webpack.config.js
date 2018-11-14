@@ -65,6 +65,12 @@ module.exports = {
               presets: [
                 "@babel/preset-react",
                 "@babel/preset-flow",
+                ["@babel/preset-env", {
+                  useBuiltIns: "entry",
+                  targets: {
+                    ie: "11",
+                  }
+                }],
               ],
               plugins: [
                 "@babel/plugin-proposal-object-rest-spread",

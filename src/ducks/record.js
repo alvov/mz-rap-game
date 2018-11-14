@@ -11,6 +11,7 @@ export const SET_GENERATED_RECORD = "record/SET_GENERATED_RECORD";
 export const ADD_LOOPS = "record/ADD_LOOPS";
 export const ADD_SHOT = "record/ADD_SHOT";
 export const SET_RECORD_FROM_GENERATED = "record/SET_RECORD_FROM_GENERATED";
+export const SET_GENERATED_LINK_LOADING = "record/SET_GENERATED_LINK_LOADING";
 export const CLEAR_RECORD = "record/CLEAR_RECORD";
 
 export type RecordLoops = string[];
@@ -35,6 +36,7 @@ export type RecordState = {|
   +loopsStartTimestamp: number | null,
   +recordLink: string,
   +generatedRecord: GeneratedRecord | null,
+  +recordLinkIsLoading: boolean
 |};
 
 const initialState: RecordState = {
@@ -46,6 +48,7 @@ const initialState: RecordState = {
   shots: [],
   recordLink: '',
   generatedRecord: null,
+  recordLinkIsLoading: false
 };
 
 type SetIsRecordingAction = {|
@@ -120,6 +123,10 @@ export const setGenerateLink = () => async (dispatch: ThunkDispatch, getState: (
       loopsStartTimestamp: loopsStartTimestamp === null ? 0 : loopsStartTimestamp,
       shots,
     };
+
+    dispatch({
+      type: SET_GENERATED_LINK_LOADING
+    });
 
     const res: Response = await fetch(API_URL, {
       method: 'POST', //
@@ -209,6 +216,7 @@ export function recordReducer(state: RecordState = initialState, action: RecordA
         analytic.GAStartRecord();
         return {
           ...initialState,
+          recordLink: state.recordLink,
           isRecording: true,
         };
       } else {
@@ -229,7 +237,14 @@ export function recordReducer(state: RecordState = initialState, action: RecordA
     case SET_GENERATED_LINK: {
       return {
         ...state,
-        recordLink: action.payload
+        recordLink: action.payload,
+        recordLinkIsLoading: false
+      }
+    }
+    case SET_GENERATED_LINK_LOADING: {
+      return {
+        ...state,
+        recordLinkIsLoading: true
       }
     }
     case SET_GENERATED_RECORD: {
@@ -307,6 +322,10 @@ export function selectRecordShots(state: RootState): RecordShot[] {
 
 export function selectRecordLink(state: RootState): string {
   return selectState(state).recordLink;
+}
+
+export function selectRecordLinkIsLoading(state: RootState): boolean {
+  return selectState(state).recordLinkIsLoading;
 }
 
 export function selectHasRecord(state: RootState): boolean {

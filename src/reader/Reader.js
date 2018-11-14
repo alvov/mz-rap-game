@@ -1,4 +1,5 @@
-import {getNewsDurationMs, randomInRange} from "../utils/utils";
+import {getNewsDurationMs, randomInRange, testSpeechSynthesis, testSpeechSynthesisUtterance} from "../utils/utils";
+import {SpeechSynthesisUtterance} from "../consts";
 
 type VoiceMap = {|
   +name: string,
@@ -18,32 +19,35 @@ export class Reader {
   newsReadingTimer: TimeoutID | null = null;
   onEnd: OnEnd;
   synth: SpeechSynthesis;
-  voices: SpeechSynthesisVoice[];
+  voices: SpeechSynthesisVoice[] = [];
   currentId: string | null = null;
 
   constructor({onReady, onEnd}: ReaderProps) {
     this.isReady = false;
     this.onEnd = onEnd;
-    this.synth = window.speechSynthesis;
-    this.voices = this.getRussianVoices();
-    if (!this.voices.length) {
-      this.synth.addEventListener("voiceschanged", () => {
-        // this check is needed because "voiceschanged" is fired several times
-        if (!this.isReady) {
-          this.voices = this.getRussianVoices();
-          this.isReady = true;
-          onReady(this.getVoicesMap());
-        }
-      });
-    } else {
-      this.isReady = true;
-      onReady(this.getVoicesMap());
+    if (testSpeechSynthesis() && testSpeechSynthesisUtterance()) {
+      this.synth = window.speechSynthesis;
+      this.voices = this.getRussianVoices();
+      if (!this.voices.length) {
+        this.synth.addEventListener("voiceschanged", () => {
+          // this check is needed because "voiceschanged" is fired several times
+          if (!this.isReady) {
+            this.voices = this.getRussianVoices();
+            this.isReady = true;
+            onReady(this.getVoicesMap());
+          }
+        });
+      } else {
+        this.isReady = true;
+        onReady(this.getVoicesMap());
+      }
     }
   }
 
   read(id: string, text: string) {
     if (!this.isReady) {
-      console.error("Reader is not ready yet");
+      console.error("Reader is not ready");
+      this.onEnd(id);
       return;
     }
 
@@ -51,7 +55,7 @@ export class Reader {
     const pitch = randomInRange(0.7, 1.1);
     const rate = randomInRange(0.9, 1);
 
-    const utterance: SpeechSynthesisUtterance = new window.SpeechSynthesisUtterance(text);
+    const utterance: SpeechSynthesisUtterance = new SpeechSynthesisUtterance(text);
     utterance.voice = this.voices.find(voice => voice.name === voiceName) || this.voices[0];
     utterance.pitch = pitch;
     utterance.rate = rate;
